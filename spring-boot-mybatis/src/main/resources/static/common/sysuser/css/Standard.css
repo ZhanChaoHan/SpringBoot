@@ -1,0 +1,503 @@
+/*-------------------------------------------------------------------------*/
+/*    文件名称: ShStandard.css                                             */
+/*    文件功能: 定义保信通业务管理平台的标准页面样式                       */
+/*  最近更新人: 应丹                                                       */
+/*最近更新日期: 2006-09-18                                                 */
+/*  最近更新人: 应丹                                                       */
+/*最近更新日期: 2007-04-05                                                 */
+/*-------------------------------------------------------------------------*/
+
+/*--BODY的样式--*/
+
+/*--拖拉条样式--*/
+  BODY{    
+    BORDER: 0px;
+    margin:0px;
+    font-size: 10pt;}
+
+body.bg{	
+	background-image: url(../../images/image_top_bg_01.jpg);
+	background-repeat: repeat-x;
+	background-position: top;
+	background-color: #00ff00;}
+
+body.menu{	background-color: #fbfff1;
+	    }
+
+/*--TABLE的样式--*/
+
+table{  color:#333333;
+        font-size:10pt;
+        border-collapse: collapse; }
+
+table.common { width: 100%; background-color:#FFFFFF;}
+
+table.common A:link    {	color: #3e9431;	text-decoration: none}
+table.common A:visited {	color: #3e9431;	text-decoration: none}
+table.common A:active  {	color: #3e9431;	text-decoration: none}
+table.common A:hover   {	color: #FF0000;	text-decoration: blink}
+
+table.common td{border: 1px #cccccc solid;}
+               
+table.top{	  width: 100%;
+	          background-image: url(../../images/image_11.jpg);
+	          background-repeat: repeat-x;
+	          height:72px;
+	      }  
+
+table.place{	width: 100%;
+	            background-image: url(../../images/image_top_bg_02.jpg);
+	            background-repeat: repeat-x;
+	            height:25px;
+	       }
+.postion_a{
+           color: #000000;}
+.postion_b{
+           color: #000000;}
+
+table.three { width: 70%; }
+
+table.button { width: 100%; }
+
+table.two { width: 60%; }
+
+table.sub { width: 95%; }
+
+table.menu { width: 172px;}
+
+/*--TD的样式--*/
+td{ font-size: 10pt}
+
+td.titleimage{ background-color: #0083da;}
+
+td.titletext{ color: #005c9e}
+
+td.bg { background-image: url(../../images/bglogon.jpg);
+        height:303px;
+        padding-top:196px;
+        padding-right:55px;
+        text-align:right;}
+
+td.title0 {	font-size: 14px;
+	font-weight:bold;
+	color: #65a148;
+	background-image: url(../../images/icon_10.png);
+	background-repeat: no-repeat;
+	text-indent: 20px;
+	height:40px;
+	text-align: left;
+	background-position: 5px;}
+
+td.copyright { color:#666666;
+               height:35px;
+               text-align:center;}
+
+td.formtitle { font-weight: bold;
+               background-color: #4D457A;
+               text-align: center;
+               color: #ffffff;}
+               
+td.top { text-align: center;
+                   color: #3083bd;}
+
+td.title { background-color: #fbfff1;
+           text-align: right;
+           width: 20%;
+           color: #642100;
+           white-space: nowrap;}
+           
+td.input { background-color: #ffffff;
+           width: 30%; 
+           color: #333333;}
+           
+td.title2 { background-color: #fbfff1;
+           text-align: right;
+           width: 40%;
+           color: #333333 }
+           
+td.input2 { background-color: #ffffff;
+           width: 60%; 
+           color: #333333;}
+           
+td.title0-bak { background-color: #0083da;
+                text-align: center;
+                width: 10%;
+                height: 20;
+                color: #ffffff }  
+                        
+td.title01 { background-color: #eff9ff;
+             text-align: left;
+             color: #65a148; }
+
+td.title1 { background-color: #eff9ff;
+            text-align: left;
+            width: 10%;
+            color: #000000 }
+           
+td.title12 { background-color: #eff9ff;
+            text-align: left;
+            width: 10%;
+            color: #000000 }
+
+td.subformtitle { background-color: #eff9ff;
+                  text-align: left;
+                  color: #000000 }
+
+td.centertitle { background-color: #AEC1AE;
+                 text-align: center;
+                 color: #000000 }
+
+td.message{ padding-top:20px;
+	          padding-bottom:20px;
+	          background-color: #ffffff;
+	          text-align:center;
+	          color:#FF0000;
+	          font-size: 14px;
+	          font-weight:bold; }
+
+td.text  { background-color: #EEECFA;
+           color: #000000 }
+
+td.lefttitle { background-color: #6699CC;
+               text-align:left;
+               color: #FFFFFF }
+
+td.titleLink {text-align:left;
+              cursor: pointer;
+              background-color:#4ca8eb;
+              color: #ffffff;}
+             
+td.menufirst { cursor: pointer;
+               font-weight:bold;
+               color: #3083bd;
+               background-image: url(../../images/bgbtn.gif);
+               width:194px;
+               height:30px }
+              
+td.titleNoLink {text-align:center;
+                color: #000000}
+
+td.titleLink2{text-align:left;
+              cursor: pointer;
+              color: #ffff00}
+              
+td.titleNoLink2 {text-align:left;
+                 color: #000000}
+
+td.itemLink {text-align:left;
+             cursor: pointer;
+             background-color:#4ca8eb;
+             color: #ffffff;}
+             
+td.disable {text-align:left;
+             background-color:#BDCFBD;
+             color: #000000}
+             
+td.itemLink1 {text-align:center;
+             cursor: pointer;
+             background-color:#0083da;
+             color: #ffffff}
+             
+td.itemNoPermission {text-align:left;
+		                 background-color:#777bc4;
+		                 color: #000000;}
+td.button { background-color: #ffffff;
+            text-align: center;
+            color: #000000 }
+
+td.label_cn { font-size:24px;
+               font-family:黑体;
+               font-weight:bold;
+               text-align:center;}
+
+td.detail_cn { font-size:16px;
+               font-family:楷体_GB2312;}
+
+td.tk_cn {font-size:10.5pt;
+          font-family:楷体_GB2312;}
+
+
+td.label_en {font-size:24px;
+             font-weight:bold;
+             text-align:center;
+             font-family:"Times New Roman";}
+
+td.detail_en { font-size:16px;
+               font-family:"Times New Roman";}
+
+td.tk_en {font-size:10.5pt;
+              font-family:"Times New Roman";}
+              
+/*--菜单样式--*/
+td.menu1 {	  background-repeat: no-repeat;
+	          background-image: url(../../images/button_02.png);
+	          height: 28px;
+	          padding-left:35px;
+	          text-indent: 10px;    
+	          color: #000000;
+	          cursor: pointer;}
+	          
+.right_button a:hover{  background: url(../../images/button_0004.png) left top no-repeat;
+						display:block;
+						height:25px;
+						line-height:25px;
+                     }
+
+td.menu1 A:link    {	color: #000000;	text-decoration: none}
+td.menu1 A:visited {	color: #000000;	text-decoration: none}
+td.menu1 A:active  {	color: #000000;	text-decoration: none}
+td.menu1 A:hover   {	color: #3e9431;	text-decoration: underline;
+                         background-image: url(../../images/button_02.png);}
+
+
+
+td.menu2 {       padding-left: 45px;
+                 background:url(../../images/icon_01.png) no-repeat 33px 10px;
+                 height:28px;
+                 cursor: pointer;
+                 color: #000000;
+	         }
+	
+td.menu2 A:link    {	color: #000000;	text-decoration: none}
+td.menu2 A:visited {	color: #000000;	text-decoration: none}
+td.menu2 A:active  {	color: #000000;	text-decoration: none}
+td.menu2 A:hover   {	color: #3e9431;	text-decoration: none}
+
+td.menu3 {    	background:url(../../images/icon_02.png) no-repeat 45px 10px; 
+				padding-left:60px; 
+				font-size:12px;
+				height:28px;
+				cursor: pointer;
+				color:#000000;
+				}
+	
+td.menu3 A:link    {	color: #000000;	text-decoration: none}
+td.menu3 A:visited {	color: #000000;	text-decoration: none}
+td.menu3 A:active  {	color: #000000;	text-decoration: none}
+td.menu3 A:hover   {	color: #3e9431;	text-decoration: underline}
+
+/*--wuzhixiong 2011-12-29 添加四级菜单menu  start--*/
+td.menu4 {    	background:url(../../images/icon_02.png) no-repeat 60px 10px; 
+				padding-left:76px; 
+				font-size:12px;
+				height:28px;
+				cursor: pointer;
+				color:#000000;
+				}
+	
+td.menu4 A:link    {	color: #000000;	text-decoration: none}
+td.menu4 A:visited {	color: #000000;	text-decoration: none}
+td.menu4 A:active  {	color: #000000;	text-decoration: none}
+td.menu4 A:hover   {	color: #3e9431;	text-decoration: underline}
+/*--wuzhixiong 2011-12-29 添加四级菜单menu  end--*/
+
+/*--TR的样式--*/
+tr.listtitle { background-color: #B3EA82;
+               text-align: center;
+               color: green;
+               height: 35px;
+               font-size: 60pt;
+	           font-weight:bold; }
+	             
+tr.common {background-color: #ffffff;
+	         color: #333333;
+	         text-align: center;}
+	         
+tr.common A:link    {	color: #3e9431;	text-decoration: none}
+tr.common A:visited {	color: #3e9431;	text-decoration: none}
+tr.common A:active  {	color: #3e9431;	text-decoration: none}
+tr.common A:hover   {	color: #FF0000;	text-decoration: blink}
+
+tr.listtitle1 { background-color: #dbf8fb;
+               text-align: center;
+               color: #0083da }
+
+tr.listodd { background-color: #eff9ff;
+             text-align: center;
+             color: #0083da }
+             
+tr.listodd1 { background-color: #eff9ff;
+              text-align: left;
+              color: #0083da }
+             
+tr.else { background-color: #F4FAF1;
+          text-align: center;
+          color: #005c9e }
+
+tr.listeven { background-color: #eff9ff;
+              text-align: center;
+              color: #0083da }
+              
+tr.listeven1 { background-color: #eff9ff;
+               text-align: left;
+               color: #0083da }
+
+td.delete { background-color: #80FFFF;
+              text-align: center;
+              color: #FF0000 }
+
+/*--INPUT的样式--*/
+input { 
+        background-color:#FFFFFF}
+
+input.common,input.text   { 
+	     height:21px;
+         border:1px solid #b5cab4;
+         width:70%
+         }
+                            
+input.common8   { border: 1px #999999 solid;
+                 color:#333333;
+                 height: 20px;                     
+                 width: 140px}
+                 
+input.logon   {  background-color: #ffffff;
+                 border: none;
+                 color:#333333;
+                 width: 160px;}
+                 
+input.commonYellow   { background-color: #FFFF00;
+                 border: 1px #819E81 solid;
+                 height: 20px;
+                 width: 160px}
+                 
+input.common1   {background-color: #E6E6E6;
+                 border: 1px #999999 solid;
+                 width: 90%}
+                 
+input.readonly { width: 90%;
+                 background-color: #eff9ff;
+                 color: #333333;
+                 BORDER: none }
+
+input.readonlyOnly { background-color: #EEECFA;
+                     color: #000000;
+                     BORDER-TOP-WIDTH: 1px;
+                     BORDER-TOP-STYLE: solid;
+                     BORDER-TOP-COLOR: #EEECFA;
+                     BORDER-BOTTOM-WIDTH: 1px;
+                     BORDER-BOTTOM-STYLE: solid;
+                     BORDER-BOTTOM-COLOR: #EEECFA;
+                     BORDER-RIGHT-STYLE: none;
+                     BORDER-LEFT-STYLE: none }
+
+input.readonlyYellow { background-color: #FFFF00;
+                       color: #000000;
+                       BORDER-TOP-WIDTH: 1px;
+                       BORDER-TOP-STYLE: solid;
+                       BORDER-TOP-COLOR: #EEECFA;
+                       BORDER-BOTTOM-WIDTH: 1px;
+                       BORDER-BOTTOM-STYLE: solid;
+                       BORDER-BOTTOM-COLOR: #EEECFA;
+                       BORDER-RIGHT-STYLE: none;
+                       BORDER-LEFT-STYLE: none }
+
+input.code { background-color: #FFFFFF;
+             border: 1px #9999CC solid;
+             height: 20px;
+             width: 160px}
+
+input.codecode { background-color: #B7EA85;
+                 border: 1px #9999CC solid;
+                 height: 20px;
+                 width: 90%;             }
+
+input.codename { background-color:  #60C0F0;
+                 border: 1px #9999CC solid;
+                 height: 20px;
+                 width: 110px}
+
+input.formtitle { font-size: 10pt;
+                  font-weight: bold;
+                  background-color: #4D457A;
+                  text-align: center;
+                  color: #ffffff;
+                  BORDER-TOP-WIDTH: 1px;
+                  BORDER-TOP-STYLE: solid;
+                  BORDER-TOP-COLOR: #4D457A;
+                  BORDER-BOTTOM-WIDTH: 1px;
+                  BORDER-BOTTOM-STYLE: solid;
+                  BORDER-BOTTOM-COLOR: #4D457A;
+                  BORDER-RIGHT-STYLE: none;
+                  BORDER-LEFT-STYLE: none }
+                
+input.readonlycheckbox{ background-color: #C0C0C0 }
+
+input.readonlyradio   { background-color: #C0C0C0 }
+                     
+/*--按钮样式--*/
+INPUT.button,INPUT.longbutton,INPUT.bgbutton {	  color:#000000;
+	                                              border:1px solid #7DBE6D;
+	                                              background-color:#B7EA85;
+	                                              cursor:pointer;	                                              
+	                                              background-repeat: repeat-x;
+	                                              background-position: center;
+	                                              height:24px;
+	                                              padding-top: 2px;
+	                                              padding-bottom: 2px;
+	                                              padding-right: 8px;
+	                                              padding-left: 8px;
+	                                              margin: 2px;   }  
+ 
+                     
+/*--TEXTAREA的样式--*/
+textarea { font-size: 10pt; }
+
+textarea.common { border: 1px #9999CC solid;}
+                 
+textarea.readonly {border: 1px #9999CC solid;}   
+
+textarea.readonly1 { background-color: #EEECFA; BORDER: none }
+
+textarea.readonlyWhite { BORDER: none }
+                 
+textarea.readonlyYellow { background-color: #FFFF00;	BORDER: none }
+                    
+
+
+/*--SELECT的样式--*/
+select { font-size: 10pt}
+
+select.code{ background-color: #92FA9C }
+
+select.query { width: 40px;
+               background-color: #ffffff }
+               
+select.one{ width:70%;
+            border:1px solid #b5cab4;
+			border-color: #b5cab4; 
+			height:22px;
+			}
+                 
+select.one1{ background-color: #ffffff;
+             border: 1px #0083da solid;
+             width: 80%;
+             color:#333333; }
+
+/*--A的样式--*/
+    
+A:link    {text-decoration: none;color: #4089b6;}
+A:visited {text-decoration: none;color: #4089b6;}
+A.active  {text-decoration: none;color: #4089b6;}
+A:hover   {text-decoration: none;color: red; }
+a img { border: none;}
+
+
+/*--IMG的样式--*/
+    IMG.button { cursor:pointer }
+
+
+/*--PRE的样式--*/
+    pre.tk_cn {font-size:10.5pt;
+               font-family:楷体_GB2312;}
+
+    pre.tk_en {font-size:10.5pt;
+               font-family:"Times New Roman";}
+               
+/*--DIV的样式--*/
+    div.menu{width:178px;}
+    
+
+
+
+		

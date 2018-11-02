@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinosoft.dao.SysUserMapper">
+  <resultMap id="BaseResultMap" type="com.sinosoft.normal.po.SysUser">
+    <id column="UserCode" jdbcType="VARCHAR" property="userCode" />
+    <result column="ComCode" jdbcType="VARCHAR" property="comCode" />
+    <result column="UserName" jdbcType="VARCHAR" property="userName" />
+    <result column="PassWord" jdbcType="VARCHAR" property="passWord" />
+    <result column="TelePhone" jdbcType="VARCHAR" property="telePhone" />
+    <result column="Email" jdbcType="VARCHAR" property="email" />
+    <result column="ValidStatus" jdbcType="VARCHAR" property="validStatus" />
+    <result column="CreateTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="CreateUserCode" jdbcType="VARCHAR" property="createUserCode" />
+    <result column="ModifyTime" jdbcType="TIMESTAMP" property="modifyTime" />
+    <result column="ModifyUserCode" jdbcType="VARCHAR" property="modifyUserCode" />
+    <result column="Reverse1" jdbcType="VARCHAR" property="reverse1" />
+    <result column="Reverse2" jdbcType="VARCHAR" property="reverse2" />
+    <result column="Reverse3" jdbcType="VARCHAR" property="reverse3" />
+  </resultMap>
+  
+  <resultMap id="SysUserVo" type="com.sinosoft.normal.vo.SysUserVo">
+   	 <id column="UserCode" jdbcType="VARCHAR" property="userCode" />
+   	 <result column="UserName" jdbcType="VARCHAR" property="userName" />
+   	 <result column="ComCode" jdbcType="VARCHAR" property="comCode" />
+     <result column="comCname" jdbcType="VARCHAR" property="comCname" />
+   	 <result column="TelePhone" jdbcType="VARCHAR" property="telePhone" />
+     <result column="Email" jdbcType="VARCHAR" property="email" />
+   </resultMap>
+  
+   <!-- 全局的查询条件 -->
+<sql id="Example_Where_Clause" >
+where 1=1
+<trim  suffixOverrides="," >
+	<if test ="userCode != null and  userCode  != ''">
+	    and u.userCode LIKE CONCAT(CONCAT('%', #{userCode}), '%')
+	</if>
+	<if test ="userName != null and  userName  != ''">
+	    and u.userName LIKE CONCAT(CONCAT('%', #{userName}), '%')
+	</if>
+	<if test ="telePhone != null and  telePhone  != ''">
+	    and u.telePhone LIKE CONCAT(CONCAT('%', #{telePhone}), '%')
+	</if>
+ 	<if test ="email != null and  email  != ''">
+	    and u.email LIKE CONCAT(CONCAT('%', #{email}), '%')
+	</if>
+ 	 <if test="comCode != null and  comCode !=''">
+	    and u.comCode LIKE CONCAT(CONCAT('%', #{comCode}), '%')
+	</if>
+	<if test="comCname != null and  comCname !=''">
+	    and c.comCname LIKE CONCAT(CONCAT('%', #{comCname}), '%')
+	</if>
+	<if test ="validStatus != null and  validStatus  != ''">
+	    and u.validStatus =  #{validStatus}
+	</if>
+		and u.userCode != #{admin}	
+</trim>
+	
+</sql>
+    <!--根据过滤条件查询用户列表  -->
+ <select id="querySysUser"  parameterType="String" resultMap="SysUserVo">
+		  select u.userCode,u.comCode,u.userName,u.telephone,u.email,c.comCname from sysuser u 
+		  left join syscompany c on u.comcode = c.comcode
+		<include refid="Example_Where_Clause" />
+</select>
+  
+  
+  
+  <sql id="Base_Column_List">
+    UserCode, ComCode, UserName, PassWord, TelePhone, Email, ValidStatus, CreateTime, 
+    CreateUserCode, ModifyTime, ModifyUserCode, Reverse1, Reverse2, Reverse3
+  </sql>
+  <!-- 校验用户代码 -->
+  <select id="selectByPrimaryKey" parameterType="String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sysuser
+    where UserCode = #{arg0} and ValidStatus = #{arg1}
+  </select>
+  <!-- 通过机构代码查询用户 -->
+    <select id="querySysUserDelete" parameterType="String" resultMap="BaseResultMap">
+    select 
+     *
+    from sysuser
+    where ComCode = #{ComCode} and ValidStatus = #{ValidStatus}
+  </select>
+ 
+   <!--
+   <select id="querySysUser"  parameterType="String" resultMap="BaseResultMap"  >
+     select * from sysuser user  where 1=1
+   			<if test="userCode != null and userCode !=''">
+   				AND user.userCode like '%${userCode}%' 
+   			</if>
+   		    <if test="userName != null and userName !=''">
+   			    AND user.userName =#{userName}  
+   			</if>
+   			<if test="comCode != null and comCode !=''">
+   			 	AND user.comCode like '%${comCode}%' 
+   			</if>
+   			<if test="telePhone != null and telePhone !=''">
+   				AND user.telePhone like '%${telePhone}%' 
+   			</if> 
+   			<if test="email != null and email !=''">
+   				AND user.email like '%${email}%' 
+   			</if> 
+   			 <trim prefix="WHERE" suffixOverrides="AND">
+   		      </trim>
+   			
+   	order by user.UserCode Desc
+  </select>
+   -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sysuser
+    where UserCode = #{userCode}
+  </delete>
+  <insert id="insert" parameterType="com.sinosoft.normal.po.SysUser">
+    insert into sysuser (UserCode, ComCode, UserName, 
+      PassWord, TelePhone, Email, 
+      ValidStatus, CreateTime, CreateUserCode, 
+      ModifyTime, ModifyUserCode)
+    values (#{userCode,jdbcType=VARCHAR}, #{comCode,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{passWord,jdbcType=VARCHAR}, #{telePhone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{validStatus,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createUserCode,jdbcType=VARCHAR}, 
+      #{modifyTime,jdbcType=TIMESTAMP}, #{modifyUserCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinosoft.normal.po.SysUser">
+    insert into sysuser
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userCode != null">
+        UserCode,
+      </if>
+      <if test="comCode != null">
+        ComCode,
+      </if>
+      <if test="userName != null">
+        UserName,
+      </if>
+      <if test="passWord != null">
+        PassWord,
+      </if>
+      <if test="telePhone != null">
+        TelePhone,
+      </if>
+      <if test="email != null">
+        Email,
+      </if>
+      <if test="validStatus != null">
+        ValidStatus,
+      </if>
+      <if test="createTime != null">
+        CreateTime,
+      </if>
+      <if test="createUserCode != null">
+        CreateUserCode,
+      </if>
+      <if test="modifyTime != null">
+        ModifyTime,
+      </if>
+      <if test="modifyUserCode != null">
+        ModifyUserCode,
+      </if>
+      <if test="reverse1 != null">
+        Reverse1,
+      </if>
+      <if test="reverse2 != null">
+        Reverse2,
+      </if>
+      <if test="reverse3 != null">
+        Reverse3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userCode != null">
+        #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="comCode != null">
+        #{comCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="passWord != null">
+        #{passWord,jdbcType=VARCHAR},
+      </if>
+      <if test="telePhone != null">
+        #{telePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="validStatus != null">
+        #{validStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserCode != null">
+        #{createUserCode,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUserCode != null">
+        #{modifyUserCode,jdbcType=VARCHAR},
+      </if>
+      <if test="reverse1 != null">
+        #{reverse1,jdbcType=VARCHAR},
+      </if>
+      <if test="reverse2 != null">
+        #{reverse2,jdbcType=VARCHAR},
+      </if>
+      <if test="reverse3 != null">
+        #{reverse3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinosoft.normal.po.SysUser">
+    update sysuser
+    <set>
+      <if test="comCode != null">
+        ComCode = #{comCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        UserName = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="passWord != null">
+        PassWord = #{passWord,jdbcType=VARCHAR},
+      </if>
+      <if test="telePhone != null">
+        TelePhone = #{telePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        Email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="validStatus != null">
+        ValidStatus = #{validStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CreateTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserCode != null">
+        CreateUserCode = #{createUserCode,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null">
+        ModifyTime = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUserCode != null">
+        ModifyUserCode = #{modifyUserCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where UserCode = #{userCode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinosoft.normal.po.SysUser">
+    update sysuser
+    set ComCode = #{comCode,jdbcType=VARCHAR},
+      UserName = #{userName,jdbcType=VARCHAR},
+      PassWord = #{passWord,jdbcType=VARCHAR},
+      TelePhone = #{telePhone,jdbcType=VARCHAR},
+      Email = #{email,jdbcType=VARCHAR},
+      ValidStatus = #{validStatus,jdbcType=VARCHAR},
+      CreateTime = #{createTime,jdbcType=TIMESTAMP},
+      CreateUserCode = #{createUserCode,jdbcType=VARCHAR},
+      ModifyTime = #{modifyTime,jdbcType=TIMESTAMP},
+      ModifyUserCode = #{modifyUserCode,jdbcType=VARCHAR},
+      Reverse1 = #{reverse1,jdbcType=VARCHAR},
+      Reverse2 = #{reverse2,jdbcType=VARCHAR},
+      Reverse3 = #{reverse3,jdbcType=VARCHAR}
+    where UserCode = #{userCode,jdbcType=VARCHAR}
+  </update>
+  
+  
+  
+  
+</mapper>

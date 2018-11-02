@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinosoft.dao.SysCompanyMapper">
+  <resultMap id="BaseResultMap" type="com.sinosoft.normal.po.SysCompany">
+    <id column="ComCode" jdbcType="VARCHAR" property="comCode" />
+    <result column="AreaCode" jdbcType="VARCHAR" property="areaCode" />
+    <result column="ComLevel" jdbcType="VARCHAR" property="comLevel" />
+    <result column="ComType" jdbcType="VARCHAR" property="comType" />
+    <result column="SupComCode" jdbcType="VARCHAR" property="supComCode" />
+    <result column="HasSubCom" jdbcType="VARCHAR" property="hasSubCom" />
+    <result column="ComCname" jdbcType="VARCHAR" property="comCname" />
+    <result column="ComAddress" jdbcType="VARCHAR" property="comAddress" />
+    <result column="ComPhone" jdbcType="VARCHAR" property="comphone" />
+    <result column="ValidStatus" jdbcType="VARCHAR" property="validStatus" />
+    <result column="CreateTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="CreateUserCode" jdbcType="VARCHAR" property="createUserCode" />
+    <result column="ModifyTime" jdbcType="TIMESTAMP" property="modifyTime" />
+    <result column="ModifyUserCode" jdbcType="VARCHAR" property="modifyUserCode" />
+    <result column="Reverse1" jdbcType="VARCHAR" property="reverse1" />
+    <result column="Reverse2" jdbcType="VARCHAR" property="reverse2" />
+    <result column="Reverse3" jdbcType="VARCHAR" property="reverse3" />
+  </resultMap>
+  
+  <resultMap id="SysCompanyVo" type="com.sinosoft.normal.vo.SysCompanyVo">
+   	 <result column="ComCode" jdbcType="VARCHAR" property="comCode" />
+     <result column="ComCname" jdbcType="VARCHAR" property="comCname" />
+   	 <result column="AreaCode" jdbcType="VARCHAR" property="areaCode" />
+     <result column="ComAddress" jdbcType="VARCHAR" property="comAddress" />
+     <result column="AreaCname" jdbcType="VARCHAR" property="areaCname" />
+   </resultMap>
+  
+   <!-- 全局的查询条件 -->
+<sql id="Example_Where_Clause" >
+where 1=1
+<trim  suffixOverrides="," >
+	<if test ="comCode != null and  comCode  != ''">
+	    and c.comCode LIKE CONCAT(CONCAT('%', #{comCode}), '%')
+	</if>
+	<if test ="comCname != null and  comCname  != ''">
+	    and c.comCname LIKE CONCAT(CONCAT('%', #{comCname}), '%')
+	</if>
+	<if test ="areaCode != null and  areaCode  != ''">
+	    and a.areaCode LIKE CONCAT(CONCAT('%', #{areaCode}), '%')
+	</if>
+ 	<if test ="comAddress != null and  comAddress  != ''">
+	    and c.comAddress LIKE CONCAT(CONCAT('%', #{comAddress}), '%')
+	</if>
+	<if test ="validStatus != null and  validStatus  != ''">
+	    and c.validStatus =  #{validStatus}
+	</if>
+		and c.comCode != #{admin}	
+</trim>
+	
+</sql>
+  
+   <!--根据过滤条件查询机构列表  -->
+  <select id="querySysCompany"  parameterType="String" resultMap="SysCompanyVo">
+		  select c.comCode,c.comCname,a.areaCode,a.areaCname,c.comphone,c.comAddress,c.comLevel,c.comType,c.supComCode from syscompany c 
+		  left join sysarea a on c.areacode = a.areacode
+		<include refid="Example_Where_Clause" />
+  </select>
+  <!-- 下拉选机构代码 -->
+  <select id="selectSysCompany" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from syscompany
+    where 1=1  and comcode != #{admin}	
+  </select>
+  <!-- 下拉选上级机构代码 -->
+  <select id="selectSupSysCompany" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from syscompany
+    where 1=1  
+    
+    <if test ="comType != null and  comType  != ''">
+	    and comType = #{comType}
+	</if>
+    
+ 
+  </select>
+  <!-- 查询上级机构 -->
+   <select id="sysCompanyId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+   <include refid="Base_Column_List" />
+    from syscompany
+    where 1=1  and comCode= #{comCode}
+  </select>
+  <!-- 删除时查看是否有下级机构 -->
+  <select id="checkSysCompany" parameterType="String" resultMap="BaseResultMap">
+    select 
+   <include refid="Base_Column_List" />
+    from syscompany u
+    where u.supComCode = #{comCode} 
+  </select>
+  
+   <!-- 把上级机构的的“是否含有下级机构”字段的值置为01 -->
+  <select id="getSysCompanyById" parameterType="String" resultMap="BaseResultMap">
+    select 
+   <include refid="Base_Column_List" />
+    from syscompany u
+    where u.comCode = #{comCode} 
+  </select>
+  
+  <sql id="Base_Column_List">
+    ComCode, AreaCode, ComLevel, ComType, SupComCode, HasSubCom, ComCname, ComAddress, 
+    ComPhone, ValidStatus, CreateTime, CreateUserCode, ModifyTime, ModifyUserCode, Reverse1, 
+    Reverse2, Reverse3
+  </sql>
+  <!--通过主键查询机构 序列号查询  -->
+  <select id="selectByPrimaryKey" parameterType="String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from syscompany
+    where ComCode = #{arg0} and ValidStatus = #{arg1}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from syscompany
+    where ComCode = #{comCode,jdbcType=VARCHAR}
+  </delete>
+  
+   <select id="findSysCompanyList"  parameterType="String" resultMap="BaseResultMap">
+    select * FROM SysCompany  WHERE 
+    ComCode IN (#{comCode}, #{reverse1})
+  </select>
+  
+  
+  <insert id="insert" parameterType="com.sinosoft.normal.po.SysCompany">
+    insert into syscompany (ComCode, AreaCode, ComLevel, 
+      ComType, SupComCode, HasSubCom, 
+      ComCname, ComAddress, ComPhone, 
+      ValidStatus, CreateTime, CreateUserCode, 
+      ModifyTime, ModifyUserCode)
+    values (#{comCode,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR}, #{comLevel,jdbcType=VARCHAR}, 
+      #{comType,jdbcType=VARCHAR}, #{supComCode,jdbcType=VARCHAR}, #{hasSubCom,jdbcType=VARCHAR}, 
+      #{comCname,jdbcType=VARCHAR}, #{comAddress,jdbcType=VARCHAR}, #{comphone,jdbcType=VARCHAR}, 
+      #{validStatus,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createUserCode,jdbcType=VARCHAR}, 
+      #{modifyTime,jdbcType=TIMESTAMP}, #{modifyUserCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinosoft.normal.po.SysCompany">
+    insert into syscompany
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="comCode != null">
+        ComCode,
+      </if>
+      <if test="areaCode != null">
+        AreaCode,
+      </if>
+      <if test="comLevel != null">
+        ComLevel,
+      </if>
+      <if test="comType != null">
+        ComType,
+      </if>
+      <if test="supComCode != null">
+        SupComCode,
+      </if>
+      <if test="hasSubCom != null">
+        HasSubCom,
+      </if>
+      <if test="comCname != null">
+        ComCname,
+      </if>
+      <if test="comAddress != null">
+        ComAddress,
+      </if>
+      <if test="comphone != null">
+        ComPhone,
+      </if>
+      <if test="validStatus != null">
+        ValidStatus,
+      </if>
+      <if test="createTime != null">
+        CreateTime,
+      </if>
+      <if test="createUserCode != null">
+        CreateUserCode,
+      </if>
+      <if test="modifyTime != null">
+        ModifyTime,
+      </if>
+      <if test="modifyUserCode != null">
+        ModifyUserCode,
+      </if>
+      <if test="reverse1 != null">
+        Reverse1,
+      </if>
+      <if test="reverse2 != null">
+        Reverse2,
+      </if>
+      <if test="reverse3 != null">
+        Reverse3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="comCode != null">
+        #{comCode,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCode != null">
+        #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="comLevel != null">
+        #{comLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="comType != null">
+        #{comType,jdbcType=VARCHAR},
+      </if>
+      <if test="supComCode != null">
+        #{supComCode,jdbcType=VARCHAR},
+      </if>
+      <if test="hasSubCom != null">
+        #{hasSubCom,jdbcType=VARCHAR},
+      </if>
+      <if test="comCname != null">
+        #{comCname,jdbcType=VARCHAR},
+      </if>
+      <if test="comAddress != null">
+        #{comAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="comphone != null">
+        #{comphone,jdbcType=VARCHAR},
+      </if>
+      <if test="validStatus != null">
+        #{validStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserCode != null">
+        #{createUserCode,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUserCode != null">
+        #{modifyUserCode,jdbcType=VARCHAR},
+      </if>
+      <if test="reverse1 != null">
+        #{reverse1,jdbcType=VARCHAR},
+      </if>
+      <if test="reverse2 != null">
+        #{reverse2,jdbcType=VARCHAR},
+      </if>
+      <if test="reverse3 != null">
+        #{reverse3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinosoft.normal.po.SysCompany">
+    update syscompany
+    <set>
+      <if test="areaCode != null">
+        AreaCode = #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="comLevel != null">
+        ComLevel = #{comLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="comType != null">
+        ComType = #{comType,jdbcType=VARCHAR},
+      </if>
+      <if test="supComCode != null">
+        SupComCode = #{supComCode,jdbcType=VARCHAR},
+      </if>
+      <if test="hasSubCom != null">
+        HasSubCom = #{hasSubCom,jdbcType=VARCHAR},
+      </if>
+      <if test="comCname != null">
+        ComCname = #{comCname,jdbcType=VARCHAR},
+      </if>
+      <if test="comAddress != null">
+        ComAddress = #{comAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="comphone != null">
+        ComPhone = #{comphone,jdbcType=VARCHAR},
+      </if>
+      <if test="validStatus != null">
+        ValidStatus = #{validStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CreateTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserCode != null">
+        CreateUserCode = #{createUserCode,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null">
+        ModifyTime = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUserCode != null">
+        ModifyUserCode = #{modifyUserCode,jdbcType=VARCHAR},
+      </if>
+      <if test="reverse1 != null">
+        Reverse1 = #{reverse1,jdbcType=VARCHAR},
+      </if>
+      <if test="reverse2 != null">
+        Reverse2 = #{reverse2,jdbcType=VARCHAR},
+      </if>
+      <if test="reverse3 != null">
+        Reverse3 = #{reverse3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ComCode = #{comCode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinosoft.normal.po.SysCompany">
+    update syscompany
+    set AreaCode = #{areaCode,jdbcType=VARCHAR},
+      ComLevel = #{comLevel,jdbcType=VARCHAR},
+      ComType = #{comType,jdbcType=VARCHAR},
+      SupComCode = #{supComCode,jdbcType=VARCHAR},
+      HasSubCom = #{hasSubCom,jdbcType=VARCHAR},
+      ComCname = #{comCname,jdbcType=VARCHAR},
+      ComAddress = #{comAddress,jdbcType=VARCHAR},
+      ComPhone = #{comphone,jdbcType=VARCHAR},
+      ValidStatus = #{validStatus,jdbcType=VARCHAR},
+      CreateTime = #{createTime,jdbcType=TIMESTAMP},
+      CreateUserCode = #{createUserCode,jdbcType=VARCHAR},
+      ModifyTime = #{modifyTime,jdbcType=TIMESTAMP},
+      ModifyUserCode = #{modifyUserCode,jdbcType=VARCHAR},
+      Reverse1 = #{reverse1,jdbcType=VARCHAR},
+      Reverse2 = #{reverse2,jdbcType=VARCHAR},
+      Reverse3 = #{reverse3,jdbcType=VARCHAR}
+    where ComCode = #{comCode,jdbcType=VARCHAR}
+  </update>
+</mapper>

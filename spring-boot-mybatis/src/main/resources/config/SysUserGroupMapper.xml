@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinosoft.dao.SysUserGroupMapper">
+  <resultMap id="BaseResultMap" type="com.sinosoft.normal.po.SysUserGroup">
+    <id column="UserCode" jdbcType="VARCHAR" property="userCode" />
+    <id column="GroupCode" jdbcType="VARCHAR" property="groupCode" />
+    <result column="ValidStatus" jdbcType="VARCHAR" property="validStatus" />
+    <result column="CreateTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="CreateUserCode" jdbcType="VARCHAR" property="createUserCode" />
+    <result column="Reverse1" jdbcType="VARCHAR" property="reverse1" />
+    <result column="Reverse2" jdbcType="VARCHAR" property="reverse2" />
+    <result column="Reverse3" jdbcType="VARCHAR" property="reverse3" />
+  </resultMap>
+ 
+  <sql id="Base_Column_List">
+    UserCode, GroupCode, ValidStatus, CreateTime, CreateUserCode, Reverse1, Reverse2, 
+    Reverse3
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.sinosoft.normal.po.SysUserGroupKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sysusergroup
+    where UserCode = #{userCode,jdbcType=VARCHAR}
+      and GroupCode = #{groupCode,jdbcType=VARCHAR}
+  </select>
+  
+  <!--查出所有用户岗位列表  -->
+	<select id="getSysUserGroupListByUserCode" resultType="com.sinosoft.normal.po.SysUserGroup" parameterType="java.lang.String">
+		select * from sysusergroup where UserCode = #{arg0} and ValidStatus = #{arg1}
+    </select>
+  
+  
+  <insert id ="saveSysUserGroupAll" parameterType="java.util.List" >
+              <selectKey resultType ="java.lang.Integer" keyProperty= "id"
+                   order= "AFTER">
+                  SELECT LAST_INSERT_ID()
+             </selectKey >
+             insert into sysusergroup
+             (userCode,groupCode,createUserCode,validStatus,createTime)
+             values
+             <foreach collection ="list" item="item" index= "index" separator =",">
+                 (
+                 #{item.userCode},#{item.groupCode},#{item.createUserCode},#{item.validStatus},#{item.createTime}
+                 )
+             </foreach>
+  </insert >
+  
+  
+  
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="com.sinosoft.normal.po.SysUserGroupKey">
+    delete from sysusergroup
+    where UserCode = #{userCode,jdbcType=VARCHAR}
+      and GroupCode = #{groupCode,jdbcType=VARCHAR}
+  </delete>
+  
+  
+  <insert id="insert" parameterType="com.sinosoft.normal.po.SysUserGroup">
+    insert into sysusergroup (UserCode, GroupCode, ValidStatus, 
+      CreateTime, CreateUserCode, Reverse1, 
+      Reverse2, Reverse3)
+    values (#{userCode,jdbcType=VARCHAR}, #{groupCode,jdbcType=VARCHAR}, #{validStatus,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{createUserCode,jdbcType=VARCHAR}, #{reverse1,jdbcType=VARCHAR}, 
+      #{reverse2,jdbcType=VARCHAR}, #{reverse3,jdbcType=VARCHAR})
+  </insert>
+  
+  
+  
+  <insert id="insertSelective" parameterType="com.sinosoft.normal.po.SysUserGroup">
+    insert into sysusergroup
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userCode != null">
+        UserCode,
+      </if>
+      <if test="groupCode != null">
+        GroupCode,
+      </if>
+      <if test="validStatus != null">
+        ValidStatus,
+      </if>
+      <if test="createTime != null">
+        CreateTime,
+      </if>
+      <if test="createUserCode != null">
+        CreateUserCode,
+      </if>
+      <if test="reverse1 != null">
+        Reverse1,
+      </if>
+      <if test="reverse2 != null">
+        Reverse2,
+      </if>
+      <if test="reverse3 != null">
+        Reverse3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userCode != null">
+        #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="groupCode != null">
+        #{groupCode,jdbcType=VARCHAR},
+      </if>
+      <if test="validStatus != null">
+        #{validStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserCode != null">
+        #{createUserCode,jdbcType=VARCHAR},
+      </if>
+      <if test="reverse1 != null">
+        #{reverse1,jdbcType=VARCHAR},
+      </if>
+      <if test="reverse2 != null">
+        #{reverse2,jdbcType=VARCHAR},
+      </if>
+      <if test="reverse3 != null">
+        #{reverse3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinosoft.normal.po.SysUserGroup">
+    update sysusergroup
+    <set>
+      <if test="validStatus != null">
+        ValidStatus = #{validStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CreateTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserCode != null">
+        CreateUserCode = #{createUserCode,jdbcType=VARCHAR},
+      </if>
+      <if test="reverse1 != null">
+        Reverse1 = #{reverse1,jdbcType=VARCHAR},
+      </if>
+      <if test="reverse2 != null">
+        Reverse2 = #{reverse2,jdbcType=VARCHAR},
+      </if>
+      <if test="reverse3 != null">
+        Reverse3 = #{reverse3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where UserCode = #{userCode,jdbcType=VARCHAR}
+      and GroupCode = #{groupCode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinosoft.normal.po.SysUserGroup">
+    update sysusergroup
+    set ValidStatus = #{validStatus,jdbcType=VARCHAR},
+      CreateTime = #{createTime,jdbcType=TIMESTAMP},
+      CreateUserCode = #{createUserCode,jdbcType=VARCHAR},
+      Reverse1 = #{reverse1,jdbcType=VARCHAR},
+      Reverse2 = #{reverse2,jdbcType=VARCHAR},
+      Reverse3 = #{reverse3,jdbcType=VARCHAR}
+    where UserCode = #{userCode,jdbcType=VARCHAR}
+      and GroupCode = #{groupCode,jdbcType=VARCHAR}
+  </update>
+  
+   
+   <!-- 通过 岗位代码查询权限合集 -->
+  <select id="selectByGroupCode"  resultMap="BaseResultMap" parameterType="String" >
+   	select  
+	     <include refid="Base_Column_List" />  
+	     from sysusergroup sug where 1=1
+	    <if test="groupCode != null and groupCode !=''">
+	 	  AND sug.groupCode =#{groupCode}  
+	</if>
+  
+  </select>
+</mapper>

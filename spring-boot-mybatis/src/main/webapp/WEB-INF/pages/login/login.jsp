@@ -48,7 +48,6 @@
 	<script type="text/javascript" src="../common/layui/layui.all.js"></script>
 	<script src='../common/js/dat.gui.min.js'></script>
 	<script src="../common/js/blackhole-index.js"></script>
-	<!-- <script type="text/javascript" src="../common/js/login-login.js"></script> -->
 	<script type="text/javascript">
 		$(function(){
 			 if (window != top)   
@@ -63,9 +62,7 @@
 			  ,form = layui.form;
 				layer = parent.layer === undefined ? layui.layer : parent.layer,
 				$ = layui.jquery;
-			
 			var msg = $("#msg").val();
-			
 			if(msg!=null&&msg!=""){
 				var index = layer.msg(msg, {
 					  icon: 5,

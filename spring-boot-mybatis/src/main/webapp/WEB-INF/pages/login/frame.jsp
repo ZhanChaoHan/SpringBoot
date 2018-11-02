@@ -27,34 +27,6 @@
 				<!-- 显示/隐藏菜单 -->
 				<a href="javascript:;" class="iconfont hideMenu icon-menu1"></a>
 				<!-- 搜索 -->
-				<!--
-				<div class="layui-form component">
-			        <select name="modules" lay-verify="required" lay-search="">
-						<option value="">直接选择或搜索选择</option>
-						<option value="1">layer</option>
-						<option value="2">form</option>
-						<option value="3">layim</option>
-						<option value="4">element</option>
-						<option value="5">laytpl</option>
-						<option value="6">upload</option>
-						<option value="7">laydate</option>
-						<option value="8">laypage</option>
-						<option value="9">flow</option>
-						<option value="10">util</option>
-						<option value="11">code</option>
-						<option value="12">tree</option>
-						<option value="13">layedit</option>
-						<option value="14">nav</option>
-						<option value="15">tab</option>
-						<option value="16">table</option>
-						<option value="17">select</option>
-						<option value="18">checkbox</option>
-						<option value="19">switch</option>
-						<option value="20">radio</option>
-			        </select>
-			        <i class="layui-icon">&#xe615;</i>
-			    </div>
-				  -->
 			   <!-- 天气信息 -->
 			    <div class="weather" pc>
 			    	<div id="tp-weather-widget"></div>
@@ -117,14 +89,10 @@
 				            	<dd><a href="javascript:;"  data-url="../${sysrole2.value.url }"><i class="iconfont " data-icon="icon-zhanghu"></i><cite>${sysrole2.value.roleName }</cite></a></dd>
 				            </c:if>
 			          	</c:forEach>
-				           
 			          </dl>
        			 </li>
-      		
-      		
       		</c:if>
       	</c:forEach>
-      
       </ul>
 		</div>
 		<!-- 右侧内容 -->
@@ -133,8 +101,6 @@
 				<ul class="layui-tab-title top_tab" id="top_tabs">
 					<li class="layui-this" lay-id=""><i class="iconfont icon-computer"></i> <cite>后台首页</cite></li>
 				</ul>
-				
-				
 				<ul class="layui-nav closeBox">
 				  <li class="layui-nav-item">
 				    <a href="javascript:;"><i class="iconfont icon-caozuo"></i> 页面操作</a>

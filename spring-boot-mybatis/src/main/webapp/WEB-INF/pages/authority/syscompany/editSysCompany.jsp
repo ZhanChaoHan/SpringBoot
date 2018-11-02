@@ -4,7 +4,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>岗位管理——查询</title>
+	<title>机构管理——添加</title>
 	<meta name="renderer" content="webkit">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -16,7 +16,7 @@
 	<link rel="stylesheet" href="../common/sysuser/css/user.css" media="all" />
 </head>
 <body class="childrenBody">
-	<form class="layui-form" action="../sysGroup/querySysGroupResult.do" method="post" id="form">
+	<form class="layui-form" action="/sysGroup/querySysGroupResult.do" method="post" id="form">
 	<blockquote class="layui-elem-quote news_search">
 		<div class="layui-row">
 		    <div class="layui-col-xs4">
@@ -188,11 +188,11 @@
 		  
 		  //监听提交
 		  form.on('submit(demo1)', function(data){
-				var url="../sysCompany/checkSysCompany.do";
+				var url="/sysCompany/checkSysCompany.do";
 				 $.post(url,{comCode:data.field.comCode},function(json){
 					 if(json.msg==1){
 						 //保存用户
-						 var url="../sysCompany/addSysCompany.do";
+						 var url="/sysCompany/addSysCompany.do";
 							  $.post(url,{comType:data.field.comType,supComCode:data.field.supComCode,comCode:data.field.comCode, comCname:data.field.comCname, areaCode:data.field.areaCode, comAddress:data.field.comAddress, comLevel:data.field.comLevel, comPhone:data.field.comPhone},function(json){ 
 								  alert("保存成功");
 								  //关闭并清空弹框的值
@@ -208,7 +208,7 @@
 	
 	//返回机构查询页面
 	function updateReturn(){
-		window.location.href="${ctx}/sysCompany/querySysCompany.do";
+		window.location.href="/sysCompany/querySysCompany.do";
 	}
 		
 	</script>

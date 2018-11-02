@@ -85,7 +85,6 @@ public class LoginController {
 					if (user.getPassWord().equals(AppUtil.md5s(password))) {
 						// 登录正常，开始加载用户权限
 						logger.info("登录成功，开始加载用户权限...");
-
 						// 通过用户查出用户所在的机构
 						SysCompany company = sysCompanyService.selectByPrimaryKey(user.getComCode(),
 								AppConst.VALID_STATUS_01);
@@ -115,7 +114,6 @@ public class LoginController {
 
 						// - 查找用户所有功能集合
 						Map<String, SysRole> funcPowersMap = new TreeMap<String, SysRole>();
-
 						for (SysRole role : sysRoleList) {
 							if (role.getRoleType().equals(AppConst.ROLE_TYPE_01)) {
 								funcPowersMap.put(role.getRoleCode(), role);
@@ -142,10 +140,8 @@ public class LoginController {
 						userSession.setFuncPowers(funcPowersMap);
 
 						// 放入权限合集
-						// userSession.setFuncPowers(funcPowersMap);
 						// 用户信息放入session
 						session.setAttribute(AppConst.USER_SESSION_ID, userSession);
-
 						// 打印日志
 						logger.info(LoggerUtil.getInfoMsg("登录操作", session));
 						return "redirect:frame.do";

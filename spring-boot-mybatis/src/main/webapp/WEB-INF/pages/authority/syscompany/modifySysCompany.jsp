@@ -211,7 +211,7 @@
 		  });
 		  //监听提交
 		  form.on('submit(demo1)', function(data){
-			  var url="../sysCompany/updateSysCompany.do";
+			  var url="/sysCompany/updateSysCompany.do";
 			  $.post(url,{comCode:data.field.comCode,comCname:data.field.comCname,areaCode:data.field.areaCode,comAddress:data.field.comAddress,comLevel:data.field.comLevel,comPhone:data.field.comPhone,supComCode:data.field.supComCode},function(json){ 
 				  alert("修改成功");
 				  //关闭并清楚弹层
@@ -225,59 +225,6 @@
 	function updateReturn(){
 		window.location.href="${ctx}/sysCompany/querySysCompany.do";
 	}
-	//修改操作如下
-	/*$("#update").click(function () {
-	var comCode=document.getElementById("comCode").value;
-  	var comCname=document.getElementById("comCname").value;
-  	var areaCode=document.getElementById("areaCode").value;
-  	var comAddress=document.getElementById("comAddress").value;
-  	var comLevel=document.getElementById("comLevel").value;
-  	var comPhone=document.getElementById("comPhone").value;
-  	var supComCode=document.getElementById("supComCode").value;
-  	if(comCode == ""){
-		alert("机构代码不能为空");
-		document.getElementById("comCode").select();
-		return false;
-	}
-	if(comCname == ""){
-		alert("机构名称不能为空");
-		document.getElementById("comCname").select();
-		return false;
-	}
-	if(areaCode == ""){
-		alert("地区不能为空");
-		document.getElementById("areaCode").select();
-		return false;
-	}
-  	if(comAddress == ""){
-		alert("机构地址不能为空");
-		document.getElementById("comAddress").select();
-		return false;
-	}
-  	if(comLevel == ""){
-		alert("机构级别不能为空!");
-		document.getElementById("comLevel").select();
-		return false;
-	}
-  	if(comPhone == ""){
-		alert("机构电话不能为空!");
-		document.getElementById("comPhone").select();
-		return false;
-	}
-	if(supComCode == ""){
-		alert("上级机构不能为空!");
-		document.getElementById("supComCode").select();
-		return false;
-	}
-	 var url="../sysCompany/updateSysCompany.do";
-	  $.post(url,{comCode:comCode,comCname:comCname,areaCode:areaCode,comAddress:comAddress,comLevel:comLevel,comPhone:comPhone,supComCode:supComCode},function(json){ 
-		  alert("修改成功");
-		  //关闭并清楚弹层
-		  $('#return').trigger("click");
-      },"json");
-	
-})*/
-		
 </script>
 <script type="text/html" id="barDemo">
  	 <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail">修改</a>

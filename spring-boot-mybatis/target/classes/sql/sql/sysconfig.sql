@@ -1,0 +1,1 @@
+insert into sysconfig (ConfigName, ConfigValue, ConfigExp, ConfigDes, ValidStatus, CreateTime, CreateUserCode, ModifyTime, ModifyUserCode, Reverse1, Reverse2, Reverse3) values ('001', '001', '001', '001', '01', '0018-10-22 00:00:00', '001', '0018-10-22 00:00:00', '001', null, null, null);

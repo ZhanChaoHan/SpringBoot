@@ -4,7 +4,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>岗位管理——查询</title>
+	<title>机构管理——查询</title>
 	<meta name="renderer" content="webkit">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -16,7 +16,7 @@
 	<link rel="stylesheet" href="../common/sysuser/css/user.css" media="all" />
 </head>
 <body class="childrenBody">
-	<form class="layui-form" action="${ctx}/sysGroup/querySysGroupResult.do" method="post" id="form">
+	<form class="layui-form" action="sysGroup/querySysGroupResult.do" method="post" id="form">
 	<blockquote class="layui-elem-quote news_search">
 		<div class="layui-row">
 		    <div class="layui-col-xs4">
@@ -79,7 +79,7 @@
 	});
   //后面就跟你平时使用jQuery一样
   $("#btn").click(function () {
-	  var url="${ctx}/sysCompany/querySysCompanyResult.do";
+	  var url="/sysCompany/querySysCompanyResult.do";
 	  var param = getParam();
 	  $.post(url,param,function(json){
 		  layui.use('table', function(){
@@ -116,17 +116,17 @@
 	     if(layEvent === 'detail'){
 	    	 //修改操作
 	    	 var form = document.getElementById("form");
-			 var url = "${ctx}/sysCompany/modifySysCompany.do?comCode="+data.comCode;
+			 var url = "/sysCompany/modifySysCompany.do?comCode="+data.comCode;
 			 form.action = url;
 			 form.submit();
 	    } else if(layEvent === 'del'){
-		   	var url="../sysCompany/deleteCheckSysCompany.do";
+		   	var url="/sysCompany/deleteCheckSysCompany.do";
 		    $.post(url,{comCode:data.comCode},function(json){ 
 		    	if(json.reFlag == "01"){
 					alert('该机构含有下属机构，不能删除！');
 				}else {
 					layer.confirm('\r\n删除该保监局机构会删除以下信息\r\n 1、该保监局机构用户的岗位信息\r\n  2、该保监局机构的用户信息\r\n  3、该保监局机构的信息\r\n\r\n删除后不可恢复，确定执行删除操作？', function(index){
-				    	  var url="../sysCompany/deleteSysCompany.do";
+				    	  var url="/sysCompany/deleteSysCompany.do";
 					      $.post(url,{comCode:data.comCode},function(json){ 
 					    	  if(json.number=="1"){
 					    		  layer.msg('删除成功');
@@ -167,7 +167,7 @@
 	
 	<script type="text/javascript">
 	function addSysCompany(){
-		window.location.href="${ctx}/sysCompany/editSysCompany.do";
+		window.location.href="/sysCompany/editSysCompany.do";
 	}
 	</script>
 </body>

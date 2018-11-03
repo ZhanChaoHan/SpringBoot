@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@include file="../../taglibs.jsp" %>
+<%@include file="../../taglibs.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -23,9 +23,7 @@
 		<div class="layui-row">
 		    <div class="layui-col-xs4">
 		    	<div class="grid-demo grid-demo-bg1">
-		    		<label class="layui-form-label">
-		    			岗位代码：
-		    		</label>
+		    		<label class="layui-form-label">岗位代码：</label>
 					<div class="layui-input-inline">
 			    		<input type="text" value="" name="groupCode" id="groupCode" placeholder="请输入关键字 (模糊)" class="layui-input search_input">
 			     	</div>
@@ -33,9 +31,7 @@
 		    </div>
 		    <div class="layui-col-xs4">
 		      <div class="grid-demo"> 
-		      		<label class="layui-form-label">
-		      			岗位名称：
-		      		</label>
+		      		<label class="layui-form-label">岗位名称：</label>
 		      		<div class="layui-input-inline">
 			    		<input type="text" value="" name="GroupName" id="GroupName" placeholder="请输入关键字 (模糊)" class="layui-input search_input">
 			    	</div>
@@ -81,10 +77,9 @@
 	 }
 	 //修改岗位
 	function modifyOne(obj){
-		alert($(obj).parent().parent().html());
 	  //获取当前选中行主键
 	  var groupCode = obj.parentNode.parentNode.parentNode.firstChild.firstChild.innerHTML;
-	  alert(groupCode);
+	  alert("有點小Bug");
 	  return;
 	  var fmq = document.getElementById("fm");
 	  var url = "/sysGroup/modifySysGroup.do?updateGroupCode="+groupCode;

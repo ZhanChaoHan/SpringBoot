@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@include file="/common/pages/taglibs.jsp" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.sinosoft.normal.po.SysRole" %>
+<%@include file="../../taglibs.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,13 +17,8 @@
     <script type="text/javascript" src="../common/dtree/dtree.js"></script>
     <script type="text/javascript" src="../common/js/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" >
-	//$(function(){
-		 //console.log("${list}");
-		//console.log($("#comType"));
-	//});
-	
 	function goback(){
-		window.location.href="${ctx}/sysGroup/editSysGroup.do";
+		window.location.href="/sysGroup/editSysGroup.do";
 	}	
 	</script>
 </head>
@@ -62,16 +57,15 @@ $("#save").click(function () {
      var groupCodeValue=document.getElementById("groupCode").value;
 	 $("input:checkbox[name='treeCheckBox']:checked").each(function() { // 遍历name=test的多选框
 	 treeCheckBox += $(this).val() + ",";  // 每一个被选中项的值
-	 // console.log(treeCheckBox);
 	});
 	 if(treeCheckBox == null || treeCheckBox ==""){
 		 alert("请添加岗位权限");
 	 }else{
-  		  var url="${ctx}/sysGroup/saveSysGroupRole.do";
+  		  var url="/sysGroup/saveSysGroupRole.do";
 	      $.post(url,{groupCode:groupCodeValue,treeCheckBox:treeCheckBox},function(json){
 			  if(json.msg == "1"){
 				  alert("添加成功");
-				  window.location.href="${ctx}/sysGroup/editSysGroup.do";
+				  window.location.href="/sysGroup/editSysGroup.do";
 			  }
 		  },"json");
 		 }

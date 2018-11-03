@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@include file="../../taglibs.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>系统代码管理页面</title>
-
+<title>系统配置管理</title>
 <link rel="stylesheet" href="../common/layui/css/layui.css" media="all" />
 <link rel="stylesheet" href="../common/css/font_eolqem241z66flxr.css" media="all" />
 <script src="../common/layui/layui.js"></script>
@@ -14,7 +14,6 @@
 <script>
 layui.use('table', function(){
     var table = layui.table;
-    
   //监听工具条
     table.on('tool(test)', function(obj){
         var data = obj.data;
@@ -73,7 +72,7 @@ layui.use('table', function(){
             
         	//点击修改按钮触发
             $("#EidtUv").click(function() { 
-            	 var url="../sysConfig/updateMarySelect.do";
+            	 var url="/sysConfig/updateMarySelect.do";
             	 var param=getparam();
                  console.log(param)
                  $.post(url,param,function(data){
@@ -85,7 +84,6 @@ layui.use('table', function(){
                    }  
                  });
             });
-            
         }  
         //工具条末尾
     });
@@ -93,11 +91,10 @@ layui.use('table', function(){
 
 //查找语句
       function search_btn(){
-    	  var url="../sysConfig/selectMaryList.do";
+    	  var url="/sysConfig/selectMaryList.do";
     	  var param= getDate();
     	  console.log(param);
     	  $.post(url,param,function(result){
-    		  console.log(result)
 				 layui.use('table', function(){
 					  var table = layui.table;
 					  //展示已知数据		

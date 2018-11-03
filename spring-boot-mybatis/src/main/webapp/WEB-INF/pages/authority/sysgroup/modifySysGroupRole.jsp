@@ -2,11 +2,12 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.sinosoft.normal.po.SysRole" %>
 <%@ page import="com.sinosoft.normal.po.SysGroupRole" %>
+<%@include file="../../taglibs.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta charset="utf-8">
-	<title>岗位管理——修改</title>
+	<title>岗位管理——分配功能</title>
 	<meta name="renderer" content="webkit">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -17,14 +18,8 @@
     <script type="text/javascript" src="../common/dtree/dtree.js"></script>
     
 	<script type="text/javascript" >
-	//$(function(){
-		// console.log("${sysRoleList}");
-		 //console.log("${sysGroupRoleList}");
-	//});
-	
-	
 	function goback(){
-		window.location.href="${ctx}/sysGroup/editSysGroup.do";
+		window.location.href="/sysGroup/editSysGroup.do";
 	}	
 	</script>
 </head>
@@ -64,7 +59,6 @@
 <br>
 <table width="100%">
 <tr>
-
 	<td align="center" ><input class="button" type="button" id="btn" value="保存" ></td>
 	<td align="center" ><input class="button" type="button" id="but2" value="返回 " onclick="goback()"></td>
 </tr>
@@ -78,15 +72,12 @@ $("#btn").click(function () {
      var groupCodeValue=document.getElementById("groupCode").value;
 	 $("input:checkbox[name='treeCheckBox']:checked").each(function() { // 遍历name=test的多选框
 	 treeCheckBox += $(this).val() + ",";  // 每一个被选中项的值
-	  //console.log(treeCheckBox);
 	});
-	//alert(typeof treeCheckBox);
-	//alert(groupCodeValue);
-  var url="${ctx}/sysGroup/saveUpdateSysGroupRole.do";
+  var url="/sysGroup/saveUpdateSysGroupRole.do";
   $.post(url,{groupCode:groupCodeValue,treeCheckBox:treeCheckBox},function(json){
 	  if(json.msg == "1"){
 		  alert("修改成功");
-		  window.location.href="${ctx}/sysGroup/querySysGroup.do";
+		  window.location.href="/sysGroup/querySysGroup.do";
 	  }
   },"json");
 });

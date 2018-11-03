@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@include file="../../taglibs.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,7 +17,7 @@
 	<link rel="stylesheet" href="../common/sysuser/css/user.css" media="all" />
 </head>
 <body class="childrenBody">
-	<form class="layui-form" action="${ctx}/sysGroup/saveSysGroup.do" method="post" id="form">
+	<form class="layui-form" action="/sysGroup/saveSysGroup.do" method="post" id="form">
 	<blockquote class="layui-elem-quote news_search">
 		<div class="layui-row">
 		    <div class="layui-col-xs4">
@@ -71,7 +72,6 @@
 	</form>
 	<div class="bg" style="position:relative;background:rgba(224,224,224,0.5);width:100%;height:100%;top:-130px;display:none;">
 		<div class="alert" style="position: absolute;top:50%;left:50%;margin-left:-163px;">
-			
 			<button class="layui-btn" id="cSave">继续添加岗位</button>
 			<button class="layui-btn" id="addSysRole">为新岗位分配功能</button>
 		</div>
@@ -105,9 +105,11 @@
 		      if(!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)){
 	              return '不能有特殊字符';
 	          }
+		      /*
 		      if(!new RegExp("/^[\u2E80-\u9FFF]+$/").test(value)){
 		    	  return '不能输入中文';
 		      }
+		      */
 		    	  
 		  } 
 	 	 ,GroupName: function(value){
@@ -142,39 +144,30 @@
 	  
 	  //监听提交:保存方法
 	  form.on('submit(demo1)', function(data){
-		  var url="${ctx}/sysGroup/checkGroupCode.do";
+		  var url="/sysGroup/checkGroupCode.do";
 		  $.post(url,{groupCode:data.field.groupCode},function(json){
 			  if(json.msg == '0'){
 					alert('已存在报告名称相同的数据！');
 				}else if(json.msg == '1'){
-					  var url="${ctx}/sysGroup/saveSysGroup.do";
+					  var url="/sysGroup/saveSysGroup.do";
 					  $.post(url,{groupCode:data.field.groupCode, groupName:data.field.GroupName, comLevel:data.field.comLevel, comType:data.field.comType},function(json){
 						  if(json.msg == '1'){
 							  var saveGroupCode = json.sysgroup.groupCode;
 					  		$(".bg").css("display","block");
 					  		$("#cSave").click(function() {
-					  			window.location.href="${ctx}/sysGroup/editSysGroup.do";
+					  			window.location.href="/sysGroup/editSysGroup.do";
 					  		});
 					  		$("#addSysRole").click(function() {
-					  			window.location.href="${ctx}/sysGroup/querySysRole.do?saveGroupCode="+saveGroupCode;
+					  			window.location.href="/sysGroup/querySysRole.do?saveGroupCode="+saveGroupCode;
 					  		});
-					  		//$("#btn")
-					  	    //var url="${ctx}/sysGroup/editsysGroup.do";
 						  }
 					  },"json");
 					  return false;
 				}
-			  
 		  },"json");
 		  return false;
 	  });
-	  
 	});
-
-	$(function(){
-		 //console.log("1111111");
-		//console.log($("#comType"));
- 	});
 </script>
 </body>
 </html>

@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@include file="../../taglibs.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>用户总数--layui后台管理模板</title>
+	<title>用户管理-分配权限</title>
 	<meta name="renderer" content="webkit">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -21,7 +22,6 @@
 	<input type="hidden" id="userCode"name="userCode" value="${sysUser.userCode }" />
 	<blockquote class="layui-elem-quote news_search">
 			<table class="common" cellspacing="1" cellpadding="5">
-			
 			<tr>
 				<td  class="title0" colspan="4"><B>为保监局用户：${sysUser.userCode }(${sysUser.userName }) 修改岗位信息</B></td>
 			</tr>
@@ -77,13 +77,13 @@
 	<script type="text/javascript" src="../common/layui/layui.all.js"></script>
 	<script  type="text/javascript">
 	function submitForm(){
-		var url = "../sysUser/updateSysUserGroup.do";
+		var url = "/sysUser/updateSysUserGroup.do";
 		from.action = url;
 		from.submit();
 	}
 	//点击返回跳转到查询页面
 	function addReturn(){
-		window.location.href="${ctx}/sysUser/querySysUser.do";
+		window.location.href="/sysUser/querySysUser.do";
 	}
 	</script>
 </body>

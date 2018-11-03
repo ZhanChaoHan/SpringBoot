@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@include file="../../taglibs.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,7 +17,7 @@
 	<link rel="stylesheet" href="../common/sysuser/css/user.css" media="all" />
 </head>
 <body class="childrenBody">
-	<form class="layui-form" action="${ctx}/sysGroup/saveUpdateSysGroup.do" method="post" id="form">
+	<form class="layui-form" action="/sysGroup/saveUpdateSysGroup.do" method="post" id="form">
 	<blockquote class="layui-elem-quote news_search">
 		<div class="layui-row">
 		    <div class="layui-col-xs4">
@@ -82,15 +83,14 @@
 	<script type="text/javascript" src="../common/js/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="../common/layui/layui.all.js"></script>
 	<script type="text/javascript">
-	
 	//保存方法
     $("#btn").click(function () {
-		  var url="${ctx}/sysGroup/saveUpdateSysGroup.do";
+		  var url="/sysGroup/saveUpdateSysGroup.do";
 		  var param = getParam();
 		  $.post(url,param,function(json){
 			  if(json.msg=="1"){
 		  		alert("修改成功");  
-		  		window.location.href="${ctx}/sysGroup/querySysGroup.do";
+		  		window.location.href="/sysGroup/querySysGroup.do";
 			  }
 		  },"json");
 		  

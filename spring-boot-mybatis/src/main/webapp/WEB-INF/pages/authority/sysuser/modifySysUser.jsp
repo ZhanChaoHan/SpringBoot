@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+     <%@include file="../../taglibs.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>用户总数--layui后台管理模板</title>
+	<title>用户管理-编辑</title>
 	<meta name="renderer" content="webkit">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -16,7 +17,7 @@
 	<link rel="stylesheet" href="../common/sysuser/css/user.css" media="all" />
 </head>
 <body class="childrenBody">
-<form action="../sysUser/querySysUserReturn.do" class="layui-form" method="post" id="from">
+<form action="/sysUser/querySysUserReturn.do" class="layui-form" method="post" id="from">
 	<blockquote class="layui-elem-quote news_search">
 		<div class="layui-row">
 		    <div class="layui-col-xs4">
@@ -112,7 +113,7 @@
 		  
 		  //监听提交
 		  form.on('submit(demo1)', function(data){
-			  var url="../sysUser/updateSysUser.do";
+			  var url="/sysUser/updateSysUser.do";
 			  $.post(url,{userCode:data.field.userCode,userName:data.field.userName,telePhone:data.field.telePhone, email:data.field.email},function(json){ 
 				  alert("修改成功");
 				  //关闭并清楚弹层
@@ -122,27 +123,10 @@
 		  });
 		});
 	
-	
-	
 		//点击返回跳转到查询页面
 		function updateReturn(){
-			window.location.href="${ctx}/sysUser/querySysUser.do";
+			window.location.href="/sysUser/querySysUser.do";
 		}
-		//修改操作如下
-		/*$("#update").click(function () {
-		var userCode=document.getElementById("userCode").value;
-		var userName=document.getElementById("userName").value;
-	  	var telePhone=document.getElementById("telePhone").value;
-		var email=document.getElementById("email").value;
-		
-		 var url="../sysUser/updateSysUser.do";
-		  $.post(url,{userCode:userCode,userName:userName,telePhone:telePhone, email:email},function(json){ 
-			  alert("修改成功");
-			  //关闭并清楚弹层
-			  $('#return').trigger("click");
-	      },"json");
-		
-	})*/
 	</script>
 </body>
 </html>

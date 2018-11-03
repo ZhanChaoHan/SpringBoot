@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+     <%@include file="../../taglibs.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>用户总数--layui后台管理模板</title>
+	<title>用户管理</title>
 	<meta name="renderer" content="webkit">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -139,13 +140,13 @@
 			    if(layEvent === 'detail'){
 				     //分配权限
 				     var form = document.getElementById("form");
-					 var url = "${ctx}/sysUser/modifySysUserGroup.do?userCode="+data.userCode;
+					 var url = "/sysUser/modifySysUserGroup.do?userCode="+data.userCode;
 					 form.action = url;
 					 form.submit();
 			    } else if(layEvent === 'del'){
 				      //删除操作
 				      layer.confirm('删除该用户会删除以下信息	1、该用户的岗位关系信息 2、该用户的用户信息删除后不可恢复，确定要执行删除操作？', function(index){
-				    	  var url="../sysUser/deleteSysUser.do";
+				    	  var url="/sysUser/deleteSysUser.do";
 					      $.post(url,{userCode:data.userCode,comCode:data.comCode},function(json){ 
 					    	  if(json.number=="1"){
 					    		  layer.msg('删除成功');
@@ -161,7 +162,7 @@
 			    } else if(layEvent === 'edit'){
 			    	 //修改操作
 			    	 var form = document.getElementById("form");
-					 var url = "${ctx}/sysUser/modifySysUser.do?userCode="+data.userCode;
+					 var url = "/sysUser/modifySysUser.do?userCode="+data.userCode;
 					 form.action = url;
 					 form.submit();
 			    }
@@ -188,7 +189,7 @@
 	
 	//点击添加跳转页面
 	function addSysUser(){
-		window.location.href="${ctx}/sysUser/editSysUser.do";
+		window.location.href="/sysUser/editSysUser.do";
 	}
 	</script>
 	<script type="text/html" id="barDemo">

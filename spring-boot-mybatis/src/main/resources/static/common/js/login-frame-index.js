@@ -9,7 +9,6 @@ var username = $(".userName").html();
 		$ = layui.jquery;
 		tab = layui.bodyTab({
 			openTabNum : "7",  //最大可打开窗口数量
-			/*url : "/springmvc_mybatis/common/json/navs.json"*/ //获取菜单json地址
 		});
 
 	//更换皮肤
@@ -124,8 +123,6 @@ var username = $(".userName").html();
 						skins();
 					}
 				});
-		
-		
 	})
 
 	//退出
@@ -141,10 +138,8 @@ var username = $(".userName").html();
 		//渲染顶部窗口
 		tab.tabMove();
 	})
-
 	//渲染左侧菜单
 	tab.render();
-
 	//锁屏
 	function lockPage(){
 		var index	=   layer.open({
@@ -153,7 +148,7 @@ var username = $(".userName").html();
 						offset: '250px',
 						area : ["360px","210px"],
 						content : '	<div class="admin-header-lock" id="lock-box">'+
-						'<div class="admin-header-lock-img"><img src="'+ctx + "/common/images/face.jpg"+'"/></div>'+
+						'<div class="admin-header-lock-img"><img src="/common/images/face.jpg"/></div>'+
 										'<div class="admin-header-lock-name" id="lockUserName">'+username+'</div>'+
 										'<div class="input_btn">'+
 											'<input type="password" class="admin-header-lock-input layui-input" autocomplete="off" placeholder="请输入密码解锁.." name="password" id="lockPwd" />'+
@@ -185,7 +180,7 @@ var username = $(".userName").html();
 	   			top:'220px',
 	   			});
 		}else{
-			$.post(ctx+"/login/validatePassWord.do", {"password":$("#lockPwd").val()}, function(json) {
+			$.post("/login/validatePassWord.do", {"password":$("#lockPwd").val()}, function(json) {
     			if(json=='error'){
     				index = layer.msg("服务器开小差了,请稍后重试!");
     				$(this).siblings(".admin-header-lock-input").val('').focus();
@@ -202,8 +197,6 @@ var username = $(".userName").html();
     	   			top:'320px',
     	   			});
 			});
-			
-			
 		}
 		
 	});
@@ -271,10 +264,6 @@ var username = $(".userName").html();
 					}
 		        }
 		    });
-	
-		
-		
-		
 	}
 	//判断是否处于锁屏状态(如果关闭以后则未关闭浏览器之前不再显示)
 	if(window.sessionStorage.getItem("lockcms") != "true" && window.sessionStorage.getItem("showNotice") != "true"){
@@ -293,7 +282,6 @@ var username = $(".userName").html();
 			openTitle = '';
 			if(menu[i].icon){
 				if(menu[i].icon.split("-")[0] == 'icon'){
-					
 					//openTitle += '<i class="iconfont '+menu[i].icon+'"></i>';
 				}else{
 					//openTitle += '<i class="layui-icon">'+menu[i].icon+'</i>';
@@ -388,6 +376,3 @@ var username = $(".userName").html();
 function addTab(_this){
 	tab.tabAdd(_this);
 }
-
-
-

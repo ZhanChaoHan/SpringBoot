@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@include file="../../taglibs.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,7 +17,7 @@
 	<link rel="stylesheet" href="../common/sysuser/css/user.css" media="all" />
 </head>
 <body class="childrenBody">
-	<form class="layui-form" action="${ctx}/sysGroup/modifySysGroup.do" method="post" id="fm">
+	<form class="layui-form" action="/sysGroup/modifySysGroup.do" method="post" id="fm">
 	 <input type="hidden" name="updateGroupCode" id="updateGroupCode"/>
 	<blockquote class="layui-elem-quote news_search">
 		<div class="layui-row">
@@ -74,48 +75,39 @@
 	<script type="text/javascript" src="../common/js/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="../common/layui/layui.all.js"></script>
 	<script type="text/javascript">
-	$(function(){
-		 //console.log("1111111");
-		//console.log($("#comType"));
- 	});
-	
 	 //添加岗位
 	 function addOne(){
-		window.location.href="${ctx}/sysGroup/editSysGroup.do";
+		window.location.href="/sysGroup/editSysGroup.do";
 	 }
-	 
 	 //修改岗位
 	function modifyOne(obj){
-	  console.log(obj.parentNode.parentNode.parentNode.firstChild.firstChild.innerHTML);
+		alert($(obj).parent().parent().html());
 	  //获取当前选中行主键
 	  var groupCode = obj.parentNode.parentNode.parentNode.firstChild.firstChild.innerHTML;
+	  alert(groupCode);
+	  return;
 	  var fmq = document.getElementById("fm");
-	  var url = "${ctx}/sysGroup/modifySysGroup.do?updateGroupCode="+groupCode;
+	  var url = "/sysGroup/modifySysGroup.do?updateGroupCode="+groupCode;
 	  fmq.action = url;
 	  fmq.submit();
 	}
 	 
 	 function groupOne(obj){
-		 console.log(obj.parentNode.parentNode.parentNode.firstChild.firstChild.innerHTML);
 		  //获取当前选中行主键
 		  var groupCode = obj.parentNode.parentNode.parentNode.firstChild.firstChild.innerHTML;
 		  var fmq = document.getElementById("fm");
-		  var url = "${ctx}/sysGroup/modifySysGroupRole.do?updateGroupCode="+groupCode;
+		  var url = "/sysGroup/modifySysGroupRole.do?updateGroupCode="+groupCode;
 		  fmq.action = url;
 		  fmq.submit();
 	 }
 	
 	  //后面就跟你平时使用jQuery一样
 	  $("#btn").click(function () {
-		  //var groupCode = document.getElementById("groupCode").value;
-		  //var url="${ctx}/sysGroup/querySysGroupResult.do?groupCode="+groupCode;
-		  var url="${ctx}/sysGroup/querySysGroupResult.do";
+		  var url="/sysGroup/querySysGroupResult.do";
 		  var param = getParam();
 		  $.post(url,param,function(json){
-			  //console.log("1111111");
 			  layui.use('table', function(){
 				  var table = layui.table;
-				  console.log(json.groupList);
 				  //展示已知数据
 				  table.render({
 				    elem: '#demo',
@@ -131,7 +123,7 @@
 				    skin: 'row', //表格风格
 				    even: true,
 				    page: true, //是否显示分页
-				    limits: [4,5,7,8,10],
+				    limits: [4,5,7,7,7],
 				    limit: 10 //每页默认显示的数量
 				  });
 				});
@@ -147,14 +139,11 @@
 		     var groupCodeValue = data.groupCode;
 		     $("#updateGroupCode").val(groupCodeValue);
 		     if(layEvent === 'edit'){
-			       console.log(data);
 			       var groupCodeValue = data.groupCode;
 			       $("#updateGroupCode").val(groupCodeValue);
-			       console.info(groupCodeValue);
-			       //modifyOne();
 		      } else if(layEvent === 'del'){
 			     layer.confirm('"\n\r删除该岗位会删除以下信息\n  1、该岗位的系统岗位功能信息\n  2、该该岗位的岗位信息\n\n删除后不可删除，确定执行删除操作？"', function(index){
-			    	 var url="../sysGroup/deleteSysGroup.do";
+			    	 var url="/sysGroup/deleteSysGroup.do";
 				     $.post(url,{groupCode:data.groupCode},function(json){ 
 				    	 if(json.number=="1"){
 				    		 layer.msg('删除成功');
@@ -167,9 +156,7 @@
 			        //向服务端发送删除指令
 			     });
 		    } else if(layEvent === 'detail'){
-		    	//alert(data.groupCode);
 		    	$("#groupCode").val(data.groupCode);
-		    	       
 		      $(".yincang").css("display","block");
 		    }
 			});

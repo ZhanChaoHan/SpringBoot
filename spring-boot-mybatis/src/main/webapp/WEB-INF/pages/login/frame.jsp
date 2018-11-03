@@ -62,9 +62,9 @@
 						</a>
 						<dl class="layui-nav-child">
 							<dd><a href="javascript:;" data-url="page/user/userInfo.html"><i class="iconfont icon-zhanghu" data-icon="icon-zhanghu"></i><cite>个人资料</cite></a></dd>
-							<dd><a href="javascript:;" data-url="../login/goUpdatePassWord.do"><i class="iconfont icon-shezhi1" data-icon="icon-shezhi1"></i><cite>修改密码</cite></a></dd>
+							<dd><a href="javascript:;" data-url="/login/goUpdatePassWord.do"><i class="iconfont icon-shezhi1" data-icon="icon-shezhi1"></i><cite>修改密码</cite></a></dd>
 							<dd><a href="javascript:;" class="changeSkin"><i class="iconfont icon-huanfu"></i><cite>更换皮肤</cite></a></dd>
-							<dd><a href="../login/loginOut.do" class="signOut"><i class="iconfont icon-loginout"></i><cite>退出</cite></a></dd>
+							<dd><a href="/login/loginOut.do" class="signOut"><i class="iconfont icon-loginout"></i><cite>退出</cite></a></dd>
 						</dl>
 					</li>
 				</ul>
@@ -113,7 +113,7 @@
 				</ul>
 				<div class="layui-tab-content clildFrame">
 					<div class="layui-tab-item layui-show">
-						<iframe src="../login/showMainPage.do"></iframe>
+						<iframe src="/login/showMainPage.do"></iframe>
 					</div>
 				</div>
 			</div>
@@ -132,6 +132,5 @@
 	<script type="text/javascript" src="../common/js/login-frame-bodyTab.js"></script>
 	<script type="text/javascript" src="../common/js/login-frame-index.js"></script>
 	<script type="text/javascript" src="../common/js/login-frame-leftNav.js"></script>
-	
 </body>
 </html>

@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@include file="../../taglibs.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>用户总数--layui后台管理模板</title>
+	<title>用户管理-添加</title>
 	<meta name="renderer" content="webkit">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -16,7 +17,7 @@
 	<link rel="stylesheet" href="../common/sysuser/css/user.css" media="all" />
 </head>
 <body class="childrenBody">
-<form action="../sysUser/querySysUserReturn.do" class="layui-form" method="post" id="from">
+<form action="/sysUser/querySysUserReturn.do" class="layui-form" method="post" id="from">
 	<blockquote class="layui-elem-quote news_search">
 		<div class="layui-row">
 		    <div class="layui-col-xs4">
@@ -168,11 +169,11 @@
 		  
 		  //监听提交
 		  form.on('submit(demo1)', function(data){
-				var url="../sysUser/checkUserCode.do";
+				var url="/sysUser/checkUserCode.do";
 				 $.post(url,{userCode:data.field.userCode},function(json){
 					 if(json.msg==1){
 						 //保存用户
-						 var url="../sysUser/addSysUser.do";
+						 var url="/sysUser/addSysUser.do";
 							  $.post(url,{userCode:data.field.userCode, userName:data.field.userName, comCode:data.field.comCode, passWord:data.field.passWord, telePhone:data.field.telePhone, email:data.field.email},function(json){ 
 								  alert("保存成功");
 								  //关闭并清空弹框的值
@@ -186,62 +187,10 @@
 			    return false;
 		  });
 		});
-	
-	
 		//点击返回跳转到查询页面
 		function addReturn(){
-			window.location.href="${ctx}/sysUser/querySysUser.do";
+			window.location.href="/sysUser/querySysUser.do";
 		}
-		//保存操作如下
-		/* $("#add").click(function () {
-			var userCode=document.getElementById("userCode").value;
-		  	var userName=document.getElementById("userName").value;
-		  	var comCode=document.getElementById("comCode").value;
-		  	var passWord=document.getElementById("passWord").value;
-		  	var passWord1=document.getElementById("passWord1").value;
-		  	var telePhone=document.getElementById("telePhone").value;
-		  	var email=document.getElementById("email").value;
-		  	if(userCode == ""){
-				alert("用户代码不能为空");
-				document.getElementById("userCode").select();
-				return false;
-			}
-			if(comCode == ""){
-				alert("机构代码不能为空");
-				document.getElementById("comCode").select();
-				return false;
-			}
-			if(userName == ""){
-				alert("用户姓名不能为空");
-				document.getElementById("userName").select();
-				return false;
-			}
-		  	if(passWord == ""){
-				alert("请再次输入密码!");
-				document.getElementById("passWord").select();
-				return false;
-			}
-		  	if(passWord != passWord1){
-		  		alert("密码不一致");
-		  		document.getElementById("passWord").select();
-		  		return false;
-		  	} 
-			//校验用户代码
-			var url="../sysUser/checkUserCode.do";
-			 $.post(url,{userCode:userCode},function(json){
-				 if(json.msg==1){
-					 //保存用户
-					 var url="../sysUser/addSysUser.do";
-						  $.post(url,{userCode:userCode, userName:userName, comCode:comCode, passWord:passWord, telePhone:telePhone, email:email},function(json){ 
-							  alert("保存成功");
-							  //关闭并清空弹框的值
-							  $('#return').trigger("click");
-					      },"json");
-				 }else{
-					 alert("用户代码重复");
-				 }
-			 },"json");
-		})*/
 	</script>
 </body>
 </html>

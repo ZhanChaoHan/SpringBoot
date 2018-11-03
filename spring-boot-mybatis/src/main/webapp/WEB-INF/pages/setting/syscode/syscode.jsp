@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@include file="../../taglibs.jsp" %>
 <!DOCTYPE html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>系统配置管理</title>
+<title>系统代码配置管理</title>
 <link rel="stylesheet" href="../common/layui/css/layui.css" media="all" />
 <link rel="stylesheet" href="../common/css/font_eolqem241z66flxr.css" media="all" />
 <script src="../common/js/jquery-1.9.1.min.js"></script> 
@@ -21,20 +22,20 @@ $(document).ready(function(){
 //删除
 layui.use('table', function(){
     var table = layui.table;
-    
   //监听工具条
     table.on('tool(test)', function(obj){
         var data = obj.data;
         if(obj.event === 'del'){
             layer.confirm('真的删除行么', function(index){
                 console.log(data);
-                var url="../sysCode/deleteSysCodes.do";
+                var url="/sysCode/deleteSysCodes.do";
                 var param={
                 		"CodeType":data.codeType,
                 		"codeCode":data.codeCode,
                 }
                 $.post(url,param,function(data){
-                	var json = eval("("+data+")");//转换json格式字符串
+                	//var json = eval("("+data+")");//转换json格式字符串
+                	var json =data;//转换json格式字符串
                 	if(json.msg1 == 0){
                 	  layer.msg("这条数据已经被删除", {icon: 2});
                 	}
@@ -98,7 +99,7 @@ layui.use('table', function(){
         	
         	//执行修改信息
         	$("#Eidtbtn").click(function () {
-        	         var url="../sysCode/updateByPrimaryKeySelective.do";
+        	         var url="/sysCode/updateByPrimaryKeySelective.do";
         	         var param=getparam();
         	         console.log(param)
         	         $.post(url,param,function(data){
@@ -114,15 +115,13 @@ layui.use('table', function(){
     });
 })
 
-
-
 //查询
 function selectsyscode(){
-		var url="../sysCode/selectByPrimaryKeyList.do";
+		var url="/sysCode/selectByPrimaryKeyList.do";
 		var param= getData();
-		console.log(param)
 		$.post(url,param,function(result){
-			var obj = JSON.parse(result);
+			//var obj = JSON.parse(result);
+			var obj = result;
 			//使用数据表格框架
 			 layui.use('table', function(){
 				  var table = layui.table;
@@ -159,8 +158,6 @@ function getData(){
 	}
 	return data;
 }
-
-
 
 //添加框页面
 function showSysCode(){
@@ -199,7 +196,7 @@ function showSysCode(){
 	 //点击提交按钮添加信息
 	    yes:function(index, layero){
 	    	  var param=getParam();
-	    		var url="../sysCode/insertSelective.do";
+	    		var url="/sysCode/insertSelective.do";
 	    		$.post(url,param,function(result){
 	    			console.log(result)
 	    			  if(result.num == 1){
@@ -219,8 +216,6 @@ function showSysCode(){
 	      }
     });
 }
-
-
 
 //获取添加表单的数据
 function getParam(){

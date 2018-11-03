@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@include file="../../taglibs.jsp" %>
 <!DOCTYPE html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -21,14 +22,13 @@ $(document).ready(function(){
 //删除
 layui.use('table', function(){
     var table = layui.table;
-    
   //监听工具条
     table.on('tool(test)', function(obj){
         var data = obj.data;
         if(obj.event === 'del'){
             layer.confirm('真的删除行么', function(index){
                 console.log(data);
-                var url="../sysCode/deleteSysCodes.do";
+                var url="/sysCode/deleteSysCodes.do";
                 var param={
                 		"CodeType":data.codeType,
                 		"codeCode":data.codeCode,
@@ -47,7 +47,6 @@ layui.use('table', function(){
                 });
             });
         } else if(obj.event === 'edit'){
-
             layer.prompt({
                  formType: 2
                 ,title: '修改 代码含义  的字段 为 ['+ data.codeCname +'] 的数据'
@@ -60,15 +59,13 @@ layui.use('table', function(){
     });
 })
 
-
 function  EidtUv(data,value,index,obj) {
-         var url="../sysCode/UpdateSysCode.do";
+         var url="/sysCode/UpdateSysCode.do";
          var param={
         		"CodeType":data.codeType,
          		"codeCode":data.codeCode,
          		"codeCname":value,
          }
-         console.log(param)
          $.post(url,param,function(data){
         	if(data == 1){
              //关闭弹框
@@ -92,7 +89,7 @@ function selectsyscode(){
 	//全局查询
 	if(scode == "" && stype == ""){
 		console.log("全局查询")
-		var url="../sysCode/SelectById.do";
+		var url="/sysCode/SelectById.do";
 		var param= getData();
 		$.post(url,param,function(result){
 			console.log(result);
@@ -124,7 +121,7 @@ function selectsyscode(){
 	}
 	
 	else if(scode !=""){
-	 var url="../sysCode/selectSysCode.do";
+	 var url="/sysCode/selectSysCode.do";
 	 var param=getData();
 	 $.post(url,param,function(result){
 		 var data=eval("("+result+")")//转换数据
@@ -161,7 +158,7 @@ function selectsyscode(){
 	//模糊查询
 	 else{
 		console.log("模糊")
-		var url="../sysCode/SelectSysCode.do";
+		var url="/sysCode/SelectSysCode.do";
 		var param= getData();
 		$.post(url,param,function(result){
 			var data=eval("("+result+")")//转换数据
@@ -250,7 +247,7 @@ function returnSysCode(){
 //点击提交按钮添加信息
 function addSysCode(){
   	    var param=getParam();
-  		var url="../sysCode/addSysCode.do";
+  		var url="/sysCode/addSysCode.do";
   		$.post(url,param,function(result){
   			console.log(result)
   			console.log(result.msg)

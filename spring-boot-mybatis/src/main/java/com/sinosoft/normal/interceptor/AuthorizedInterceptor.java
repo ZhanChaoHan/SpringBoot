@@ -19,7 +19,7 @@ public class AuthorizedInterceptor  implements HandlerInterceptor {
 		"toEnvinfo.do"	,"toSelectUrl.do","showCommonConfigInfo.do","toListMsg.do","toIndex.do","toCitr.do",
 		"toCitrs.do","fadebackinfo","toTractory.do","totransactionmonitoring.do","censusIssueAndBillPeak.do",
 		"censusStoreProxyCentralizeIssue.do","censusBillVolumeOfBusiness.do","getNocatfesiotcsoai.do","censusInterfaceErrorTOP10.do",
-		"searchLog.do"
+		"searchLog.do","getVerificationCode.do"
 	};
 	
 	

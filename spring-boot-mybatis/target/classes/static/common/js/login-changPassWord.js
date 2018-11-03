@@ -22,41 +22,25 @@ var ctx;
             }
         }
     })
-
-     //修改密码
-    
-    /* form.on("submit(changePwd)",function(data){
-    	 
-    	 
-    	 
-    	 
-    	 
-     });*/
-    
-    
     //下面的方法有个bug就是session超时后点击无法校验
         form.on("submit(changePwd)",function(data){
     	var index;
     	//判断session超时
-    		$.post(ctx+"/login/validatePassWord.do", {"password":$("#pwd").val()}, function(json) {
+    		$.post("/login/validatePassWord.do", {"password":$("#pwd").val()}, function(json) {
     			console.log(json)
        		 if(json=='error'){
        			index = layer.msg("服务器开小差了,请稍后重试!", {
         			  icon: 5,
         			  time: 2000 //2秒关闭（如果不配置，默认是3秒）
         			}, function(){
-        			  //do something
         			}); 
        		 }
           		 if(json!='success'){
-          		
           			index = layer.msg("原密码输入不正确,请重新输入", {
           			  icon: 5,
           			  time: 2000 //2秒关闭（如果不配置，默认是3秒）
           			}, function(){
-          			  //do something
           			}); 
-          			 
           		 }
           		layer.style(index, {
         			width: 'auto',
@@ -68,7 +52,7 @@ var ctx;
                			width: 'auto',
                			top:'300px',
                			});
-          			$.post(ctx+"/login/updateUserPassWord.do", {"password":$("#newPwd").val()}, function(msg) {
+          			$.post("/login/updateUserPassWord.do", {"password":$("#newPwd").val()}, function(msg) {
           				if(msg=="success"){
           					setTimeout(function(){
                   	            layer.close(index);
@@ -91,13 +75,9 @@ var ctx;
                   	        },2000);
           				}
           			});
-          			
           		}
-       	 
-       	
     		});
     	return false;
-	
 	});
     
     	/*var index = layer.msg('提交中，请稍候',{icon: 16,time:false,shade:0.8});

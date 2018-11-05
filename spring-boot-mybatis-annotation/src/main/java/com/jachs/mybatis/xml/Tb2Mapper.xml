@@ -1,0 +1,637 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jachs.mybatis.dao.Tb2Mapper">
+  <resultMap id="BaseResultMap" type="com.jachs.mybatis.entity.Tb2">
+    <id column="aa" jdbcType="VARCHAR" property="aa" />
+    <result column="bb" jdbcType="VARCHAR" property="bb" />
+    <result column="cc" jdbcType="VARCHAR" property="cc" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    aa, bb, cc
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb2
+    where aa = #{aa,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb2
+    where aa = #{aa,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.jachs.mybatis.entity.Tb2">
+    insert into tb2 (aa, bb, cc)
+    values (#{aa,jdbcType=VARCHAR}, #{bb,jdbcType=VARCHAR}, #{cc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jachs.mybatis.entity.Tb2">
+    insert into tb2
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="aa != null">
+        aa,
+      </if>
+      <if test="bb != null">
+        bb,
+      </if>
+      <if test="cc != null">
+        cc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="aa != null">
+        #{aa,jdbcType=VARCHAR},
+      </if>
+      <if test="bb != null">
+        #{bb,jdbcType=VARCHAR},
+      </if>
+      <if test="cc != null">
+        #{cc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jachs.mybatis.entity.Tb2">
+    update tb2
+    <set>
+      <if test="bb != null">
+        bb = #{bb,jdbcType=VARCHAR},
+      </if>
+      <if test="cc != null">
+        cc = #{cc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where aa = #{aa,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jachs.mybatis.entity.Tb2">
+    update tb2
+    set bb = #{bb,jdbcType=VARCHAR},
+      cc = #{cc,jdbcType=VARCHAR}
+    where aa = #{aa,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="com.jachs.mybatis.entity.Tb2">
+    <id column="aa" jdbcType="VARCHAR" property="aa" />
+    <result column="bb" jdbcType="VARCHAR" property="bb" />
+    <result column="cc" jdbcType="VARCHAR" property="cc" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    aa, bb, cc
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb2
+    where aa = #{aa,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb2
+    where aa = #{aa,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jachs.mybatis.entity.Tb2Example">
+    delete from tb2
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jachs.mybatis.entity.Tb2">
+    insert into tb2 (aa, bb, cc)
+    values (#{aa,jdbcType=VARCHAR}, #{bb,jdbcType=VARCHAR}, #{cc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jachs.mybatis.entity.Tb2">
+    insert into tb2
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="aa != null">
+        aa,
+      </if>
+      <if test="bb != null">
+        bb,
+      </if>
+      <if test="cc != null">
+        cc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="aa != null">
+        #{aa,jdbcType=VARCHAR},
+      </if>
+      <if test="bb != null">
+        #{bb,jdbcType=VARCHAR},
+      </if>
+      <if test="cc != null">
+        #{cc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jachs.mybatis.entity.Tb2Example" resultType="java.lang.Integer">
+    select count(*) from tb2
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jachs.mybatis.entity.Tb2">
+    update tb2
+    <set>
+      <if test="bb != null">
+        bb = #{bb,jdbcType=VARCHAR},
+      </if>
+      <if test="cc != null">
+        cc = #{cc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where aa = #{aa,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jachs.mybatis.entity.Tb2">
+    update tb2
+    set bb = #{bb,jdbcType=VARCHAR},
+      cc = #{cc,jdbcType=VARCHAR}
+    where aa = #{aa,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="com.jachs.mybatis.entity.Tb2">
+    <id column="aa" jdbcType="VARCHAR" property="aa" />
+    <result column="bb" jdbcType="VARCHAR" property="bb" />
+    <result column="cc" jdbcType="VARCHAR" property="cc" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    aa, bb, cc
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb2
+    where aa = #{aa,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb2
+    where aa = #{aa,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jachs.mybatis.entity.Tb2Example">
+    delete from tb2
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jachs.mybatis.entity.Tb2">
+    insert into tb2 (aa, bb, cc)
+    values (#{aa,jdbcType=VARCHAR}, #{bb,jdbcType=VARCHAR}, #{cc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jachs.mybatis.entity.Tb2">
+    insert into tb2
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="aa != null">
+        aa,
+      </if>
+      <if test="bb != null">
+        bb,
+      </if>
+      <if test="cc != null">
+        cc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="aa != null">
+        #{aa,jdbcType=VARCHAR},
+      </if>
+      <if test="bb != null">
+        #{bb,jdbcType=VARCHAR},
+      </if>
+      <if test="cc != null">
+        #{cc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jachs.mybatis.entity.Tb2Example" resultType="java.lang.Integer">
+    select count(*) from tb2
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jachs.mybatis.entity.Tb2">
+    update tb2
+    <set>
+      <if test="bb != null">
+        bb = #{bb,jdbcType=VARCHAR},
+      </if>
+      <if test="cc != null">
+        cc = #{cc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where aa = #{aa,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jachs.mybatis.entity.Tb2">
+    update tb2
+    set bb = #{bb,jdbcType=VARCHAR},
+      cc = #{cc,jdbcType=VARCHAR}
+    where aa = #{aa,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="com.jachs.mybatis.entity.Tb2">
+    <id column="aa" jdbcType="VARCHAR" property="aa" />
+    <result column="bb" jdbcType="VARCHAR" property="bb" />
+    <result column="cc" jdbcType="VARCHAR" property="cc" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    aa, bb, cc
+  </sql>
+  <select id="selectByExample" parameterType="com.jachs.mybatis.entity.Tb2Example" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb2
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb2
+    where aa = #{aa,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb2
+    where aa = #{aa,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jachs.mybatis.entity.Tb2Example">
+    delete from tb2
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jachs.mybatis.entity.Tb2">
+    insert into tb2 (aa, bb, cc)
+    values (#{aa,jdbcType=VARCHAR}, #{bb,jdbcType=VARCHAR}, #{cc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jachs.mybatis.entity.Tb2">
+    insert into tb2
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="aa != null">
+        aa,
+      </if>
+      <if test="bb != null">
+        bb,
+      </if>
+      <if test="cc != null">
+        cc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="aa != null">
+        #{aa,jdbcType=VARCHAR},
+      </if>
+      <if test="bb != null">
+        #{bb,jdbcType=VARCHAR},
+      </if>
+      <if test="cc != null">
+        #{cc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jachs.mybatis.entity.Tb2Example" resultType="java.lang.Integer">
+    select count(*) from tb2
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb2
+    <set>
+      <if test="record.aa != null">
+        aa = #{record.aa,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bb != null">
+        bb = #{record.bb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cc != null">
+        cc = #{record.cc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb2
+    set aa = #{record.aa,jdbcType=VARCHAR},
+      bb = #{record.bb,jdbcType=VARCHAR},
+      cc = #{record.cc,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jachs.mybatis.entity.Tb2">
+    update tb2
+    <set>
+      <if test="bb != null">
+        bb = #{bb,jdbcType=VARCHAR},
+      </if>
+      <if test="cc != null">
+        cc = #{cc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where aa = #{aa,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jachs.mybatis.entity.Tb2">
+    update tb2
+    set bb = #{bb,jdbcType=VARCHAR},
+      cc = #{cc,jdbcType=VARCHAR}
+    where aa = #{aa,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="com.jachs.mybatis.entity.Tb2">
+    <result column="aa" jdbcType="VARCHAR" property="aa" />
+    <result column="bb" jdbcType="VARCHAR" property="bb" />
+    <result column="cc" jdbcType="VARCHAR" property="cc" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    aa, bb, cc
+  </sql>
+  <select id="selectByExample" parameterType="com.jachs.mybatis.entity.Tb2Example" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb2
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.jachs.mybatis.entity.Tb2Example">
+    delete from tb2
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jachs.mybatis.entity.Tb2">
+    insert into tb2 (aa, bb, cc)
+    values (#{aa,jdbcType=VARCHAR}, #{bb,jdbcType=VARCHAR}, #{cc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jachs.mybatis.entity.Tb2">
+    insert into tb2
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="aa != null">
+        aa,
+      </if>
+      <if test="bb != null">
+        bb,
+      </if>
+      <if test="cc != null">
+        cc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="aa != null">
+        #{aa,jdbcType=VARCHAR},
+      </if>
+      <if test="bb != null">
+        #{bb,jdbcType=VARCHAR},
+      </if>
+      <if test="cc != null">
+        #{cc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jachs.mybatis.entity.Tb2Example" resultType="java.lang.Integer">
+    select count(*) from tb2
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb2
+    <set>
+      <if test="record.aa != null">
+        aa = #{record.aa,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bb != null">
+        bb = #{record.bb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cc != null">
+        cc = #{record.cc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb2
+    set aa = #{record.aa,jdbcType=VARCHAR},
+      bb = #{record.bb,jdbcType=VARCHAR},
+      cc = #{record.cc,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <resultMap id="BaseResultMap" type="com.jachs.mybatis.entity.Tb2">
+    <result column="aa" jdbcType="VARCHAR" property="aa" />
+    <result column="bb" jdbcType="VARCHAR" property="bb" />
+    <result column="cc" jdbcType="VARCHAR" property="cc" />
+  </resultMap>
+  <insert id="insert" parameterType="com.jachs.mybatis.entity.Tb2">
+    insert into tb2 (aa, bb, cc)
+    values (#{aa,jdbcType=VARCHAR}, #{bb,jdbcType=VARCHAR}, #{cc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jachs.mybatis.entity.Tb2">
+    insert into tb2
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="aa != null">
+        aa,
+      </if>
+      <if test="bb != null">
+        bb,
+      </if>
+      <if test="cc != null">
+        cc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="aa != null">
+        #{aa,jdbcType=VARCHAR},
+      </if>
+      <if test="bb != null">
+        #{bb,jdbcType=VARCHAR},
+      </if>
+      <if test="cc != null">
+        #{cc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

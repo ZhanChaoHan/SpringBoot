@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-11-7 14:40:15 by Hibernate Tools 4.0.1.Final -->
+<hibernate-mapping>
+    <class name="com.jachs.hibernate.entity.Test" table="test" catalog="test2">
+        <id name="name" type="string">
+            <column name="Name" length="100" />
+            <generator class="assigned" />
+        </id>
+        <property name="age" type="java.lang.Integer">
+            <column name="Age" />
+        </property>
+        <property name="gender" type="string">
+            <column name="gender" length="50" />
+        </property>
+    </class>
+</hibernate-mapping>

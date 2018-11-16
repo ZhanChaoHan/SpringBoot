@@ -1,5 +1,3 @@
-/*! 一叶孤舟 | qq:28701884 | 欢迎指教 */
-
 var bill = bill || {};
 
 //初始化
@@ -24,7 +22,6 @@ bill.setBillList = function (map){
 		 option.value=i;
 		list.add(option , null);
 	}
-	
 	list.addEventListener("change", function(e) {
 		bill.setBox (com.store[this.value], map)
 	})
@@ -64,7 +61,6 @@ bill.setMove = function (bl,inx,map){
 		}
 		map[newY][newX] = map[y][x];
 		delete map[y][x];
-		
 	}
 	return map;
 }
@@ -95,5 +91,4 @@ bill.setBox = function (bl,initMap){
 			com.show();
 		})
 	}
-
 }

@@ -1,9 +1,6 @@
-/*! 一叶孤舟 | qq:28701884 | 欢迎指教 */
-
 var play = play||{};
 
 play.init = function (){
-	
 	play.my				=	1;				//玩家方
 	play.map 			=	com.arr2Clone (com.initMap);		//初始化棋盘
 	play.nowManKey		=	false;			//现在要操作的棋子
@@ -17,8 +14,6 @@ play.init = function (){
 	play.depth			=	play.depth || 3;				//搜索深度
 	
 	play.isFoul			=	false;	//是否犯规长将
-	
-	
 	
 	com.pane.isShow		=	 false;			//隐藏方块
 	
@@ -118,19 +113,12 @@ play.regret = function (){
 		if (i==pace.length-1){
 			com.showPane(newX ,newY,x,y)	
 		}
-		//} catch (e){
-		//	com.show()
-		//	z([key,p,pace,map])
-			
-		//	}
 	}
 	play.map = map;
 	play.my=1;
 	play.isPlay=true;
 	com.show();
 }
-
-
 
 //点击棋盘事件
 play.clickCanvas = function (e){
@@ -186,7 +174,6 @@ play.clickMan = function (key,x,y){
 			com.mans[key].ps = com.mans[key].bl(); //获得所有能着点
 			com.dot.dots = com.mans[key].ps
 			com.show();
-			//com.get("selectAudio").start(0);
 			com.get("selectAudio").play();
 		}
 	}
@@ -199,7 +186,6 @@ play.clickPoint = function (x,y){
 	if (play.nowManKey){
 		if (play.indexOfPs(com.mans[key].ps,[x,y])){
 			var pace=man.x+""+man.y
-			//z(bill.createMove(play.map,man.x,man.y,x,y))
 			delete play.map[man.y][man.x];
 			play.map[y][x] = key;
 			com.showPane(man.x ,man.y,x,y)

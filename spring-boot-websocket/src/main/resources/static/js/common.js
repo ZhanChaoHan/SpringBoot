@@ -23,7 +23,6 @@ com.init = function (stype){
 	com.childList		=	com.childList||[];
 	
 	com.loadImages(com.page);		//载入图片/图片目录
-	//z(com.initMap.join())
 }
 
 //样式
@@ -123,7 +122,6 @@ window.onload = function(){
 
 //载入图片
 com.loadImages = function(stype){
-	
 	//绘制棋盘
 	com.bgImg = new Image();
 	com.bgImg.src  = "/img/"+stype+"/bg.png";
@@ -144,7 +142,6 @@ com.loadImages = function(stype){
 	com.paneImg.src  = "/img/"+stype+"/r_box.png";
 	
 	document.getElementsByTagName("body")[0].style.background= "url(/img/"+stype+"/bg.jpg)";
-	
 }
 
 //显示列表

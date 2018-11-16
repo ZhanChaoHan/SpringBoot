@@ -57,7 +57,6 @@ public class MyWebSocket {
 	@OnMessage
 	public void onMessage(String message, Session session) {
 		System.out.println("来自客户端的消息:" + message);
-
 		// 群发消息
 		for (MyWebSocket item : webSocketSet) {
 			try {
@@ -71,7 +70,6 @@ public class MyWebSocket {
 	/**
 	 * 发生错误时调用
 	 */
-
 	@OnError
 	public void onError(Session session, Throwable error) {
 		System.out.println("发生错误");

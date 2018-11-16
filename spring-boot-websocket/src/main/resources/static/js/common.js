@@ -566,7 +566,6 @@ com.bylaw.z = function (x,y,map,my){
 }
 
 com.value = {
-	
 	//车价值
 	c:[
 		[206, 208, 207, 213, 214, 213, 207, 208, 206],

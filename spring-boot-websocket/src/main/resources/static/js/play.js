@@ -152,6 +152,7 @@ play.clickPoint = function (x,y){
 			man.alpha = 1;
 			play.pace.push(pace+x+y);
 			play.nowManKey = false;
+			sendMssg(x+":"+y);
 			com.dot.dots = [];
 			com.show();
 			setTimeout("play.AIPlay()",500);

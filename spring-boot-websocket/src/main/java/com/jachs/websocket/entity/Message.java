@@ -3,29 +3,27 @@ package com.jachs.websocket.entity;
 import java.io.Serializable;
 
 public class Message implements Serializable{
-	private Status Status;//状态
-	private String Mess;//信息
-	
+	private Status status;//状态
+	private String mess;//信息
 	
 	public Message() {
 		super();
 	}
-	public Message(com.jachs.websocket.entity.Status status, String mess) {
+	public Message(Status status, String mess) {
 		super();
-		Status = status;
-		Mess = mess;
+		this.status = status;
+		this.mess = mess;
 	}
 	public Status getStatus() {
-		return Status;
+		return status;
 	}
 	public void setStatus(Status status) {
-		Status = status;
+		this.status = status;
 	}
 	public String getMess() {
-		return Mess;
+		return mess;
 	}
 	public void setMess(String mess) {
-		Mess = mess;
+		this.mess = mess;
 	}
-	
 }

@@ -1,4 +1,5 @@
 var ws = new WebSocket("ws://localhost:8080/websocket");
+var status;
 
 /*
 //建立 web socket 连接成功触发事件
@@ -9,9 +10,14 @@ ws.onopen = function () {
 };
 */
 
+function sendMssg(mssg){
+	ws.send(mssg);
+}
+
 // 接收服务端数据时触发事件
 ws.onmessage = function (evt) {
   var received_msg =$.parseJSON(evt.data);
+  console.info(received_msg);
   switch (received_msg.status) {
 	case "CONNTION":
 		console.info(received_msg.mess);

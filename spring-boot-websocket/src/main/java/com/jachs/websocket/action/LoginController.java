@@ -1,5 +1,10 @@
 package com.jachs.websocket.action;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.net.ssl.SSLEngineResult.Status;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
@@ -16,6 +21,8 @@ public class LoginController {
 	public String index() {
 		try {
 			logger.info("初始化登陆页面...");
+			Status[]StatusArr=Status.values();
+			
 			return "/html/chess/chess";
 		} catch (Exception e) {
 			e.printStackTrace();

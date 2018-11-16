@@ -1,8 +1,6 @@
-
 var com = com||{};
 
 com.init = function (stype){
-	
 	com.nowStype= stype || com.getCookie("stype") ||"stype1";
 	var stype = com.stype[com.nowStype];
 	com.width			=	stype.width;		//画布宽度
@@ -19,9 +17,7 @@ com.init = function (stype){
 	com.ct				=	com.canvas.getContext("2d") ; 
 	com.canvas.width	=	com.width;
 	com.canvas.height	=	com.height;
-	
 	com.childList		=	com.childList||[];
-	
 	com.loadImages(com.page);		//载入图片/图片目录
 }
 
@@ -29,20 +25,20 @@ com.init = function (stype){
 com.stype = {
 	stype1:{
 		width:325,		//画布宽度
-		height:402, 		//画布高度
+		height:402, 	//画布高度
 		spaceX:35,		//着点X跨度
 		spaceY:36,		//着点Y跨度
-		pointStartX:5,		//第一个着点X坐标;
-		pointStartY:19,		//第一个着点Y坐标;
+		pointStartX:5,	//第一个着点X坐标;
+		pointStartY:19,	//第一个着点Y坐标;
 		page:"stype_1"	//图片目录
 	},
 	stype2:{
 		width:530,		//画布宽度
-		height:567, 		//画布高度
+		height:567, 	//画布高度
 		spaceX:57,		//着点X跨度
 		spaceY:57,		//着点Y跨度
-		pointStartX:-2,		//第一个着点X坐标;
-		pointStartY:0,		//第一个着点Y坐标;
+		pointStartX:-2,	//第一个着点X坐标;
+		pointStartY:0,	//第一个着点Y坐标;
 		page:"stype_2"	//图片目录
 	}		
 }
@@ -108,16 +104,6 @@ window.onload = function(){
 			if (i++>=5) clearInterval(timer);
 		},2000);
 	})
-	
-	com.getData("/js/gambit.all.js",
-		function(data){
-		com.gambit=data.split(" ");
-		AI.historyBill = com.gambit;
-	})
-	com.getData("/js/store.js",
-		function(data){
-		com.store=data.split(" ");
-	})
 }
 
 //载入图片
@@ -176,17 +162,14 @@ com.createMans = function(map){
 	}
 }
 
-
 //debug alert
 com.alert = function (obj,f,n){
 	if (typeof obj !== "object") {
 		try{console.log(obj)} catch (e){}
-		//return alert(obj);
 	}
 	var arr = [];
 	for (var i in obj) arr.push(i+" = "+obj[i]);
 	try{console.log(arr.join(n||"\n"))} catch (e){}
-	//return alert(arr.join(n||"\n\r"));
 }
 
 //com.alert的简写，考虑z变量名最不常用
@@ -225,27 +208,6 @@ com.arr2Clone = function (arr){
 		newArr[i] = arr[i].slice();
 	}
 	return newArr;
-}
-
-//ajax载入数据
-com.getData = function (url,fun){
-	var XMLHttpRequestObject=false;
-	if(window.XMLHttpRequest){
-		XMLHttpRequestObject=new XMLHttpRequest();
-	}else if(window.ActiveXObject){
-	XMLHttpRequestObject=new ActiveXObject("Microsoft.XMLHTTP");
-	}
-	if(XMLHttpRequestObject){
-		XMLHttpRequestObject.open("GET",url);
-		XMLHttpRequestObject.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
-		XMLHttpRequestObject.onreadystatechange=function (){
-			if(XMLHttpRequestObject.readyState==4 && XMLHttpRequestObject.status==200){
-				fun (XMLHttpRequestObject.responseText)
-				//return XMLHttpRequestObject.responseText;
-			}
-		}
-	XMLHttpRequestObject.send(null);
-	}
 }
 
 //把坐标生成着法
@@ -809,4 +771,3 @@ com.class.Dot = function (img, x, y){
 }
 
 com.init();
-

@@ -15,7 +15,7 @@ play.init = function (){
 	
 	play.isFoul			=	false;	//是否犯规长将
 	
-	com.pane.isShow		=	 false;			//隐藏方块
+	com.pane.isShow		=	false;	//隐藏方块
 	
 	//初始化棋子
 	for (var i=0; i<play.map.length; i++){
@@ -32,49 +32,11 @@ play.init = function (){
 	
 	//绑定点击事件
 	com.canvas.addEventListener("click",play.clickCanvas)
-	//clearInterval(play.timer);
-	//com.get("autoPlay").addEventListener("click", function(e) {
-		//clearInterval(play.timer);
-		//play.timer = setInterval("play.AIPlay()",1000);
-	//	play.AIPlay()
-	//})
-	/*
-	com.get("offensivePlay").addEventListener("click", function(e) {
-		play.isOffensive=true;
-		play.isPlay=true ;	
-		com.get("chessRight").style.display = "none";
-		play.init();
-	})
-	
-	com.get("defensivePlay").addEventListener("click", function(e) {
-		play.isOffensive=false;
-		play.isPlay=true ;	
-		com.get("chessRight").style.display = "none";
-		play.init();
-	})
-	*/
-	
 	
 	com.get("regretBn").addEventListener("click", function(e) {
 		play.regret();
 	})
-	
-	/*
-	var initTime = new Date().getTime();
-	for (var i=0; i<=100000; i++){
-		
-		var h=""
-		var h=play.map.join();
-		//for (var n in play.mans){
-		//	if (play.mans[n].show) h+=play.mans[n].key+play.mans[n].x+play.mans[n].y
-		//}
-	}
-	var nowTime= new Date().getTime();
-	z([h,nowTime-initTime])
-	*/
-	
 }
-
 
 
 //悔棋
@@ -102,7 +64,6 @@ play.regret = function (){
 		var newX = parseInt(p[2], 10);
 		var newY = parseInt(p[3], 10);
 		var key=map[y][x];
-		//try{
 	 
 		var cMan=map[newY][newX];
 		if (cMan) com.mans[map[newY][newX]].isShow = false;
@@ -146,7 +107,6 @@ play.clickMan = function (key,x,y){
 		if (play.indexOfPs(com.mans[play.nowManKey].ps,[x,y])){
 			man.isShow = false;
 			var pace=com.mans[play.nowManKey].x+""+com.mans[play.nowManKey].y
-			//z(bill.createMove(play.map,man.x,man.y,x,y))
 			delete play.map[com.mans[play.nowManKey].y][com.mans[play.nowManKey].x];
 			play.map[y][x] = play.nowManKey;
 			com.showPane(com.mans[play.nowManKey].x ,com.mans[play.nowManKey].y,x,y)
@@ -159,7 +119,6 @@ play.clickMan = function (key,x,y){
 			com.pane.isShow = false;
 			com.dot.dots = [];
 			com.show()
-			com.get("clickAudio").play();
 			setTimeout("play.AIPlay()",500);
 			if (key == "j0") play.showWin (-1);
 			if (key == "J0") play.showWin (1);
@@ -174,7 +133,6 @@ play.clickMan = function (key,x,y){
 			com.mans[key].ps = com.mans[key].bl(); //获得所有能着点
 			com.dot.dots = com.mans[key].ps
 			com.show();
-			com.get("selectAudio").play();
 		}
 	}
 }
@@ -196,13 +154,11 @@ play.clickPoint = function (x,y){
 			play.nowManKey = false;
 			com.dot.dots = [];
 			com.show();
-			com.get("clickAudio").play();
 			setTimeout("play.AIPlay()",500);
 		}else{
 			//alert("不能这么走哦！")	
 		}
 	}
-	
 }
 
 //Ai自动走棋
@@ -224,9 +180,6 @@ play.AIPlay = function (){
 	}else {
 		play.AIclickPoint(pace[2],pace[3]);	
 	}
-	com.get("clickAudio").play();
-	
-	
 }
 
 //检查是否长将
@@ -238,8 +191,6 @@ play.checkFoul = function(){
 	}
 	return false;
 }
-
-
 
 play.AIclickMan = function (key,x,y){
 	var man = com.mans[key];
@@ -266,12 +217,10 @@ play.AIclickPoint = function (x,y){
 		play.map[y][x] = key;
 		
 		com.showPane(man.x,man.y,x,y)
-		
 	
 		man.x = x;
 		man.y = y;
 		play.nowManKey = false;
-		
 	}
 	com.show();
 }
@@ -282,7 +231,6 @@ play.indexOfPs = function (ps,xy){
 		if (ps[i][0]==xy[0]&&ps[i][1]==xy[1]) return true;
 	}
 	return false;
-	
 }
 
 //获得点击的着点
@@ -310,4 +258,3 @@ play.showWin = function (my){
 		alert("很遗憾，你输了！");
 	}
 }
-

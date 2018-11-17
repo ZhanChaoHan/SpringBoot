@@ -26,7 +26,6 @@ AI.init = function(pace){
 	 //如果棋谱里面没有，人工智能开始运作
 	var initTime = new Date().getTime();
 	AI.treeDepth=play.depth;
-	//AI.treeDepth=4;
 	
 	AI.number=0;
 	AI.setHistoryTable.lenght = 0

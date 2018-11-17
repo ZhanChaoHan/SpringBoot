@@ -137,32 +137,6 @@ play.clickMan = function (key,x,y){
 	}
 }
 
-//点击着点
-/*
-play.clickPoint = function (x,y){
-	var key=play.nowManKey;
-	var man=com.mans[key];
-	if (play.nowManKey){
-		if (play.indexOfPs(com.mans[key].ps,[x,y])){
-			var pace=man.x+""+man.y
-			delete play.map[man.y][man.x];
-			play.map[y][x] = key;
-			com.showPane(man.x ,man.y,x,y)
-			man.x = x;
-			man.y = y;
-			man.alpha = 1;
-			play.pace.push(pace+x+y);
-			play.nowManKey = false;
-			sendMssg('{"userName":"'+dates+'","status":"'+Status[2]+'","mess":"'+x+'-'+y+'"}');//发送请求
-			com.dot.dots = [];
-			com.show();
-			setTimeout("play.AIPlay()",500);
-		}else{
-			//alert("不能这么走哦！")	
-		}
-	}
-}
-*/
 
 //Ai自动走棋
 play.AIPlay = function (){

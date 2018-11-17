@@ -1,6 +1,8 @@
 package com.jachs.websocket.action;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 import javax.websocket.EncodeException;
@@ -13,6 +15,7 @@ import javax.websocket.server.ServerEndpoint;
 
 import org.springframework.stereotype.Component;
 
+import com.google.gson.Gson;
 import com.jachs.websocket.entity.Message;
 import com.jachs.websocket.entity.Status;
 import com.jachs.websocket.vo.MessageVo;
@@ -24,7 +27,7 @@ public class WebSocket {
 	private static int onlineCount = 0;
 	// concurrent包的线程安全Set，用来存放每个客户端对应的MyWebSocket对象。
 	private static CopyOnWriteArraySet<WebSocket> webSocketSet = new CopyOnWriteArraySet<WebSocket>();
-//	private static CopyOnWriteArraySet<WebSocket> playWebSocketSet = new CopyOnWriteArraySet<WebSocket>();
+	private static CopyOnWriteArraySet<String> onLineUser = new CopyOnWriteArraySet<String>();
 	// 与某个客户端的连接会话，需要通过它来给客户端发送数据
 	private Session session;
 	
@@ -36,17 +39,11 @@ public class WebSocket {
 	public void onOpen(Session session) throws EncodeException {
 		this.session = session;
 		webSocketSet.add(this); // 加入set中
+		onLineUser.add(session.getQueryString());
 		addOnlineCount(); // 在线数加1
-//		if(getOnlineCount()<=2){
-//			playWebSocketSet.add(this);
-//		}
 		System.out.println(session.getQueryString()+"有新连接加入！当前在线人数为" + getOnlineCount());
 		try {
-			if(getOnlineCount()<=2){
-				sendInfo(new Message(session.getQueryString(),true,Status.CONNTION, getOnlineCount()+""));
-			}else{
-				sendInfo(new Message(session.getQueryString(),false,Status.CONNTION, getOnlineCount()+""));
-			}
+			sendInfo(new Gson().toJson(getOnLineUser()));
 		} catch (IOException e) {
 			System.out.println("IO异常");
 		}
@@ -54,17 +51,33 @@ public class WebSocket {
 
 	/**
 	 * 连接关闭调用的方法
+	 * @throws EncodeException 
+	 * @throws IOException 
 	 */
 	@OnClose
-	public void onClose() {
+	public void onClose() throws IOException, EncodeException {
 		webSocketSet.remove(this); // 从set中删除
 		subOnlineCount(); // 在线数减1
 		System.out.println("有一连接关闭！当前在线人数为" + getOnlineCount());
-//		if(playWebSocketSet.contains(this)){//play玩家退出
-//			System.out.println("游戏玩家退出");
-//		}
+		if(onLineUser.contains(this.session.getQueryString())){
+			onLineUser.remove(this.session.getQueryString());
+		}
 	}
-
+	
+	private List<Message> getOnLineUser(){
+		List<Message>UserInfo=new ArrayList<>();
+		int index=0;
+			
+		for (String userName : onLineUser) {
+			if(index<2){
+				UserInfo.add(new Message(userName, true, Status.CHECKUSER, ""));
+			}else{
+				UserInfo.add(new Message(userName, false, Status.CHECKUSER, ""));
+			}
+			index++;
+		}
+		return UserInfo;
+	}
 	/**
 	 * 收到客户端消息后调用的方法
 	 *
@@ -83,7 +96,36 @@ public class WebSocket {
 			}
 		}
 	}
-
+	/**
+	 * 群发自定义消息
+	 * @throws EncodeException 
+	 */
+	public static void sendInfo(Object message) throws IOException, EncodeException {
+		for (WebSocket item : webSocketSet) {
+			if(item.session.isOpen()){
+				try {
+					item.sendMessage(message);
+				} catch (IOException e) {
+					continue;
+				}
+			}
+		}
+	}
+	/**
+	 * 群发自定义消息
+	 * @throws EncodeException 
+	 */
+	public static void sendInfo(String message) throws IOException, EncodeException {
+		for (WebSocket item : webSocketSet) {
+			if(item.session.isOpen()){
+				try {
+					item.sendMessage(message);
+				} catch (IOException e) {
+					continue;
+				}
+			}
+		}
+	}
 	/**
 	 * 发生错误时调用
 	 */
@@ -99,28 +141,12 @@ public class WebSocket {
 	public void sendMessage(Object message) throws IOException, EncodeException {
 		this.session.getBasicRemote().sendObject(message);
 	}
-	/**
-	 * 群发自定义消息
-	 * @throws EncodeException 
-	 */
-	public static void sendInfo(Object message) throws IOException, EncodeException {
-		for (WebSocket item : webSocketSet) {
-			try {
-				item.sendMessage(message);
-			} catch (IOException e) {
-				continue;
-			}
-		}
-	}
-
 	public static synchronized int getOnlineCount() {
 		return onlineCount;
 	}
-
 	public static synchronized void addOnlineCount() {
 		WebSocket.onlineCount++;
 	}
-
 	public static synchronized void subOnlineCount() {
 		WebSocket.onlineCount--;
 	}

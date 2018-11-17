@@ -1,7 +1,7 @@
 package com.jachs.websocket.entity;
 
 public enum Status {
-	CONNTION(1),LOGINOUT(2),MOVER(3),SENDMESS(4);
+	MOVER(2),SENDMESS(3),CHECKUSER(4);
 	private int status;
 
 	private Status(int status) {

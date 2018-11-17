@@ -33,9 +33,8 @@ ws.onmessage = function (evt) {
   var received_msg =$.parseJSON(evt.data);
   switch (received_msg.status) {
 	case Status[0]://移动
-		console.info(received_msg.mess);
 		var point=received_msg.mess.split("-");
-		clickPoint(point[0],point[1],point[2]);
+		clickPoint(point[0],point[1],point[2],received_msg.userName);
 		break;
 	case Status[1]://发送消息
 		$("#messBox").append(received_msg.mess);
@@ -89,7 +88,10 @@ play.clickPoint = function (x,y){
 		}
 	}
 }
-function clickPoint(x,y,key){
+function clickPoint(x,y,key,userName){
+	if(userName==dates){//当前用户发送的移动命令
+		play.nowManKey = false;
+	}
 	var man=com.mans[key];
 	var pace=man.x+""+man.y
 	delete play.map[man.y][man.x];
@@ -99,7 +101,6 @@ function clickPoint(x,y,key){
 	man.y = y;
 	man.alpha = 1;
 	play.pace.push(pace+x+y);
-	play.nowManKey = false;
 	com.dot.dots = [];
 	com.show();
 }

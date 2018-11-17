@@ -27,7 +27,6 @@ public class WebSocket {
 	private static int onlineCount = 0;
 	// concurrent包的线程安全Set，用来存放每个客户端对应的MyWebSocket对象。
 	private static CopyOnWriteArraySet<WebSocket> webSocketSet = new CopyOnWriteArraySet<WebSocket>();
-	private static CopyOnWriteArraySet<String> onLineUser = new CopyOnWriteArraySet<String>();
 	// 与某个客户端的连接会话，需要通过它来给客户端发送数据
 	private Session session;
 	
@@ -39,11 +38,12 @@ public class WebSocket {
 	public void onOpen(Session session) throws EncodeException {
 		this.session = session;
 		webSocketSet.add(this); // 加入set中
-		onLineUser.add(session.getQueryString());
 		addOnlineCount(); // 在线数加1
 		System.out.println(session.getQueryString()+"有新连接加入！当前在线人数为" + getOnlineCount());
 		try {
-			sendInfo(new Gson().toJson(getOnLineUser()));
+			String data=new Gson().toJson(getOnLineUser());
+			Message message=new Message(null,false,Status.CHECKUSER,data);
+			sendInfo(new Gson().toJson(message));
 		} catch (IOException e) {
 			System.out.println("IO异常");
 		}
@@ -59,20 +59,17 @@ public class WebSocket {
 		webSocketSet.remove(this); // 从set中删除
 		subOnlineCount(); // 在线数减1
 		System.out.println("有一连接关闭！当前在线人数为" + getOnlineCount());
-		if(onLineUser.contains(this.session.getQueryString())){
-			onLineUser.remove(this.session.getQueryString());
-		}
 	}
 	
 	private List<Message> getOnLineUser(){
 		List<Message>UserInfo=new ArrayList<>();
 		int index=0;
 			
-		for (String userName : onLineUser) {
+		for (WebSocket webSocket : webSocketSet) {
 			if(index<2){
-				UserInfo.add(new Message(userName, true, Status.CHECKUSER, ""));
+				UserInfo.add(new Message(webSocket.session.getQueryString(), true, Status.CHECKUSER, ""));
 			}else{
-				UserInfo.add(new Message(userName, false, Status.CHECKUSER, ""));
+				UserInfo.add(new Message(webSocket.session.getQueryString(), false, Status.CHECKUSER, ""));
 			}
 			index++;
 		}

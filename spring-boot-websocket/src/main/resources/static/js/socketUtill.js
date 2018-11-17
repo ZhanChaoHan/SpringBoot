@@ -50,6 +50,11 @@ function getPlays(received_msg){
 			}
 		}
 	}
+	if(play1!=dates&&play2!=dates){//上一把吃瓜了
+		if(p1==dates||p2==dates){//這把上手
+			
+		}
+	}
 	play1=p1;
 	play2=p2;
 }

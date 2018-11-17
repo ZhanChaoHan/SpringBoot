@@ -2,7 +2,6 @@ var AI = AI||{};
 
 AI.historyTable	=	{};		//历史表
 
-
 //人工智能初始化
 AI.init = function(pace){
 	var bill = AI.historyBill || com.gambit; //开局库

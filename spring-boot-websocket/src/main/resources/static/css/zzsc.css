@@ -1,16 +1,16 @@
-@charset "gb2312";
+@charset "utf-8";
 body {
 	font-size: 12px;
 	line-height: 150%;
 }
 .box {
 	margin:0 auto;
-	width:460px;
+	margin-left:200px;
 	position: relative;
 }
 .chess_left {
 	float:left;
-	text-align:center
+	/*text-align:center*/
 }
 .chess_right {
 	float:left;

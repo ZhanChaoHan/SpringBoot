@@ -11,7 +11,7 @@ com.init = function (stype){
 	com.pointStartY		=	stype.pointStartY;	//第一个着点Y坐标;
 	com.page			=	stype.page;			//图片目录
 	
-	com.get("box").style.width = com.width+130+"px";
+	//com.get("box").style.width = com.width+130+"px";
 	
 	com.canvas			=	document.getElementById("chess"); //画布
 	com.ct				=	com.canvas.getContext("2d") ; 
@@ -65,26 +65,6 @@ window.onload = function(){
 			com.get("chessRight").style.display = "block";
 			com.get("moveInfo").style.display = "none";
 			bill.init();
-		}
-	})
-	com.get("superPlay").addEventListener("click", function(e) {
-		if (confirm("确认开始大师级对弈？")){
-			play.isPlay=true ;	
-			com.get("chessRight").style.display = "none";
-			com.get("moveInfo").style.display = "block";
-			com.get("moveInfo").innerHTML="";
-			play.depth = 4;
-			play.init();
-		}
-	})
-	com.get("tyroPlay").addEventListener("click", function(e) {
-		if (confirm("确认开始新手级对弈？")){
-			play.isPlay=true ;	
-			com.get("chessRight").style.display = "none";
-			com.get("moveInfo").style.display = "block";
-			com.get("moveInfo").innerHTML="";
-			play.depth = 3;
-			play.init();
 		}
 	})
 	

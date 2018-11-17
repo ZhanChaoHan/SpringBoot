@@ -24,6 +24,7 @@ public class WebSocket {
 	private static int onlineCount = 0;
 	// concurrent包的线程安全Set，用来存放每个客户端对应的MyWebSocket对象。
 	private static CopyOnWriteArraySet<WebSocket> webSocketSet = new CopyOnWriteArraySet<WebSocket>();
+//	private static CopyOnWriteArraySet<WebSocket> playWebSocketSet = new CopyOnWriteArraySet<WebSocket>();
 	// 与某个客户端的连接会话，需要通过它来给客户端发送数据
 	private Session session;
 	
@@ -36,10 +37,16 @@ public class WebSocket {
 		this.session = session;
 		webSocketSet.add(this); // 加入set中
 		addOnlineCount(); // 在线数加1
+//		if(getOnlineCount()<=2){
+//			playWebSocketSet.add(this);
+//		}
 		System.out.println(session.getQueryString()+"有新连接加入！当前在线人数为" + getOnlineCount());
 		try {
-//			sendInfo(gson.toJson(new Message(Status.CONNTION, getOnlineCount()+"")));
-			sendInfo(new Message(session.getQueryString(),Status.CONNTION, getOnlineCount()+""));
+			if(getOnlineCount()<=2){
+				sendInfo(new Message(session.getQueryString(),true,Status.CONNTION, getOnlineCount()+""));
+			}else{
+				sendInfo(new Message(session.getQueryString(),false,Status.CONNTION, getOnlineCount()+""));
+			}
 		} catch (IOException e) {
 			System.out.println("IO异常");
 		}
@@ -53,6 +60,9 @@ public class WebSocket {
 		webSocketSet.remove(this); // 从set中删除
 		subOnlineCount(); // 在线数减1
 		System.out.println("有一连接关闭！当前在线人数为" + getOnlineCount());
+//		if(playWebSocketSet.contains(this)){//play玩家退出
+//			System.out.println("游戏玩家退出");
+//		}
 	}
 
 	/**

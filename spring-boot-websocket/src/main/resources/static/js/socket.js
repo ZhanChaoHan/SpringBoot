@@ -1,4 +1,4 @@
-var dates=Date.parse(new Date());
+var dates=Date.parse(new Date());//取当前时间为用户ID
 var ws = new WebSocket("ws://localhost:8080/websocket?"+dates);
 var Status;
 
@@ -9,6 +9,7 @@ $.ajax({
 	async:false,
 	success:function(json){
 		Status=json;
+		$("#sendMssg").attr("disabled",false);
 	},
 	error:function(XMLHttpRequest, textStatus, errorThrown) {
 	   alert(XMLHttpRequest.status);
@@ -19,12 +20,23 @@ $.ajax({
 function sendMssg(mssg){
 	ws.send(mssg);
 }
+//发送消息
+function sendMess(){
+	var mess=$("#Messg").val();
+	sendMssg('{"userName":"'+dates+'","status":"'+Status[3]+'","mess":"'+dates+"  Say："+mess+'</br>"}');//发送请求
+	$("#Messg").val("");
+}
 // 接收服务端数据时触发事件
 ws.onmessage = function (evt) {
   var received_msg =$.parseJSON(evt.data);
+  if(received_msg.userName==dates&&received_msg.playUser){//游戏玩家
+	  $("#startPlay").attr("disabled",false);
+  }else{//吃瓜群众
+	  
+  }
   switch (received_msg.status) {
 	case Status[0]://新连接
-		console.info(received_msg.mess);
+		conntion(received_msg.mess);
 		break;
 	case Status[1]://登出
 		console.info(received_msg.mess);
@@ -34,6 +46,9 @@ ws.onmessage = function (evt) {
 		var point=received_msg.mess.split("-");
 		clickPoint(point[0],point[1]);
 		break;
+	case Status[3]://发送消息
+		$("#messBox").append(received_msg.mess);
+		break;
 	default:
 		break;
   }
@@ -42,7 +57,15 @@ ws.onmessage = function (evt) {
 ws.onclose = function () {
   alert("连接已关闭...");
 };
-
+//开始游戏
+function startPlay(){
+	play.isPlay=true ;	
+	play.init();
+}
+//新连接
+function conntion(number){
+	$("#onLine").text("当前用户ID："+dates+"   当前在线人数:"+number);
+}
 //点击着点
 play.clickPoint = function (x,y){
 	var key=play.nowManKey;

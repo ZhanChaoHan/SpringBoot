@@ -8,16 +8,11 @@
 <body>
 <div class="box" id="box">
 	<div class="chess_left">
+		<p id="onLine">当前在线</p>
 		<canvas id="chess">对不起，您的浏览器不支持HTML5，请升级浏览器至IE9、firefox或者谷歌浏览器！</canvas>
 		<div>
 			<div class="bn_box" id="bnBox">
-				<input type="button" name="offensivePlay" id="tyroPlay" value="新手水平" />
-				<input type="button" name="offensivePlay" id="superPlay" value="中级水平" />
-                <input type="button" name="button" id="" value="大师水平" disabled />
-				<!--
-				<input type="button" name="offensivePlay" id="offensivePlay" value="先手开始" />
-				<input type="button" name="defensivePlay" id="defensivePlay" value="后手开始" />
-				-->
+                <input type="button"  id="startPlay" onclick="startPlay()" value="开始游戏" disabled/>
 				<input type="button" name="regret" id="regretBn" value="悔棋" />
 				<input type="button" name="billBn" id="billBn" value="棋谱" class="bn_box" />
 				<input type="button" name="stypeBn" id="stypeBn" value="换肤" />
@@ -28,7 +23,12 @@
 		<select name="billList" id="billList"></select>
 		<ol id="billBox" class="bill_box"></ol>
 	</div>
-	<div id="moveInfo" class="move_info"></div>
+	<div id="moveInfo" class="move_info">
+		<div style="width:500px;height: 400px;overflow: scroll;background-color: red" id="messBox">
+		</div>
+		<input type="text" id="Messg"/>
+		<input type="button" onclick="sendMess()" id="sendMssg" value="发送信息" disabled/>
+	</div>
 </div>
 <script src="/js/jquery-2.1.4.js"></script> 
 <script src="/js/common.js"></script> 

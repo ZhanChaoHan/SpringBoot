@@ -138,6 +138,7 @@ play.clickMan = function (key,x,y){
 }
 
 //点击着点
+/*
 play.clickPoint = function (x,y){
 	var key=play.nowManKey;
 	var man=com.mans[key];
@@ -152,7 +153,7 @@ play.clickPoint = function (x,y){
 			man.alpha = 1;
 			play.pace.push(pace+x+y);
 			play.nowManKey = false;
-			sendMssg(x+":"+y);
+			sendMssg('{"userName":"'+dates+'","status":"'+Status[2]+'","mess":"'+x+'-'+y+'"}');//发送请求
 			com.dot.dots = [];
 			com.show();
 			setTimeout("play.AIPlay()",500);
@@ -161,6 +162,7 @@ play.clickPoint = function (x,y){
 		}
 	}
 }
+*/
 
 //Ai自动走棋
 play.AIPlay = function (){
@@ -177,9 +179,9 @@ play.AIPlay = function (){
 	
 	var key=play.map[pace[3]][pace[2]];
 	if (key){
-		play.AIclickMan(key,pace[2],pace[3]);	
+		play.AIclickMan(key,pace[2],pace[3]);	//吃子
 	}else {
-		play.AIclickPoint(pace[2],pace[3]);	
+		play.AIclickPoint(pace[2],pace[3]);		//不吃子
 	}
 }
 

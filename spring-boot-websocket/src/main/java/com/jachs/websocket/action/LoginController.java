@@ -3,13 +3,18 @@ package com.jachs.websocket.action;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.net.ssl.SSLEngineResult.Status;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.google.gson.Gson;
+import com.jachs.websocket.entity.Status;
+import com.jachs.websocket.vo.StatusVo;
+
 
 
 @Controller
@@ -21,13 +26,24 @@ public class LoginController {
 	public String index() {
 		try {
 			logger.info("初始化登陆页面...");
-			Status[]StatusArr=Status.values();
-			
 			return "/html/chess/chess";
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.info("初始化登陆页失败...");
 			return "/login/error";
+		}
+	}
+	
+	@RequestMapping(value = "/status.do",produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public Object status(String callback) {
+		try {
+			logger.info("获取状态码");
+			return callback+"("+new Gson().toJson(Status.values())+")";
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.info("获取状态码异常...");
+			return null;
 		}
 	}
 }

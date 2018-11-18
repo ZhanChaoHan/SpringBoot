@@ -108,10 +108,10 @@ function clickPoint(key,x,y,userName){
 	com.showPane(man.x ,man.y,x,y)
 	man.x = x;
 	man.y = y;
-	//man.alpha = 1;
 	play.pace.push(pace+x+y);
 	com.dot.dots = [];
 	com.show();
+	$("#news").append("用户:"+userName+"移动:"+key+"到:"+x+"-"+y+"</br>");
 }
 //吃子
 function eatChess(key,x,y,opponent){
@@ -127,4 +127,5 @@ function eatChess(key,x,y,opponent){
 		if (key == "j0") play.showWin (-1);
 		if (key == "J0") play.showWin (1);
 	}
+	$("#news").append("用户:"+opponent+"移动:"+key+"到:"+x+"-"+y+"</br>");
 }

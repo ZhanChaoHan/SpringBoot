@@ -102,30 +102,48 @@ function clickPoint(key,x,y,userName){
 		
 	}
 	var man=com.mans[key];
-	var pace=man.x+""+man.y;
+	//var pace=man.x+""+man.y;
 	delete play.map[man.y][man.x];
 	play.map[y][x] = key;
 	com.showPane(man.x ,man.y,x,y)
 	man.x = x;
 	man.y = y;
-	play.pace.push(pace+x+y);
+	//play.pace.push(pace+x+y);
 	com.dot.dots = [];
 	com.show();
 	$("#news").append("用户:"+userName+"移动:"+key+"到:"+x+"-"+y+"</br>");
 }
 //吃子
-function eatChess(key,x,y,opponent){
-	if(playUser&&opponent==opponent){
-		alert(key);
-		var pace=com.mans[key].x+""+com.mans[key].y
-		delete play.map[com.mans[key].y][com.mans[key].x];
-		com.showPane(com.mans[key].x ,com.mans[key].y,x,y)
+function eatChess(key,x,y,opponents,eatChess){
+	if(playUser&&opponents==opponent){
+		y=parseInt(y);
+		if(y==0)y=9;
+		if(y==1)y=8;
+		if(y==2)y=7;
+		if(y==3)y=6;
+		if(y==4)y=5;
+		play.isPlay=true;
 		
-		play.pace.push(pace+x+y);
+		console.info(play.map);
+		key=key.toUpperCase();
+		eatChess=eatChess.toLowerCase();
+		
+		var man = com.mans[eatChess];//被吃
+		man.isShow = false;
+		
+		//var pace=com.mans[key].x+""+com.mans[key].y;
+		delete play.map[com.mans[key].y][com.mans[key].x];
+		
+		play.map[y][x] =key;
+		com.showPane(com.mans[key].x ,com.mans[key].y,x,y);
+		
+		//play.pace.push(pace+x+y);
+		com.pane.isShow = false;
 		com.dot.dots = [];
-		com.show()
+		com.show();
+		console.info(play.map);
 		if (key == "j0") play.showWin (-1);
 		if (key == "J0") play.showWin (1);
 	}
-	$("#news").append("用户:"+opponent+"移动:"+key+"到:"+x+"-"+y+"</br>");
+	$("#news").append("用户:"+opponent+"移动:"+key+"到:"+x+"-"+y+"吃了"+eatChess+"</br>");
 }

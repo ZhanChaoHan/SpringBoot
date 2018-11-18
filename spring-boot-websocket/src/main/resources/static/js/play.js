@@ -107,7 +107,7 @@ play.clickMan = function (key,x,y){
 		//man为被吃掉的棋子
 		if (play.indexOfPs(com.mans[play.nowManKey].ps,[x,y])){
 			console.info("play:"+play.nowManKey);
-			sendMssg('{"userName":"'+dates+'","status":"'+Status[3]+'","mess":"'+man.key+'-'+x+'-'+y+"userName:"+dates+'"}');//发送请求
+			sendMssg('{"userName":"'+dates+'","status":"'+Status[3]+'","mess":"'+play.nowManKey+'-'+x+'-'+y+"-"+man.key+'"}');//发送请求
 			man.isShow = false;
 			var pace=com.mans[play.nowManKey].x+""+com.mans[play.nowManKey].y
 			delete play.map[com.mans[play.nowManKey].y][com.mans[play.nowManKey].x];
@@ -129,7 +129,6 @@ play.clickMan = function (key,x,y){
 	}else{
 		if (man.my===1){
 			if (com.mans[play.nowManKey]) com.mans[play.nowManKey].alpha = 1 ;
-			man.alpha = 0.6;
 			com.pane.isShow = false;
 			play.nowManKey = key;
 			com.mans[key].ps = com.mans[key].bl(); //获得所有能着点

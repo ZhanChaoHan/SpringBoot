@@ -42,7 +42,7 @@ ws.onmessage = function (evt) {
 		break;
 	case Status[3]://吃
 		var point=received_msg.mess.split("-");
-		eatChess(point[0],point[1],point[2],received_msg.userName);
+		eatChess(point[0],point[1],point[2],received_msg.userName,point[3]);
 		break;
 	default:
 		break;

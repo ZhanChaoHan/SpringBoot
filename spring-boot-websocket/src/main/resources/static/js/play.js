@@ -36,6 +36,7 @@ play.init = function (){
 	com.get("regretBn").addEventListener("click", function(e) {
 		play.regret();
 	})
+	console.info(play.map);
 }
 
 
@@ -100,6 +101,7 @@ play.clickCanvas = function (e){
 
 //点击棋子，两种情况，选中或者吃子
 play.clickMan = function (key,x,y){
+	console.info("key:"+key+"x:"+x+"y:"+y);
 	var man = com.mans[key];
 	//吃子
 	if (play.nowManKey&&play.nowManKey != key && man.my != com.mans[play.nowManKey ].my){
@@ -137,28 +139,6 @@ play.clickMan = function (key,x,y){
 	}
 }
 
-
-//Ai自动走棋
-play.AIPlay = function (){
-	//return
-	play.my = -1 ;
-	var pace=AI.init(play.pace.join(""))
-	if (!pace) {
-		play.showWin (1);
-		return ;
-	}
-	play.pace.push(pace.join(""));
-	var key=play.map[pace[1]][pace[0]]
-		play.nowManKey = key;
-	
-	var key=play.map[pace[3]][pace[2]];
-	if (key){
-		play.AIclickMan(key,pace[2],pace[3]);	//吃子
-	}else {
-		play.AIclickPoint(pace[2],pace[3]);		//不吃子
-	}
-}
-
 //检查是否长将
 play.checkFoul = function(){
 	var p=play.pace;
@@ -168,40 +148,6 @@ play.checkFoul = function(){
 	}
 	return false;
 }
-
-play.AIclickMan = function (key,x,y){
-	var man = com.mans[key];
-	//吃子
-	man.isShow = false;
-	delete play.map[com.mans[play.nowManKey].y][com.mans[play.nowManKey].x];
-	play.map[y][x] = play.nowManKey;
-	play.showPane(com.mans[play.nowManKey].x ,com.mans[play.nowManKey].y,x,y)
-	
-	com.mans[play.nowManKey].x = x;
-	com.mans[play.nowManKey].y = y;
-	play.nowManKey = false;
-	
-	com.show()
-	if (key == "j0") play.showWin (-1);
-	if (key == "J0") play.showWin (1);
-}
-
-play.AIclickPoint = function (x,y){
-	var key=play.nowManKey;
-	var man=com.mans[key];
-	if (play.nowManKey){
-		delete play.map[com.mans[play.nowManKey].y][com.mans[play.nowManKey].x];
-		play.map[y][x] = key;
-		
-		com.showPane(man.x,man.y,x,y)
-	
-		man.x = x;
-		man.y = y;
-		play.nowManKey = false;
-	}
-	com.show();
-}
-
 
 play.indexOfPs = function (ps,xy){
 	for (var i=0; i<ps.length; i++){

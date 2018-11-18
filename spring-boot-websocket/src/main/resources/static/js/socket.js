@@ -1,5 +1,5 @@
 var dates=Date.parse(new Date());//取当前时间为用户ID
-var ws = new WebSocket("ws://localhost:8080/websocket?"+dates);
+var ws = new WebSocket("ws://localhost:8080/websocket?"+dates+Math.round(Math.random()*10));
 var Status;//状态码
 var init=false;//是否初始化
 var playUser;//是否游戏玩家
@@ -25,16 +25,10 @@ $.ajax({
 function sendMssg(mssg){
 	ws.send(mssg);
 }
-//发送消息
-function sendMess(){
-	var mess=$("#Messg").val();
-	sendMssg('{"userName":"'+dates+'","status":"'+Status[1]+'","mess":"'+dates+"  Say："+mess+'</br>"}');//发送请求
-	$("#Messg").val("");
-}
 // 接收服务端数据时触发事件
 ws.onmessage = function (evt) {
   var received_msg =$.parseJSON(evt.data);
-  console.info(dates);
+  //console.info(received_msg);
   switch (received_msg.status) {
 	case Status[0]://移动
 		var point=received_msg.mess.split("-");

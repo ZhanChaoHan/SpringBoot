@@ -10,8 +10,7 @@ function startPlay(){
 function sendMess(){
 	var mess=$("#Messg").val();
 	sendMssg('{"userName":"'+dates+'","status":"'+Status[1]+'","mess":"'+dates+"  Say："+mess+'</br>"}');//发送请求
-	//opponentMover('X1',4,2)
-	//clickPoint('z2',4,4,dates);
+	//clickPoint('z0',0,4,dates);
 	$("#Messg").val("");
 }
 
@@ -80,19 +79,23 @@ function checkUser(received_msg){
 	}else{
 		
 	}
+	$("#opponent").text("对手: "+opponent);
+	$("#play1").text("玩家1: "+play1);
+	$("#play2").text("玩家2: "+play2);
 }
 //移动棋子
 function clickPoint(key,x,y,userName){
-	console.info("a"+x+"-"+y);
 	if(userName==dates){//当前用户发送的移动命令
 		play.isPlay=false;
 	}
 	if(userName==opponent){//对手移动
 		key=key.toUpperCase();
-		z=x;
-		x=y;
-		y=z;
-		//console.info("b"+x+"-"+y);
+		y=parseInt(y);
+		if(y==9)y=0;
+		if(y==8)y=1;
+		if(y==7)y=2;
+		if(y==6)y=3;
+		if(y==5)y=4;
 		play.isPlay=true;
 	}
 	if(userName!=dates&&userName!=opponent){//吃瓜群众
@@ -100,7 +103,6 @@ function clickPoint(key,x,y,userName){
 	}
 	var man=com.mans[key];
 	var pace=man.x+""+man.y;
-	console.info(play.map);
 	delete play.map[man.y][man.x];
 	play.map[y][x] = key;
 	com.showPane(man.x ,man.y,x,y)
@@ -111,15 +113,18 @@ function clickPoint(key,x,y,userName){
 	com.dot.dots = [];
 	com.show();
 }
-function opponentMover(key,x,y){
-	var man=com.mans[key];
-	delete play.map[com.mans[key].y][com.mans[key].x];
-	play.map[y][x] = key;
+//吃子
+function eatChess(key,x,y,opponent){
+	if(playUser&&opponent==opponent){
+		alert(key);
+		var pace=com.mans[key].x+""+com.mans[key].y
+		delete play.map[com.mans[key].y][com.mans[key].x];
+		com.showPane(com.mans[key].x ,com.mans[key].y,x,y)
 		
-	com.showPane(man.x,man.y,x,y)
-	
-	man.x = x;
-	man.y = y;
-	play.nowManKey = false;
-	com.show();
+		play.pace.push(pace+x+y);
+		com.dot.dots = [];
+		com.show()
+		if (key == "j0") play.showWin (-1);
+		if (key == "J0") play.showWin (1);
+	}
 }

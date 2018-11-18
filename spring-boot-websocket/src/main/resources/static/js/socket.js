@@ -1,5 +1,5 @@
-var dates=Date.parse(new Date());//取当前时间为用户ID
-var ws = new WebSocket("ws://localhost:8080/websocket?"+dates+Math.round(Math.random()*10));
+var dates=Date.parse(new Date())+Math.round(Math.random()*10);//取当前时间为用户ID
+var ws = new WebSocket("ws://localhost:8080/websocket?"+dates);
 var Status;//状态码
 var init=false;//是否初始化
 var playUser;//是否游戏玩家
@@ -39,6 +39,10 @@ ws.onmessage = function (evt) {
 		break;
 	case Status[2]://checkUser
 		checkUser(received_msg.mess);
+		break;
+	case Status[3]://吃
+		var point=received_msg.mess.split("-");
+		eatChess(point[0],point[1],point[2],received_msg.userName);
 		break;
 	default:
 		break;

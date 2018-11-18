@@ -36,7 +36,6 @@ play.init = function (){
 	com.get("regretBn").addEventListener("click", function(e) {
 		play.regret();
 	})
-	console.info(play.map);
 }
 
 
@@ -107,6 +106,8 @@ play.clickMan = function (key,x,y){
 	if (play.nowManKey&&play.nowManKey != key && man.my != com.mans[play.nowManKey ].my){
 		//man为被吃掉的棋子
 		if (play.indexOfPs(com.mans[play.nowManKey].ps,[x,y])){
+			console.info("play:"+play.nowManKey);
+			sendMssg('{"userName":"'+dates+'","status":"'+Status[3]+'","mess":"'+man.key+'-'+x+'-'+y+"userName:"+dates+'"}');//发送请求
 			man.isShow = false;
 			var pace=com.mans[play.nowManKey].x+""+com.mans[play.nowManKey].y
 			delete play.map[com.mans[play.nowManKey].y][com.mans[play.nowManKey].x];
@@ -121,7 +122,6 @@ play.clickMan = function (key,x,y){
 			com.pane.isShow = false;
 			com.dot.dots = [];
 			com.show()
-			setTimeout("play.AIPlay()",500);
 			if (key == "j0") play.showWin (-1);
 			if (key == "J0") play.showWin (1);
 		}

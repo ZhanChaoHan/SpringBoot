@@ -13,12 +13,17 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
+import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.google.gson.Gson;
 import com.jachs.websocket.entity.Message;
 import com.jachs.websocket.entity.Status;
+import com.jachs.websocket.service.GameService;
+import com.jachs.websocket.service.PlayService;
 import com.jachs.websocket.vo.MessageVo;
+
 
 @ServerEndpoint(value = "/websocket", encoders = { MessageVo.class })
 @Component
@@ -29,6 +34,15 @@ public class WebSocket {
 	private static CopyOnWriteArraySet<WebSocket> webSocketSet = new CopyOnWriteArraySet<WebSocket>();
 	// 与某个客户端的连接会话，需要通过它来给客户端发送数据
 	private Session session;
+	//玩家1
+	private String p1;
+	//玩家2
+	private String p2;
+	
+	@Autowired
+	private GameService gameService;
+	@Autowired
+	private PlayService playService;
 	
 	/**
 	 * 连接建立成功调用的方法
@@ -42,6 +56,7 @@ public class WebSocket {
 		System.out.println(session.getQueryString()+"有新连接加入！当前在线人数为" + getOnlineCount());
 		try {
 			String data=new Gson().toJson(getOnLineUser());
+			
 			Message message=new Message(null,false,Status.CHECKUSER,data);
 			sendInfo(new Gson().toJson(message));
 		} catch (IOException e) {
@@ -75,6 +90,7 @@ public class WebSocket {
 		}
 		return UserInfo;
 	}
+	
 	/**
 	 * 收到客户端消息后调用的方法
 	 *
@@ -84,6 +100,10 @@ public class WebSocket {
 	@OnMessage
 	public void onMessage(String message, Session session) {
 		System.out.println("来自客户端的消息:" + message);
+		
+		if(StringUtils.isBlank(p1)){
+			
+		}
 		// 群发消息
 		for (WebSocket item : webSocketSet) {
 			try {

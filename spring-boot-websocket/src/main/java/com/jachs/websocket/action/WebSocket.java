@@ -35,9 +35,9 @@ public class WebSocket {
 	// 与某个客户端的连接会话，需要通过它来给客户端发送数据
 	private Session session;
 	//玩家1
-	private String p1;
+	private static String p1;
 	//玩家2
-	private String p2;
+	private static String p2;
 	
 	@Autowired
 	private GameService gameService;
@@ -53,16 +53,18 @@ public class WebSocket {
 		this.session = session;
 		webSocketSet.add(this); // 加入set中
 		addOnlineCount(); // 在线数加1
-		if(getOnlineCount()<2){
+		if(getOnlineCount()<=2){
 			if(StringUtils.isBlank(p1)){
 				p1=session.getQueryString();
-			}else{
+				return;
+			}
+			if(StringUtils.isBlank(p2)){
 				p2=session.getQueryString();
 			}
 		}
 		System.out.println(session.getQueryString()+"有新连接加入！当前在线人数为" + getOnlineCount());
 		try {
-			String data=new Gson().toJson(getOnLineUser());
+			String data=new Gson().toJson(getOnLineUser(false));
 			
 			Message message=new Message(null,false,Status.CHECKUSER,data);
 			sendInfo(new Gson().toJson(message));
@@ -78,28 +80,49 @@ public class WebSocket {
 	 */
 	@OnClose
 	public void onClose() throws IOException, EncodeException {
-		webSocketSet.remove(this); // 从set中删除
 		subOnlineCount(); // 在线数减1
 		System.out.println("有一连接关闭！当前在线人数为" + getOnlineCount());
+		boolean playLeave=false;
 		if(this.session.getQueryString().equals(p1)){
 			p1=null;
+			playLeave=true;
 		}
 		if(this.session.getQueryString().equals(p2)){
 			p2=null;
+			playLeave=true;
 		}
+		if(playLeave){
+			sendInfo(new Message(this.session.getQueryString(), true, Status.LEAVE, "LEAVEOUT"));
+		}
+		webSocketSet.remove(this); // 从set中删除
 	}
 	
-	private List<Message> getOnLineUser(){
+	/****
+	 * 获取所有玩家,或游戏玩家
+	 * @return
+	 */
+	private List<Message> getOnLineUser(boolean all){
 		List<Message>UserInfo=new ArrayList<>();
-		int index=0;
-			
-		for (WebSocket webSocket : webSocketSet) {
-			if(index<2){
-				UserInfo.add(new Message(webSocket.session.getQueryString(), true, Status.CHECKUSER, ""));
-			}else{
-				UserInfo.add(new Message(webSocket.session.getQueryString(), false, Status.CHECKUSER, ""));
+		
+		if(all){
+			int index=0;
+			for (WebSocket webSocket : webSocketSet) {
+				if(index<2){
+					UserInfo.add(new Message(webSocket.session.getQueryString(), true, Status.CHECKUSER, ""));
+				}else{
+					UserInfo.add(new Message(webSocket.session.getQueryString(), false, Status.CHECKUSER, ""));
+				}
+				index++;
 			}
-			index++;
+		}else{
+			for (WebSocket webSocket : webSocketSet) {
+				if(webSocket.session.getQueryString().equals(p1)){
+					UserInfo.add(new Message(webSocket.session.getQueryString(), true, Status.CHECKUSER, ""));
+				}
+				if(webSocket.session.getQueryString().equals(p2)){
+					UserInfo.add(new Message(webSocket.session.getQueryString(), true, Status.CHECKUSER, ""));
+				}
+			}
 		}
 		return UserInfo;
 	}

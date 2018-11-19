@@ -63,7 +63,7 @@ play.clickMan = function (key,x,y){
 		//man为被吃掉的棋子
 		if (play.indexOfPs(com.mans[play.nowManKey].ps,[x,y])){
 			console.info("play:"+play.nowManKey);
-			sendMssg(dates,Status[3],play.nowManKey+'-'+x+'-'+y+"-"+man.key);
+			sendMssg(dates,Status[4],play.nowManKey+'-'+x+'-'+y+"-"+man.key);
 			man.isShow = false;
 			var pace=com.mans[play.nowManKey].x+""+com.mans[play.nowManKey].y
 			delete play.map[com.mans[play.nowManKey].y][com.mans[play.nowManKey].x];

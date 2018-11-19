@@ -52,7 +52,6 @@ play.clickCanvas = function (e){
 	}else {
 		play.clickPoint(x,y);	
 	}
-	//play.isFoul = play.checkFoul();//检测是不是长将
 }
 
 //点击棋子，两种情况，选中或者吃子
@@ -64,7 +63,7 @@ play.clickMan = function (key,x,y){
 		//man为被吃掉的棋子
 		if (play.indexOfPs(com.mans[play.nowManKey].ps,[x,y])){
 			console.info("play:"+play.nowManKey);
-			sendMssg('{"userName":"'+dates+'","status":"'+Status[3]+'","mess":"'+play.nowManKey+'-'+x+'-'+y+"-"+man.key+'"}');//发送请求
+			sendMssg(dates,Status[3],play.nowManKey+'-'+x+'-'+y+"-"+man.key);
 			man.isShow = false;
 			var pace=com.mans[play.nowManKey].x+""+com.mans[play.nowManKey].y
 			delete play.map[com.mans[play.nowManKey].y][com.mans[play.nowManKey].x];
@@ -94,18 +93,6 @@ play.clickMan = function (key,x,y){
 		}
 	}
 }
-
-/*
-//检查是否长将
-play.checkFoul = function(){
-	var p=play.pace;
-	var len=parseInt(p.length,10);
-	if (len>11&&p[len-1] == p[len-5] &&p[len-5] == p[len-9]){
-		return p[len-4].split("");
-	}
-	return false;
-}
-*/
 
 play.indexOfPs = function (ps,xy){
 	for (var i=0; i<ps.length; i++){

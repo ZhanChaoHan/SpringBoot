@@ -52,7 +52,7 @@ play.clickCanvas = function (e){
 	}else {
 		play.clickPoint(x,y);	
 	}
-	play.isFoul = play.checkFoul();//检测是不是长将
+	//play.isFoul = play.checkFoul();//检测是不是长将
 }
 
 //点击棋子，两种情况，选中或者吃子
@@ -74,7 +74,7 @@ play.clickMan = function (key,x,y){
 			com.mans[play.nowManKey].y = y;
 			com.mans[play.nowManKey].alpha = 1
 			
-			play.pace.push(pace+x+y);
+			//play.pace.push(pace+x+y);
 			play.nowManKey = false;
 			com.pane.isShow = false;
 			com.dot.dots = [];
@@ -95,6 +95,7 @@ play.clickMan = function (key,x,y){
 	}
 }
 
+/*
 //检查是否长将
 play.checkFoul = function(){
 	var p=play.pace;
@@ -104,6 +105,7 @@ play.checkFoul = function(){
 	}
 	return false;
 }
+*/
 
 play.indexOfPs = function (ps,xy){
 	for (var i=0; i<ps.length; i++){

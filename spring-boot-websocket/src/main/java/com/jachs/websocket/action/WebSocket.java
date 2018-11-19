@@ -53,6 +53,13 @@ public class WebSocket {
 		this.session = session;
 		webSocketSet.add(this); // 加入set中
 		addOnlineCount(); // 在线数加1
+		if(getOnlineCount()<2){
+			if(StringUtils.isBlank(p1)){
+				p1=session.getQueryString();
+			}else{
+				p2=session.getQueryString();
+			}
+		}
 		System.out.println(session.getQueryString()+"有新连接加入！当前在线人数为" + getOnlineCount());
 		try {
 			String data=new Gson().toJson(getOnLineUser());
@@ -74,6 +81,12 @@ public class WebSocket {
 		webSocketSet.remove(this); // 从set中删除
 		subOnlineCount(); // 在线数减1
 		System.out.println("有一连接关闭！当前在线人数为" + getOnlineCount());
+		if(this.session.getQueryString().equals(p1)){
+			p1=null;
+		}
+		if(this.session.getQueryString().equals(p2)){
+			p2=null;
+		}
 	}
 	
 	private List<Message> getOnLineUser(){
@@ -100,10 +113,6 @@ public class WebSocket {
 	@OnMessage
 	public void onMessage(String message, Session session) {
 		System.out.println("来自客户端的消息:" + message);
-		
-		if(StringUtils.isBlank(p1)){
-			
-		}
 		// 群发消息
 		for (WebSocket item : webSocketSet) {
 			try {

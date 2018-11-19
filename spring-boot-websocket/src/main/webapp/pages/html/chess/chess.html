@@ -6,7 +6,7 @@
 <link href="/css/zzsc.css" type="text/css" rel="stylesheet" />
 <script src="/js/jquery-2.1.4.js"></script>
 <script>
-var dates=Date.parse(new Date())+Math.round(Math.random()*10);//取当前时间为用户ID
+//var dates=Date.parse(new Date())+Math.round(Math.random()*10);//取当前时间为用户ID
 var Status;//状态码
 var Sender;//发送
 var init=false;//是否初始化
@@ -19,6 +19,8 @@ $.getJSON("../js/Status.json", function (data,status){
 	Status=$.parseJSON(data[0]);
 	Sender=$.parseJSON(data[1]);
 })
+dates=prompt("输入名称?","请在这里输入");
+
 </script>
 </head>
 <body>

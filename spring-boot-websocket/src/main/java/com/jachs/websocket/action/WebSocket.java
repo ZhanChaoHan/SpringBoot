@@ -56,8 +56,7 @@ public class WebSocket {
 		if(getOnlineCount()<=2){
 			if(StringUtils.isBlank(p1)){
 				p1=session.getQueryString();
-			}
-			if(StringUtils.isNotBlank(p1)&&StringUtils.isBlank(p2)){
+			}else{
 				p2=session.getQueryString();
 			}
 		}
@@ -107,19 +106,19 @@ public class WebSocket {
 			int index=0;
 			for (WebSocket webSocket : webSocketSet) {
 				if(index<2){
-					UserInfo.add(new Message(webSocket.session.getQueryString(), true, Status.CHECKUSER, ""));
+					UserInfo.add(new Message(webSocket.session.getQueryString(), true, Status.CHECKUSER, getOnlineCount()+""));
 				}else{
-					UserInfo.add(new Message(webSocket.session.getQueryString(), false, Status.CHECKUSER, ""));
+					UserInfo.add(new Message(webSocket.session.getQueryString(), false, Status.CHECKUSER, getOnlineCount()+""));
 				}
 				index++;
 			}
 		}else{
 			for (WebSocket webSocket : webSocketSet) {
 				if(webSocket.session.getQueryString().equals(p1)){
-					UserInfo.add(new Message(webSocket.session.getQueryString(), true, Status.CHECKUSER, ""));
+					UserInfo.add(new Message(webSocket.session.getQueryString(), true, Status.CHECKUSER, getOnlineCount()+""));
 				}
 				if(webSocket.session.getQueryString().equals(p2)){
-					UserInfo.add(new Message(webSocket.session.getQueryString(), true, Status.CHECKUSER, ""));
+					UserInfo.add(new Message(webSocket.session.getQueryString(), true, Status.CHECKUSER, getOnlineCount()+""));
 				}
 			}
 		}

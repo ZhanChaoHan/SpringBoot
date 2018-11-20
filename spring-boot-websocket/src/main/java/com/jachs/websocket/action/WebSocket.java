@@ -56,9 +56,8 @@ public class WebSocket {
 		if(getOnlineCount()<=2){
 			if(StringUtils.isBlank(p1)){
 				p1=session.getQueryString();
-				return;
 			}
-			if(StringUtils.isBlank(p2)){
+			if(StringUtils.isNotBlank(p1)&&StringUtils.isBlank(p2)){
 				p2=session.getQueryString();
 			}
 		}

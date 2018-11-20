@@ -62,7 +62,6 @@ play.clickMan = function (key,x,y){
 	if (play.nowManKey&&play.nowManKey != key && man.my != com.mans[play.nowManKey ].my){
 		//man为被吃掉的棋子
 		if (play.indexOfPs(com.mans[play.nowManKey].ps,[x,y])){
-			console.info("play:"+play.nowManKey);
 			sendMssg(dates,Status[4],play.nowManKey+'-'+x+'-'+y+"-"+man.key);
 			man.isShow = false;
 			var pace=com.mans[play.nowManKey].x+""+com.mans[play.nowManKey].y
@@ -71,13 +70,13 @@ play.clickMan = function (key,x,y){
 			com.showPane(com.mans[play.nowManKey].x ,com.mans[play.nowManKey].y,x,y)
 			com.mans[play.nowManKey].x = x;
 			com.mans[play.nowManKey].y = y;
-			com.mans[play.nowManKey].alpha = 1
 			
-			//play.pace.push(pace+x+y);
 			play.nowManKey = false;
 			com.pane.isShow = false;
 			com.dot.dots = [];
 			com.show()
+			console.info(play.map);
+			console.info(com.mans);
 			if (key == "j0") play.showWin (-1);
 			if (key == "J0") play.showWin (1);
 		}
@@ -90,6 +89,20 @@ play.clickMan = function (key,x,y){
 			com.mans[key].ps = com.mans[key].bl(); //获得所有能着点
 			com.dot.dots = com.mans[key].ps
 			com.show();
+		}
+	}
+}
+
+//点击着点
+play.clickPoint = function (x,y){
+	var key=play.nowManKey;
+	var man=com.mans[key];
+	if (playUser&&play.nowManKey){
+		if (play.indexOfPs(com.mans[key].ps,[x,y])){
+			sendMssg(dates,Status[1],key+'-'+x+'-'+y);
+			play.isPlay=false;
+		}else{
+			//alert("不能这么走哦！")	
 		}
 	}
 }

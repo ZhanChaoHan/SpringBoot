@@ -4,8 +4,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.net.URLDecoder;
-import java.util.ArrayList;
-import java.util.List;
 
 
 import org.apache.commons.logging.Log;
@@ -14,12 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.jachs.websocket.entity.Message;
 import com.jachs.websocket.entity.Status;
-import com.jachs.websocket.vo.StatusVo;
 
 
 
@@ -27,7 +23,7 @@ import com.jachs.websocket.vo.StatusVo;
 @RequestMapping(value = "/login")
 public class LoginController {
 	private static final Log logger = LogFactory.getLog(LoginController.class);
-
+	
 	@RequestMapping(value = "/index.do", method = RequestMethod.GET,produces="text/plain;charset=UTF-8")
 	public String index() {
 		try {

@@ -2,6 +2,7 @@ package com.jachs.websocket.action;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArraySet;
 
@@ -14,21 +15,20 @@ import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
 import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.google.gson.Gson;
+import com.jachs.websocket.entity.Game;
 import com.jachs.websocket.entity.Message;
+import com.jachs.websocket.entity.Play;
 import com.jachs.websocket.entity.Status;
 import com.jachs.websocket.service.GameService;
 import com.jachs.websocket.service.PlayService;
 import com.jachs.websocket.vo.MessageVo;
 
-
-@ServerEndpoint(value = "/websocket", encoders = { MessageVo.class })
 @Component
+@ServerEndpoint(value = "/websocket", encoders = { MessageVo.class })
 public class WebSocket {
-	// 静态变量，用来记录当前在线连接数。应该把它设计成线程安全的。
 	private static int onlineCount = 0;
 	// concurrent包的线程安全Set，用来存放每个客户端对应的MyWebSocket对象。
 	private static CopyOnWriteArraySet<WebSocket> webSocketSet = new CopyOnWriteArraySet<WebSocket>();
@@ -36,14 +36,17 @@ public class WebSocket {
 	private Session session;
 	//玩家1
 	private static String p1;
+	private static boolean p1Ready;
 	//玩家2
 	private static String p2;
+	private static boolean p2Ready;
 	
-	@Autowired
-	private GameService gameService;
-	@Autowired
-	private PlayService playService;
+	private static Gson gson=new Gson();
+	private static String gameID;
+	public static GameService gameService;
+	public static PlayService playService;
 	
+
 	/**
 	 * 连接建立成功调用的方法
 	 * @throws EncodeException 
@@ -65,7 +68,7 @@ public class WebSocket {
 			String data=new Gson().toJson(getOnLineUser(false));
 			
 			Message message=new Message(null,false,Status.CHECKUSER,data);
-			sendInfo(new Gson().toJson(message));
+			sendInfo(gson.toJson(message));
 		} catch (IOException e) {
 			System.out.println("IO异常");
 		}
@@ -133,7 +136,47 @@ public class WebSocket {
 	 */
 	@OnMessage
 	public void onMessage(String message, Session session) {
-		System.out.println("来自客户端的消息:" + message);
+		Message messages=gson.fromJson(message, Message.class);
+		System.out.println("来自客户端的消息:"+messages.getMess());
+		Date time=new Date();
+		Play play=new Play();
+		switch (messages.getStatus()) {
+			case MOVER:
+				play.setGameid(gameID);
+				play.setIds(time.getTime()+"");
+				play.setMess(messages.getMess());
+				play.setPlayuser(messages.getUserName());
+				play.setStatustype(messages.getStatus().name());
+				play.setTimeconsuming(null);
+				
+				playService.insert(play);
+				break;
+			case EATCHESS:
+				play.setGameid(gameID);
+				play.setIds(time.getTime()+"");
+				play.setMess(messages.getMess());
+				play.setPlayuser(messages.getUserName());
+				play.setStatustype(messages.getStatus().name());
+				play.setTimeconsuming(null);
+				
+				playService.insert(play);
+				break;
+			case STARTGAME:
+				if(messages.getUserName().equals(p1))p1Ready=true;
+				if(messages.getUserName().equals(p2))p2Ready=true;
+				if(p1Ready&&p2Ready){//都准备好了进库
+					Game games=new Game();
+					gameID=time.getTime()+"";
+					games.setIds(gameID);
+					games.setP1(p1);
+					games.setP2(p2);
+					games.setStarttime(time);
+					gameService.insert(games);
+				}
+				break;
+			default:
+				break;
+		}
 		// 群发消息
 		for (WebSocket item : webSocketSet) {
 			try {

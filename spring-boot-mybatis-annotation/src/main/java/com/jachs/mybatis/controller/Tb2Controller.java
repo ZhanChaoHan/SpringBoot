@@ -17,8 +17,8 @@ public class Tb2Controller {
 	@RequestMapping(value = "/index.do", method = RequestMethod.GET)
 	public void index() {
 		try {
-			Tb2 tb2= tb2Service.selectByPrimaryKey("a");
-			System.out.println(tb2.getAa());
+//			Tb2 tb2= tb2Service.selectByPrimaryKey("a");
+//			System.out.println(tb2.getAa());
 			
 //			Tb2 insert=new Tb2();
 //			insert.setAa("aaa");
@@ -26,12 +26,18 @@ public class Tb2Controller {
 //			insert.setCc("cc");
 //			tb2Service.insert(insert);
 			
-			Tb2 update=new Tb2();
-			update.setAa("aaa");
-			update.setBb("avc");
-			update.setCc("acv");
-			tb2Service.updateByPrimaryKey(update);
+//			Tb2 update=new Tb2();
+//			update.setAa("aaa");
+//			update.setBb("avc");
+//			update.setCc("acv");
+//			tb2Service.updateByPrimaryKey(update);
 			
+//			Tb2 b=tb2Service.selectByPrimaryKey("aaa");
+//			System.out.println(b.getAa());
+			Tb2 bc=tb2Service.select("aaa", "avc", "acv");
+			System.out.println(bc.getBb());
+			Tb2 b=tb2Service.select(null, "avc", "acv");
+			System.out.println(b.getBb());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -1,4 +1,4 @@
-<!-- <?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jachs.mybatis.dao.Tb2Mapper">
   <resultMap id="BaseResultMap" type="com.jachs.mybatis.entity.Tb2">
@@ -15,14 +15,6 @@
     from tb2
     where aa = #{aa,jdbcType=VARCHAR}
   </select>
-  
-  <select id="select" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from tb2
-    where aa = #{aa} and bb=#{bb}
-  </select>
-  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from tb2
     where aa = #{aa,jdbcType=VARCHAR}
@@ -642,4 +634,4 @@
       </if>
     </trim>
   </insert>
-</mapper> -->
+</mapper>

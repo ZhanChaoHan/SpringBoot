@@ -47,6 +47,12 @@ public class Tb2ServiceImpl implements Tb2Service{
 	public int updateByPrimaryKey(Tb2 record) {
 		return tb2Mapper.updateByPrimaryKey(record);
 	}
+
+	@Override
+	public Tb2 select(String aa, String bb, String cc) {
+		// TODO Auto-generated method stub
+		return tb2Mapper.select(aa,bb,cc);
+	}
 	
 
 }

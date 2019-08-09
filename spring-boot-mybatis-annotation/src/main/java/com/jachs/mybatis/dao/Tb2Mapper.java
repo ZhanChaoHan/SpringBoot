@@ -18,4 +18,14 @@ public interface Tb2Mapper {
     int updateByPrimaryKeySelective(Tb2 record);
     @Update("update tb2 set bb = #{bb,jdbcType=VARCHAR},cc = #{cc,jdbcType=VARCHAR} where aa = #{aa,jdbcType=VARCHAR}")
     int updateByPrimaryKey(Tb2 record);
+    @Select("<script>"
+    		+"select * from tb2 where "
+    		+"<if test='aa!=null'>"
+    		+ "aa=#{aa} and" 
+    		+"</if>"
+    		+ " bb=#{bb} and cc=#{cc}"
+    		+"</script>")
+    		
+	Tb2 select(String aa, String bb, String cc);
+    
 }

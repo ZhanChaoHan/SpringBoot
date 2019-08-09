@@ -10,6 +10,7 @@ public interface Tb2Service {
 	    int insertSelective(Tb2 record);
 
 	    Tb2 selectByPrimaryKey(String aa);
+	    Tb2 select(String aa,String bb,String cc);
 
 	    int updateByPrimaryKeySelective(Tb2 record);
 

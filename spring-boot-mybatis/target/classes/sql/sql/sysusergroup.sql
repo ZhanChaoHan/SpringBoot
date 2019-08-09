@@ -1,8 +1,0 @@
-insert into sysusergroup (UserCode, GroupCode, ValidStatus, CreateTime, CreateUserCode, Reverse1, Reverse2, Reverse3) values ('admin', 'sysgorup', '01', '2017-01-01 00:00:00', 'admin', null, null, null);
-insert into sysusergroup (UserCode, GroupCode, ValidStatus, CreateTime, CreateUserCode, Reverse1, Reverse2, Reverse3) values ('deefff', '123', '01', '2018-04-11 15:12:36', 'admin', null, null, null);
-insert into sysusergroup (UserCode, GroupCode, ValidStatus, CreateTime, CreateUserCode, Reverse1, Reverse2, Reverse3) values ('deefff', 'cvbg0', '01', '2018-04-11 15:12:36', 'admin', null, null, null);
-insert into sysusergroup (UserCode, GroupCode, ValidStatus, CreateTime, CreateUserCode, Reverse1, Reverse2, Reverse3) values ('deefff', 'sysgorup10', '01', '2018-04-11 15:12:36', 'admin', null, null, null);
-insert into sysusergroup (UserCode, GroupCode, ValidStatus, CreateTime, CreateUserCode, Reverse1, Reverse2, Reverse3) values ('deefff', 'sysgorup12', '01', '2018-04-11 15:12:36', 'admin', null, null, null);
-insert into sysusergroup (UserCode, GroupCode, ValidStatus, CreateTime, CreateUserCode, Reverse1, Reverse2, Reverse3) values ('deefff', 'sysgorup3', '01', '2018-04-11 15:12:36', 'admin', null, null, null);
-insert into sysusergroup (UserCode, GroupCode, ValidStatus, CreateTime, CreateUserCode, Reverse1, Reverse2, Reverse3) values ('deefff', 'sysgorup5', '01', '2018-04-11 15:12:36', 'admin', null, null, null);
-insert into sysusergroup (UserCode, GroupCode, ValidStatus, CreateTime, CreateUserCode, Reverse1, Reverse2, Reverse3) values ('deefff', 'sysgorup7', '01', '2018-04-11 15:12:36', 'admin', null, null, null);

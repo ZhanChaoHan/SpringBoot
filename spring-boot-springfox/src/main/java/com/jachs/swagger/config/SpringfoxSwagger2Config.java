@@ -52,7 +52,13 @@ public class SpringfoxSwagger2Config {
 				.paths(PathSelectors.regex("/test.*"))
 				.build().apiInfo(swaggerDemoApiInfo()).enable(enable);
 	}
-
+	@Bean("群组模块")
+	public Docket groupDocket() {
+		return new Docket(DocumentationType.SWAGGER_2).groupName("群组模块").select()
+				.apis(RequestHandlerSelectors.basePackage("com.jachs.swagger.controller"))
+				.paths(PathSelectors.regex("/group.*"))
+				.build().apiInfo(swaggerDemoApiInfo()).enable(enable);
+	}
 	/**
 	 * 自定义API文档基本信息实体
 	 * 

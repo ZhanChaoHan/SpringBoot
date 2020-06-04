@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinosoft.dao.SysCodeMapper">
+  <resultMap id="BaseResultMap" type="com.sinosoft.normal.po.SysCode">
+    <id column="CodeType" jdbcType="VARCHAR" property="CodeType" />
+    <id column="CodeCode" jdbcType="VARCHAR" property="codeCode" />
+    <result column="CodeCname" jdbcType="VARCHAR" property="codeCname" />
+    <result column="ValidStatus" jdbcType="VARCHAR" property="validStatus" />
+    <result column="CreateTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="CreateUserCode" jdbcType="VARCHAR" property="createUserCode" />
+    <result column="ModifyTime" jdbcType="TIMESTAMP" property="modifyTime" />
+    <result column="ModifyUserCode" jdbcType="VARCHAR" property="modifyUserCode" />
+    <result column="Reverse1" jdbcType="VARCHAR" property="reverse1" />
+    <result column="Reverse2" jdbcType="VARCHAR" property="reverse2" />
+    <result column="Reverse3" jdbcType="VARCHAR" property="reverse3" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    CodeType, CodeCode, CodeCname, ValidStatus, CreateTime, CreateUserCode, ModifyTime, 
+    ModifyUserCode, Reverse1, Reverse2, Reverse3
+  </sql>
+  
+  <!-- 条件查询 -->
+    <select id="selectByPrimaryKeyList" parameterType="com.sinosoft.normal.po.SysCode" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from syscode
+    where 1=1
+         <if test="CodeType != null and CodeType != ''">
+         	and CodeType  like '%${CodeType}%'
+         </if>
+         <if test="codeCode != null and codeCode !=''">
+            and CodeCode  like '%${codeCode}%'
+         </if>
+         <if test="codeCname != null and codeCname !=''">
+            and codeCname like '%${codeCname}%'
+         </if>
+  </select>
+  
+ 
+  <select id="selectByPrimaryKey" parameterType="com.sinosoft.normal.po.SysCodeKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from syscode
+    where CodeType = #{CodeType,jdbcType=VARCHAR}
+      and CodeCode = #{codeCode,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="com.sinosoft.normal.po.SysCodeKey">
+    delete from syscode
+    where CodeType = #{CodeType,jdbcType=VARCHAR}
+      and CodeCode = #{codeCode,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sinosoft.normal.po.SysCode">
+    insert into syscode (CodeType, CodeCode, CodeCname, 
+      ValidStatus, CreateTime, CreateUserCode, 
+      ModifyTime, ModifyUserCode, Reverse1, 
+      Reverse2, Reverse3)
+    values (#{CodeType,jdbcType=VARCHAR}, #{codeCode,jdbcType=VARCHAR}, #{codeCname,jdbcType=VARCHAR}, 
+      #{validStatus,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createUserCode,jdbcType=VARCHAR}, 
+      #{modifyTime,jdbcType=TIMESTAMP}, #{modifyUserCode,jdbcType=VARCHAR}, #{reverse1,jdbcType=VARCHAR}, 
+      #{reverse2,jdbcType=VARCHAR}, #{reverse3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinosoft.normal.po.SysCode">
+    insert into syscode
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="CodeType != null">
+        CodeType,
+      </if>
+      <if test="codeCode != null">
+        CodeCode,
+      </if>
+      <if test="codeCname != null">
+        CodeCname,
+      </if>
+      <if test="validStatus != null">
+        ValidStatus,
+      </if>
+      <if test="createTime != null">
+        CreateTime,
+      </if>
+      <if test="createUserCode != null">
+        CreateUserCode,
+      </if>
+      <if test="modifyTime != null">
+        ModifyTime,
+      </if>
+      <if test="modifyUserCode != null">
+        ModifyUserCode,
+      </if>
+      <if test="reverse1 != null">
+        Reverse1,
+      </if>
+      <if test="reverse2 != null">
+        Reverse2,
+      </if>
+      <if test="reverse3 != null">
+        Reverse3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="CodeType != null">
+        #{CodeType,jdbcType=VARCHAR},
+      </if>
+      <if test="codeCode != null">
+        #{codeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="codeCname != null">
+        #{codeCname,jdbcType=VARCHAR},
+      </if>
+      <if test="validStatus != null">
+        #{validStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserCode != null">
+        #{createUserCode,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUserCode != null">
+        #{modifyUserCode,jdbcType=VARCHAR},
+      </if>
+      <if test="reverse1 != null">
+        #{reverse1,jdbcType=VARCHAR},
+      </if>
+      <if test="reverse2 != null">
+        #{reverse2,jdbcType=VARCHAR},
+      </if>
+      <if test="reverse3 != null">
+        #{reverse3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinosoft.normal.po.SysCode">
+    update syscode
+    <set>
+      <if test="codeCname != null">
+        CodeCname = #{codeCname,jdbcType=VARCHAR},
+      </if>
+      <if test="validStatus != null">
+        ValidStatus = #{validStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CreateTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserCode != null">
+        CreateUserCode = #{createUserCode,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null">
+        ModifyTime = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUserCode != null">
+        ModifyUserCode = #{modifyUserCode,jdbcType=VARCHAR},
+      </if>
+      <if test="reverse1 != null">
+        Reverse1 = #{reverse1,jdbcType=VARCHAR},
+      </if>
+      <if test="reverse2 != null">
+        Reverse2 = #{reverse2,jdbcType=VARCHAR},
+      </if>
+      <if test="reverse3 != null">
+        Reverse3 = #{reverse3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where CodeType = #{CodeType,jdbcType=VARCHAR}
+      and CodeCode = #{codeCode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinosoft.normal.po.SysCode">
+    update syscode
+    set CodeCname = #{codeCname,jdbcType=VARCHAR},
+        ModifyTime = #{modifyTime,jdbcType=TIMESTAMP},
+        ModifyUserCode = #{modifyUserCode,jdbcType=VARCHAR}
+    where CodeType = #{CodeType,jdbcType=VARCHAR}
+      and CodeCode = #{codeCode,jdbcType=VARCHAR}
+  </update>
+  
+   <select id="getSysCodeList" parameterType="String" resultMap="BaseResultMap">
+    select * from syscode sc where 1=1
+    and sc.CodeType = #{CodeType,jdbcType=VARCHAR}
+     <!--只有一个条件的<if test="_parameter != null and _parameter !=''">
+         WHERE sg.GroupCode = #{_parameter,jdbcType=VARCHAR}
+ 	</if> -->
+  </select>
+    <select id="getCodeTypeList" parameterType="String" resultMap="BaseResultMap">
+    select * from syscode sc where 1=1
+    and sc.CodeType = #{CodeType}
+    and sc.CodeCode = #{ComCode}
+     <!--只有一个条件的<if test="_parameter != null and _parameter !=''">
+         WHERE sg.GroupCode = #{_parameter,jdbcType=VARCHAR}
+ 	</if> -->
+  </select>
+   <select id="userComLevelList" parameterType="String" resultMap="BaseResultMap">
+    select * from syscode sc where 1=1
+    
+   	 <if test="CodeType != null and CodeType != ''">
+         and sc.CodeType >= #{CodeType}
+        </if>
+        <if test="codeCode != null and codeCode !=''">
+        and sc.CodeCode = #{ComCode}
+        </if>
+    
+     <!--只有一个条件的<if test="_parameter != null and _parameter !=''">
+         WHERE sg.GroupCode = #{_parameter,jdbcType=VARCHAR}
+ 	</if> -->
+  </select>
+   <select id="muchComLevelList" parameterType="String" resultMap="BaseResultMap">
+    select * from syscode sc where 1=1
+    
+   	 <if test="CodeType != null and CodeType != ''">
+         and sc.CodeType = #{CodeType}
+        </if>
+        <if test="ComCode != null and ComCode !=''">
+        and sc.CodeCode >= #{ComCode}
+        </if>
+    
+     <!--只有一个条件的<if test="_parameter != null and _parameter !=''">
+         WHERE sg.GroupCode = #{_parameter,jdbcType=VARCHAR}
+ 	</if> -->
+  </select>
+   <select id="thanComLevelList" parameterType="String" resultMap="BaseResultMap">
+    select * from syscode sc where 1=1
+    
+   	 <if test="CodeType != null and CodeType != ''">
+         and sc.CodeType = #{CodeType}
+        </if>
+        <if test="ComCode != null and ComCode !=''">
+        and sc.CodeCode = #{ComCode}
+        </if>
+    
+     <!--只有一个条件的<if test="_parameter != null and _parameter !=''">
+         WHERE sg.GroupCode = #{_parameter,jdbcType=VARCHAR}
+ 	</if> -->
+  </select>
+</mapper>

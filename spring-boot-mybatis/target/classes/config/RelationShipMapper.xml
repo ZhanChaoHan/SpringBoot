@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinosoft.dao.RelationShipMapper">
+  <resultMap id="BaseResultMap" type="com.sinosoft.normal.po.RelationShip">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="ComCode" jdbcType="VARCHAR" property="comCode" />
+    <result column="UserCode" jdbcType="VARCHAR" property="userCode" />
+    <result column="ValidStatus" jdbcType="VARCHAR" property="validStatus" />
+    <result column="Reverse1" jdbcType="VARCHAR" property="reverse1" />
+    <result column="Reverse2" jdbcType="VARCHAR" property="reverse2" />
+    <result column="Reverse3" jdbcType="VARCHAR" property="reverse3" />
+  </resultMap>
+ 
+</mapper>

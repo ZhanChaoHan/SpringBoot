@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sinosoft.dao.SysAreaMapper">
+  <resultMap id="BaseResultMap" type="com.sinosoft.normal.po.SysArea">
+    <id column="AreaCode" jdbcType="VARCHAR" property="areaCode" />
+    <result column="SupAreaCode" jdbcType="VARCHAR" property="supAreaCode" />
+    <result column="HasSubArea" jdbcType="VARCHAR" property="hasSubArea" />
+    <result column="AreaCname" jdbcType="VARCHAR" property="areaCname" />
+    <result column="ValidStatus" jdbcType="VARCHAR" property="validStatus" />
+    <result column="CreateTime" jdbcType="DATE" property="createTime" />
+    <result column="CreateUserCode" jdbcType="VARCHAR" property="createUserCode" />
+    <result column="ModifyTime" jdbcType="DATE" property="modifyTime" />
+    <result column="ModifyUserCode" jdbcType="VARCHAR" property="modifyUserCode" />
+    <result column="Reverse1" jdbcType="VARCHAR" property="reverse1" />
+    <result column="Reverse2" jdbcType="VARCHAR" property="reverse2" />
+    <result column="Reverse3" jdbcType="VARCHAR" property="reverse3" />
+  </resultMap>
+  
+   
+   <resultMap id="SysAreaVo" type="com.sinosoft.normal.vo.SysAreaVo">
+    <id column="AreaCode" jdbcType="VARCHAR" property="areaCode" />
+    <result column="HasSubArea" jdbcType="VARCHAR" property="hasSubArea" />
+    <result column="AreaCname" jdbcType="VARCHAR" property="areaCname" />
+    <result column="SuperName" jdbcType="VARCHAR" property="superName" />
+  </resultMap>
+  
+  
+   <select id="querySysAreaListByFilter" parameterType="java.util.HashMap" resultMap="SysAreaVo">
+	select s1.areacode,s1.hassubarea,s1.areacname,s2.areacname as superName from sysarea s1,sysarea s2
+ 	where 1=1 and  s1.supareacode = s2.areacode
+	 <trim  suffixOverrides="," >
+		    	<if test ="areaCode != null and  areaCode  != ''">
+				 	 and s1.areaCode  LIKE CONCAT(CONCAT('%', #{areaCode}), '%') 
+				</if>
+	 			<if test ="areaCname != null and  areaCname  != ''">
+	 				and s1.areaCname LIKE CONCAT(CONCAT('%', #{areacname}), '%') 
+	 			</if>
+	 			
+	 			<if test ="superName != null and  superName  != ''">
+	 				and s2.areacname LIKE CONCAT(CONCAT('%', #{superName}), '%') 
+	 			</if>
+	 			
+	 			<if test ="validStatus != null and  validStatus  != ''">
+	 				and s1.validStatus=#{validStatus} and s2.validStatus=#{validStatus}
+	 			</if>
+	 </trim>
+  	</select>
+  
+  
+  <sql id="Base_Column_List">
+    AreaCode, SupAreaCode, HasSubArea, AreaCname, ValidStatus, CreateTime, CreateUserCode, 
+    ModifyTime, ModifyUserCode, Reverse1, Reverse2, Reverse3
+  </sql>
+  
+   <select id="getSysAreaList" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sysarea
+    where 1=1
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sysarea
+    where AreaCode = #{areaCode,jdbcType=VARCHAR}
+  </select>
+    <select id="selectList" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sysarea
+    where AreaCode = #{areaCode,jdbcType=VARCHAR}
+  </select>
+   <select id="queryProvinceAreaList" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sysarea
+    where SupAreaCode = #{supAreaCode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sysarea
+    where AreaCode = #{areaCode,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sinosoft.normal.po.SysArea">
+    insert into sysarea (AreaCode, SupAreaCode, HasSubArea, 
+      AreaCname, ValidStatus, CreateTime, 
+      CreateUserCode, ModifyTime, ModifyUserCode, 
+      Reverse1, Reverse2, Reverse3
+      )
+    values (#{areaCode,jdbcType=VARCHAR}, #{supAreaCode,jdbcType=VARCHAR}, #{hasSubArea,jdbcType=VARCHAR}, 
+      #{areaCname,jdbcType=VARCHAR}, #{validStatus,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}, 
+      #{createUserCode,jdbcType=VARCHAR}, #{modifyTime,jdbcType=DATE}, #{modifyUserCode,jdbcType=VARCHAR}, 
+      #{reverse1,jdbcType=VARCHAR}, #{reverse2,jdbcType=VARCHAR}, #{reverse3,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinosoft.normal.po.SysArea">
+    insert into sysarea
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="areaCode != null">
+        AreaCode,
+      </if>
+      <if test="supAreaCode != null">
+        SupAreaCode,
+      </if>
+      <if test="hasSubArea != null">
+        HasSubArea,
+      </if>
+      <if test="areaCname != null">
+        AreaCname,
+      </if>
+      <if test="validStatus != null">
+        ValidStatus,
+      </if>
+      <if test="createTime != null">
+        CreateTime,
+      </if>
+      <if test="createUserCode != null">
+        CreateUserCode,
+      </if>
+      <if test="modifyTime != null">
+        ModifyTime,
+      </if>
+      <if test="modifyUserCode != null">
+        ModifyUserCode,
+      </if>
+      <if test="reverse1 != null">
+        Reverse1,
+      </if>
+      <if test="reverse2 != null">
+        Reverse2,
+      </if>
+      <if test="reverse3 != null">
+        Reverse3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="areaCode != null">
+        #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="supAreaCode != null">
+        #{supAreaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="hasSubArea != null">
+        #{hasSubArea,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCname != null">
+        #{areaCname,jdbcType=VARCHAR},
+      </if>
+      <if test="validStatus != null">
+        #{validStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="createUserCode != null">
+        #{createUserCode,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=DATE},
+      </if>
+      <if test="modifyUserCode != null">
+        #{modifyUserCode,jdbcType=VARCHAR},
+      </if>
+      <if test="reverse1 != null">
+        #{reverse1,jdbcType=VARCHAR},
+      </if>
+      <if test="reverse2 != null">
+        #{reverse2,jdbcType=VARCHAR},
+      </if>
+      <if test="reverse3 != null">
+        #{reverse3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinosoft.normal.po.SysArea">
+    update sysarea
+    <set>
+      <if test="supAreaCode != null">
+        SupAreaCode = #{supAreaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="hasSubArea != null">
+        HasSubArea = #{hasSubArea,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCname != null">
+        AreaCname = #{areaCname,jdbcType=VARCHAR},
+      </if>
+      <if test="validStatus != null">
+        ValidStatus = #{validStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CreateTime = #{createTime,jdbcType=DATE},
+      </if>
+      <if test="createUserCode != null">
+        CreateUserCode = #{createUserCode,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null">
+        ModifyTime = #{modifyTime,jdbcType=DATE},
+      </if>
+      <if test="modifyUserCode != null">
+        ModifyUserCode = #{modifyUserCode,jdbcType=VARCHAR},
+      </if>
+      <if test="reverse1 != null">
+        Reverse1 = #{reverse1,jdbcType=VARCHAR},
+      </if>
+      <if test="reverse2 != null">
+        Reverse2 = #{reverse2,jdbcType=VARCHAR},
+      </if>
+      <if test="reverse3 != null">
+        Reverse3 = #{reverse3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where AreaCode = #{areaCode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinosoft.normal.po.SysArea">
+    update sysarea
+    set SupAreaCode = #{supAreaCode,jdbcType=VARCHAR},
+      HasSubArea = #{hasSubArea,jdbcType=VARCHAR},
+      AreaCname = #{areaCname,jdbcType=VARCHAR},
+      ValidStatus = #{validStatus,jdbcType=VARCHAR},
+      CreateTime = #{createTime,jdbcType=DATE},
+      CreateUserCode = #{createUserCode,jdbcType=VARCHAR},
+      ModifyTime = #{modifyTime,jdbcType=DATE},
+      ModifyUserCode = #{modifyUserCode,jdbcType=VARCHAR},
+      Reverse1 = #{reverse1,jdbcType=VARCHAR},
+      Reverse2 = #{reverse2,jdbcType=VARCHAR},
+      Reverse3 = #{reverse3,jdbcType=VARCHAR}
+    where AreaCode = #{areaCode,jdbcType=VARCHAR}
+  </update>
+</mapper>

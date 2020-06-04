@@ -1,0 +1,34 @@
+<link href="dtree.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="dtree.js"></script>
+
+<div id="divTree">
+  <script language="javascript">
+    var d = new dTree('d');
+    d.add('0','-1','功能列表','','功能列表','','','','',false,false,true);
+  
+  
+    d.add('1','0','理赔系统','','','','','','',true,'0',true);
+    d.add('2','1','报案    ','','','','','','',true,'1',true);
+    d.add('3','1','查勘    ','','','','','','',true,'0',true);
+    d.add('4','1','立案    ','','','','','','',true,'0',true);
+    d.add('5','1','定损    ','','','','','','',true,'0',true);
+    d.add('6','5','修理换件','','','','','','',true,'0',true);
+    d.add('7','5','财产定损','','','','','','',true,'0',true);
+    d.add('8','5','人员定损','','','','','','',true,'0',true);
+ 
+ 
+    document.write(d);
+
+    function openAndClose(){
+      if(fm.openCloseAll.value=="prompt.common.open"){
+        fm.openCloseAll.value = "prompt.common.close";
+        d.openAll();
+      }else{
+        fm.openCloseAll.value = "prompt.common.open";
+        d.closeAll();
+      }
+    }
+  </script>
+</div>
+
+<input type="button" value="test" onclick="javascript:alert(divTree.innerHTML);">

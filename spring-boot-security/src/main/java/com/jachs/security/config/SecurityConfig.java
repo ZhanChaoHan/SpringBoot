@@ -15,6 +15,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -52,6 +53,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	 */
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
+		 ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry = http.antMatcher("/**").authorizeRequests();
+		 // 禁用CSRF 开启跨域
+	     http.csrf().disable().cors();
+	     
+	     // 标识只能在 服务器本地ip[127.0.0.1或localhost] 访问`/login/*`接口，其他ip地址无法访问
+	     registry.antMatchers("/login/*").hasIpAddress("127.0.0.1");
+	     
 		 http.csrf().disable()
          .cors()
          .and()
@@ -94,7 +102,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		  auth.inMemoryAuthentication()
 	        .withUser("admin").password("admin").roles("ADMIN")
 	        .and()
-	        .withUser("jachs").password("jachs").roles("USER")
+	        .withUser("jachs").password("BCrypt").roles("USER")
 	        .and()
 	        .withUser("test").password("test").roles("USER");
 	}

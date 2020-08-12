@@ -63,10 +63,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
          .loginPage("/login/golog")//登录页面url
          .loginProcessingUrl("/login/log")//登录验证url
          	 //如果不想表单使用默认用户名密码命名修改一下二个参数
-	         .passwordParameter("username")
-	         .usernameParameter("password")
+//	         .passwordParameter("username")
+//	         .usernameParameter("password")
 	     //指定登录页的路径,任何人都可访问,第二个参数，如果不写成true，则默认登录成功以后，访问之前被拦截的页面，而非去我们规定的页面
-         .defaultSuccessUrl("/hello.html", true)
+//         .defaultSuccessUrl("/hello.html", true)
          .successHandler(loginSuccessHandler)//成功登录处理器
          .failureHandler(loginFailureHandler)//失败登录处理器
          .and()

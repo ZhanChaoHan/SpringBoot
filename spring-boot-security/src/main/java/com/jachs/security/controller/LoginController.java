@@ -1,6 +1,7 @@
 package com.jachs.security.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,9 +27,7 @@ public class LoginController {
 		return "log";
 	}
 	@RequestMapping("/log")
-	public String login(@RequestParam("username") String username, @RequestParam("password") String password) {
-		System.out.println(username);
-		System.out.println(password);
-		return "hello";
+	public UserDetails login(@RequestParam("username") String username, @RequestParam("password") String password) {
+		return loginService.loadUserByUsername ( username, password );
 	}
 }

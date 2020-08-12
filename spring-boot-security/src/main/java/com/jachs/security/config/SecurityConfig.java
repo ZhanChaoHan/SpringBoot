@@ -1,11 +1,7 @@
 package com.jachs.security.config;
 
-import java.io.IOException;
 
 import javax.annotation.Resource;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -16,10 +12,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import com.jachs.security.handler.security.LoginFailureHandler;
 import com.jachs.security.handler.security.LoginSuccessHandler;
@@ -60,10 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	     // 标识只能在 服务器本地ip[127.0.0.1或localhost] 访问`/login/*`接口，其他ip地址无法访问
 	     registry.antMatchers("/login/*").hasIpAddress("127.0.0.1");
 	     
-		 http.csrf().disable()
-         .cors()
-         .and()
-         	.authorizeRequests()
+	     http.authorizeRequests()
 			//放行所有login下接口地址
 			.antMatchers("/login/*").permitAll()
 			.anyRequest().authenticated()

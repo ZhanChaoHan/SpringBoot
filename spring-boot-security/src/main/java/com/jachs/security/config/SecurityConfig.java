@@ -14,9 +14,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices;
 
 import com.jachs.security.handler.security.LoginFailureHandler;
 import com.jachs.security.handler.security.LoginSuccessHandler;
+import com.jachs.security.service.impl.LoginServiceImpl;
 
 /****
  * 
@@ -33,6 +35,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Resource
     private LoginFailureHandler loginFailureHandler;
     
+    /**
+     * TokenBasedRememberMeServices的生成密钥，
+     * 算法实现详见文档：https://docs.spring.io/spring-security/site/docs/5.1.3.RELEASE/reference/htmlsingle/#remember-me-hash-token
+     */
+    private final String SECRET_KEY = "123456";
+    @Autowired
+    private LoginServiceImpl loginService;
     
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -54,14 +63,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	     // 标识只能在 服务器本地ip[127.0.0.1或localhost] 访问`/login/*`接口，其他ip地址无法访问
 	     registry.antMatchers("/login/*").hasIpAddress("127.0.0.1");
 	     
+	     //放行所有login下接口地址
+	     registry.antMatchers("/login/*").permitAll().anyRequest().authenticated();
+	     
 	     http.authorizeRequests()
-			//放行所有login下接口地址
-			.antMatchers("/login/*").permitAll()
-			.anyRequest().authenticated()
 		 .and()
          .formLogin()
          .loginPage("/login/golog")//登录页面url
-         .loginProcessingUrl("/login/log")//登录验证url
+//         .loginProcessingUrl("/login/log")//登录验证url
          	 //如果不想表单使用默认用户名密码命名修改一下二个参数
 //	         .passwordParameter("username")
 //	         .usernameParameter("password")
@@ -74,6 +83,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
          .csrf()
          .disable().httpBasic();
 	}
+	/**
+     * 如果要设置cookie过期时间或其他相关配置，请在下方自行配置
+     */
+    private TokenBasedRememberMeServices getRememberMeServices() {
+        TokenBasedRememberMeServices services = new TokenBasedRememberMeServices(SECRET_KEY, loginService);
+        services.setCookieName("remember-cookie");
+        services.setTokenValiditySeconds(100); // 默认14天
+        return services;
+    }
 	/**
      * 忽略拦截url或静态资源文件夹
      * @param web

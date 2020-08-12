@@ -21,24 +21,19 @@ public class LoginServiceImpl implements LoginService, UserDetailsService {
      * 接口提供的默认查询方法
      */
     @Override
-    public UserDetails loadUserByUsername ( String username ) throws UsernameNotFoundException {
-
-        return null;
-    }
-
-    @Override
-    public UserDetails loadUserByUsername ( String username , String password ) {
+    public UserDetails loadUserByUsername ( String username ) throws UsernameNotFoundException{
         Set<SecurityUser> gaSet = new HashSet<> ();
-        gaSet.add ( new  SecurityUser ( 1, "COCKcS" ));
-        gaSet.add ( new  SecurityUser ( 2, "mjsh" ));
+        gaSet.add ( new  SecurityUser ( 1, "ROLE_A" ));
+        gaSet.add ( new  SecurityUser ( 2, "ROLE_B" ));
         RoleUser ud = new RoleUser ();
         ud.setUsername ( username );
-        ud.setPassword ( password );
+        ud.setPassword ( "oooo" );
         ud.setAccountNonExpired ( true );
         ud.setAccountNonLocked ( false );
         ud.setAuthorities ( gaSet );
         ud.setEnabled ( true );
         return ud;
     }
+
 
 }

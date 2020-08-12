@@ -5,14 +5,15 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.jachs.security.service.LoginService;
+import com.jachs.security.service.impl.LoginServiceImpl;
 
 @Controller
 @RequestMapping("/login")
 public class LoginController {
 	@Autowired
-	private LoginService loginService;
+	private LoginServiceImpl loginService;
 
 	@RequestMapping("/failure")
 	public String failure() {
@@ -27,7 +28,8 @@ public class LoginController {
 		return "log";
 	}
 	@RequestMapping("/log")
+	@ResponseBody
 	public UserDetails login(@RequestParam("username") String username, @RequestParam("password") String password) {
-		return loginService.loadUserByUsername ( username, password );
+		return loginService.loadUserByUsername ( username );
 	}
 }

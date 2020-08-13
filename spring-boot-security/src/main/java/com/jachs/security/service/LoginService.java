@@ -25,10 +25,13 @@ public class LoginService implements  UserDetailsService {
         RoleUser ud = new RoleUser ();
         ud.setUsername ( username );
         ud.setPassword ( "oooo" );
-        ud.setAccountNonExpired ( true );
+        //指示用户的帐户是否已过期。过期帐户不能已验证
+        ud.setAccountNonExpired ( false );
+        //指示用户是锁定还是解锁。锁定的用户不能 已验证。
         ud.setAccountNonLocked ( false );
         ud.setAuthorities ( gaSet );
-        ud.setEnabled ( true );
+        //指示用户是启用还是禁用。禁用的用户不能已验证。
+        ud.setEnabled ( false );
         return ud;
     }
 

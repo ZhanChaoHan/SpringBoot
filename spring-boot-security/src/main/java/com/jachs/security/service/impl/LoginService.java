@@ -10,10 +10,9 @@ import org.springframework.stereotype.Service;
 
 import com.jachs.security.entity.RoleUser;
 import com.jachs.security.entity.SecurityUser;
-import com.jachs.security.service.LoginService;
 
 @Service
-public class LoginServiceImpl implements LoginService, UserDetailsService {
+public class LoginService implements  UserDetailsService {
 
     /**
      * 接口提供的默认查询方法

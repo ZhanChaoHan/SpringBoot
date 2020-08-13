@@ -2,6 +2,7 @@ package com.jachs.security.config;
 
 
 import javax.annotation.Resource;
+import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -14,11 +15,15 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices;
 
 import com.jachs.security.handler.security.LoginFailureHandler;
 import com.jachs.security.handler.security.LoginSuccessHandler;
-import com.jachs.security.service.impl.LoginServiceImpl;
+import com.jachs.security.service.impl.LoginService;
+import com.jachs.security.service.impl.RememberMeTokenService;
 
 /****
  * 
@@ -27,21 +32,22 @@ import com.jachs.security.service.impl.LoginServiceImpl;
  */
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    @Autowired
+    private LoginService loginService;
 	//登录成功handler
     @Resource
     private LoginSuccessHandler loginSuccessHandler;
-
     //登录失败handler
     @Resource
     private LoginFailureHandler loginFailureHandler;
+    @Autowired
+    private RememberMeTokenService rememberMeTokenService;
     
     /**
      * TokenBasedRememberMeServices的生成密钥，
      * 算法实现详见文档：https://docs.spring.io/spring-security/site/docs/5.1.3.RELEASE/reference/htmlsingle/#remember-me-hash-token
      */
     private final String SECRET_KEY = "123456";
-    @Autowired
-    private LoginServiceImpl loginService;
     
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -82,14 +88,37 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
          // 关闭下 CSRF ，否则表单得不到提交，或者在表单里面添加一个 hidden 属性，提交csrf；
          .csrf()
          .disable().httpBasic();
+	     
+	     
+	     http.authorizeRequests()
+         .and()
+         .rememberMe()
+         .rememberMeServices(getRememberMeServices())
+//         .tokenRepository(persistentTokenRepository()) // 设置数据访问层
+         .key("remember-me");
 	}
+	/**
+     * 持久化token
+     * 
+     * Security中，默认是使用PersistentTokenRepository的子类InMemoryTokenRepositoryImpl，将token放在内存中
+     * 如果使用JdbcTokenRepositoryImpl，会创建表persistent_logins，将token持久化到数据库
+     */
+	 @Bean
+	    public PersistentTokenBasedRememberMeServices persistentTokenBasedRememberMeServices() {
+	        PersistentTokenBasedRememberMeServices services = new PersistentTokenBasedRememberMeServices("remember-me"
+	                , loginService, rememberMeTokenService);
+	        services.setTokenValiditySeconds(3600);
+	        services.setParameter("rememberMe");
+	        return services;
+	    }
 	/**
      * 如果要设置cookie过期时间或其他相关配置，请在下方自行配置
      */
-    private TokenBasedRememberMeServices getRememberMeServices() {
+	@Bean
+	public TokenBasedRememberMeServices getRememberMeServices() {
         TokenBasedRememberMeServices services = new TokenBasedRememberMeServices(SECRET_KEY, loginService);
         services.setCookieName("remember-cookie");
-        services.setTokenValiditySeconds(100); // 默认14天
+        services.setTokenValiditySeconds(100); // 记住我的时间(秒) 默认14天
         return services;
     }
 	/**
@@ -108,12 +137,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception  {
-		  auth.inMemoryAuthentication()
-	        .withUser("admin").password("admin").roles("ADMIN")
-	        .and()
-	        .withUser("jachs").password("BCrypt").roles("USER")
-	        .and()
-	        .withUser("test").password("test").roles("USER");
+//		  auth.inMemoryAuthentication()
+//	        .withUser("admin").password("admin").roles("ADMIN")
+//	        .and()
+//	        .withUser("jachs").password("BCrypt").roles("USER")
+//	        .and()
+//	        .withUser("test").password("test").roles("USER");
 	}
 
 }

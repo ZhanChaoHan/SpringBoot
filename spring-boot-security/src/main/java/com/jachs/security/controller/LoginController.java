@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.jachs.security.service.impl.LoginServiceImpl;
+import com.jachs.security.service.impl.LoginService;
 
 @Controller
 @RequestMapping("/login")
 public class LoginController {
 	@Autowired
-	private LoginServiceImpl loginService;
+	private LoginService loginService;
 
 	@RequestMapping("/failure")
 	public String failure() {

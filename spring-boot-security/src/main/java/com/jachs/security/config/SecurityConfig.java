@@ -23,6 +23,7 @@ import com.jachs.security.handler.security.LoginSuccessHandler;
 import com.jachs.security.service.impl.LoginService;
 import com.jachs.security.service.impl.RememberMeTokenService;
 
+
 /****
  * SpringCecurity主要配置
  * @author zhanchaohan
@@ -56,7 +57,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     public void configure ( HttpSecurity http ) throws Exception {
-        
         ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry = http
                 .antMatcher ( "/**" ).authorizeRequests ();
         // 禁用CSRF 开启跨域
@@ -88,20 +88,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         
     }
 
-    /**
-     * 持久化token
-     * 
-     * Security中，默认是使用PersistentTokenRepository的子类InMemoryTokenRepositoryImpl，将token放在内存中
-     * 如果使用JdbcTokenRepositoryImpl，会创建表persistent_logins，将token持久化到数据库
-     */
-    @Bean
-    public PersistentTokenBasedRememberMeServices persistentTokenBasedRememberMeServices () {
-        PersistentTokenBasedRememberMeServices services = new PersistentTokenBasedRememberMeServices ( "remember-me",
-                loginService, rememberMeTokenService );
-        services.setTokenValiditySeconds ( 3600 );
-        services.setParameter ( "rememberMe" );
-        return services;
-    }
 
     /**
      * 忽略拦截url或静态资源文件夹
@@ -123,11 +109,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //	        .and()
         //	        .withUser("test").password("test").roles("USER");
     }
+    /**
+     * 持久化token
+     * 
+     * Security中，默认是使用PersistentTokenRepository的子类InMemoryTokenRepositoryImpl，将token放在内存中
+     * 如果使用JdbcTokenRepositoryImpl，会创建表persistent_logins，将token持久化到数据库
+     */
+    @Bean
+    public PersistentTokenBasedRememberMeServices persistentTokenBasedRememberMeServices () {
+        PersistentTokenBasedRememberMeServices services = new PersistentTokenBasedRememberMeServices ( "remember-me",
+                loginService, rememberMeTokenService );
+        services.setTokenValiditySeconds ( 3600 );
+        services.setParameter ( "rememberMe" );
+        return services;
+    }
     @Bean
     public PersistentTokenRepository persistentTokenRepository() {
         JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
         tokenRepository.setDataSource(dataSource);
-//      tokenRepository.setCreateTableOnStartup(true);   //首次设置为true,自动创建表，如果这里不设置为true就需要自己手动创建表
+        tokenRepository.setCreateTableOnStartup(true);   //首次设置为true,自动创建表，如果这里不设置为true就需要自己手动创建表
         return tokenRepository;
     }
 }

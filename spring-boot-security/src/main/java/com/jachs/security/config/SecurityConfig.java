@@ -1,6 +1,7 @@
 package com.jachs.security.config;
 
 import javax.annotation.Resource;
+import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -13,8 +14,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
-import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 import com.jachs.security.handler.security.LoginFailureHandler;
 import com.jachs.security.handler.security.LoginSuccessHandler;
@@ -22,7 +24,7 @@ import com.jachs.security.service.impl.LoginService;
 import com.jachs.security.service.impl.RememberMeTokenService;
 
 /****
- * 
+ * SpringCecurity主要配置
  * @author zhanchaohan
  *
  */
@@ -38,7 +40,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private LoginFailureHandler loginFailureHandler;
     @Autowired
     private RememberMeTokenService rememberMeTokenService;
-
+    @Autowired
+    private DataSource dataSource;
+    
     @Bean
     public PasswordEncoder passwordEncoder () {
         // Spring Security 提供的密码加密工具，可快速实现加密加盐
@@ -52,6 +56,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     public void configure ( HttpSecurity http ) throws Exception {
+        
         ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry = http
                 .antMatcher ( "/**" ).authorizeRequests ();
         // 禁用CSRF 开启跨域
@@ -60,26 +65,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // 标识只能在 服务器本地ip[127.0.0.1或localhost] 访问`/login/*`接口，其他ip地址无法访问
         registry.antMatchers ( "/login/*" ).hasIpAddress ( "127.0.0.1" );
 
+        HttpSecurity httpSecurity=http.authorizeRequests ().and ();
+        
         //放行所有login下接口地址
         registry.antMatchers ( "/login/*" ).permitAll ().anyRequest ().authenticated ();
-
-        http.authorizeRequests ().and ().formLogin ().loginPage ( "/login/golog" )//登录页面url
-                //         .loginProcessingUrl("/login/log")//登录验证url
-                //如果不想表单使用默认用户名密码命名修改一下二个参数
-                //	         .passwordParameter("username")
-                //	         .usernameParameter("password")
-                //指定登录页的路径,任何人都可访问,第二个参数，如果不写成true，则默认登录成功以后，访问之前被拦截的页面，而非去我们规定的页面
-                //         .defaultSuccessUrl("/hello.html", true)
+        //配置成功失败处理器
+        httpSecurity.formLogin ()
+            .loginPage ( "/login/golog" )//登录页面url
+            .loginProcessingUrl("/login/mylogin")          //指定验证凭据的URL，和表单路径一样
                 .successHandler ( loginSuccessHandler )//成功登录处理器
-                .failureHandler ( loginFailureHandler )//失败登录处理器
-                .and ()
-                // 关闭下 CSRF ，否则表单得不到提交，或者在表单里面添加一个 hidden 属性，提交csrf；
-                .csrf ().disable ().httpBasic ();
-
-        http.authorizeRequests ().and ().rememberMe ()
+                .failureHandler ( loginFailureHandler );//失败登录处理器
+            
+        //配置持久化
+        httpSecurity.rememberMe ()
         .rememberMeServices ( persistentTokenBasedRememberMeServices () )
-                //         .tokenRepository(persistentTokenRepository()) // 设置数据访问层
                 .key ( "remember-me" );
+        
+        httpSecurity.rememberMe ()
+        .userDetailsService(loginService)
+        .tokenRepository(persistentTokenRepository())
+        .tokenValiditySeconds(3600);     //设置token过期时间
+        
     }
 
     /**
@@ -117,5 +123,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //	        .and()
         //	        .withUser("test").password("test").roles("USER");
     }
-
+    @Bean
+    public PersistentTokenRepository persistentTokenRepository() {
+        JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
+        tokenRepository.setDataSource(dataSource);
+//      tokenRepository.setCreateTableOnStartup(true);   //首次设置为true,自动创建表，如果这里不设置为true就需要自己手动创建表
+        return tokenRepository;
+    }
 }

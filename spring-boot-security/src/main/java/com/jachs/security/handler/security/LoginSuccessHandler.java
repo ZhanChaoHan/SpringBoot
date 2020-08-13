@@ -17,6 +17,7 @@ import com.alibaba.fastjson.JSONObject;
 
 /**
  * 登陆成功处理handler
+ * @author zhanchaohan
  */
 @Component
 public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {

@@ -20,8 +20,8 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 
 import com.jachs.security.handler.security.LoginFailureHandler;
 import com.jachs.security.handler.security.LoginSuccessHandler;
-import com.jachs.security.service.impl.LoginService;
-import com.jachs.security.service.impl.RememberMeTokenService;
+import com.jachs.security.service.LoginService;
+import com.jachs.security.service.RememberMeTokenService;
 
 
 /****

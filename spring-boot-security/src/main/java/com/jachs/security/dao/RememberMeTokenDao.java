@@ -4,13 +4,16 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.web.authentication.rememberme.InMemoryTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.stereotype.Repository;
 
 import com.jachs.security.entity.RememberMeToken;
 
 /**
  * @author zhanchaohan
- * 
+ * @see JdbcTokenRepositoryImpl
+ * @see InMemoryTokenRepositoryImpl
  */
 @Repository
 public class RememberMeTokenDao {

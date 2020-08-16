@@ -82,7 +82,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.logoutSuccessHandler(loginOutHandler).permitAll();// 注销成功处理器
 		
 		// 配置持久化
-		httpSecurity.rememberMe().rememberMeServices(persistentTokenBasedRememberMeServices()).key("remember-me");
+		httpSecurity.rememberMe().key("remember-me")
+//		.rememberMeServices(persistentTokenBasedRememberMeServices())
+		.tokenRepository(persistentTokenRepository());
 
 		httpSecurity.rememberMe().userDetailsService(loginService).tokenRepository(persistentTokenRepository())
 				.tokenValiditySeconds(3600); // 设置token过期时间
@@ -126,7 +128,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		services.setParameter("rememberMe");
 		return services;
 	}
-
+	/***
+	 * 官方默认的数据库持久化
+	 * InMemoryTokenRepositoryImpl ：仅用于测试保存内存中。
+	 * JdbcTokenRepositoryImpl ：存储令牌到数据库中。
+	 * @return
+	 */
 	@Bean
 	public PersistentTokenRepository persistentTokenRepository() {
 		JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();

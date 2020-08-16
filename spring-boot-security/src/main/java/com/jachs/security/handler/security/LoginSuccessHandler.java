@@ -27,7 +27,7 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException {
         //登录成功返回
         Map<String, Object> paramMap = new HashMap<>();
-        paramMap.put("code", "400");
+        paramMap.put("code", "200");
         paramMap.put("message", "登录成功!");
         paramMap.put("security", SecurityContextHolder.getContext().getAuthentication());
         //设置返回请求头

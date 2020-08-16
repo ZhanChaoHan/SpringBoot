@@ -67,7 +67,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		HttpSecurity httpSecurity = http.authorizeRequests().and();
 
 		// 放行所有login下接口地址
-		registry.antMatchers("/login/*").permitAll().anyRequest().authenticated();
+		registry
+		.antMatchers("/login/*").permitAll()
+		.antMatchers("/helper/*","").hasRole("ROS")
+		.anyRequest().authenticated();
+		
+		
 		// 配置成功失败处理器
 		httpSecurity.formLogin().loginPage("/login/golog")// 登录页面url
 				.loginProcessingUrl("/login/mylogin") // 指定验证凭据的URL，和表单路径一样
@@ -75,13 +80,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.failureHandler(loginFailureHandler).and().logout().logoutUrl("/login/logout")
 				// 注销成功处理器
 				.logoutSuccessHandler(loginOutHandler).permitAll();// 失败登录处理器
-
+		
 		// 配置持久化
 		httpSecurity.rememberMe().rememberMeServices(persistentTokenBasedRememberMeServices()).key("remember-me");
 
 		httpSecurity.rememberMe().userDetailsService(loginService).tokenRepository(persistentTokenRepository())
 				.tokenValiditySeconds(3600); // 设置token过期时间
-
+		
+		
 	}
 
 	/**

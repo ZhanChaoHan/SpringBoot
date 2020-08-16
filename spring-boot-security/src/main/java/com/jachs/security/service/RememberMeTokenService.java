@@ -12,38 +12,41 @@ import org.springframework.transaction.annotation.Transactional;
 import com.jachs.security.dao.RememberMeTokenDao;
 import com.jachs.security.entity.RememberMeToken;
 
-
 /**
  * @author zhanchaohan
  * 
  */
 @Service
-public class RememberMeTokenService implements PersistentTokenRepository{
-    @Autowired
-    private RememberMeTokenDao rememberMeTokenDao;
+public class RememberMeTokenService implements PersistentTokenRepository {
+	@Autowired
+	private RememberMeTokenDao rememberMeTokenDao;
+	
+	public void setCreateTableOnStartup(boolean createTableOnStartup) {
+		rememberMeTokenDao.CreateTableOnStartup(createTableOnStartup);
+	}
+	@Override
+	public void createNewToken(PersistentRememberMeToken token) {
+		rememberMeTokenDao.createNewToken(
+				new RememberMeToken(token.getSeries(), token.getUsername(), token.getTokenValue(), token.getDate()));
+	}
 
-    @Override
-    public void createNewToken(PersistentRememberMeToken token) {
-        rememberMeTokenDao.saveRememberMeToken(new RememberMeToken(token.getSeries(),token.getUsername(),token.getTokenValue(),token.getDate()));
-    }
+	@Transactional
+	@Override
+	public void updateToken(String series, String tokenValue, Date lastUsed) {
+		rememberMeTokenDao.updateToken(series, tokenValue, lastUsed);
+	}
 
-    @Transactional
-    @Override
-    public void updateToken(String series, String tokenValue, Date lastUsed) {
-        rememberMeTokenDao.updateRememberMeToken(series,tokenValue,lastUsed);
-    }
+	@Override
+	public PersistentRememberMeToken getTokenForSeries(String seriesId) {
+		RememberMeToken rememberMeToken = rememberMeTokenDao.getTokenForSeries(seriesId);
+		return Optional.ofNullable(rememberMeToken).map(a -> {
+			return new PersistentRememberMeToken(a.getLoginName(), a.getSeries(), a.getToken(), a.getLastUsed());
+		}).orElse(null);
+	}
 
-    @Override
-    public PersistentRememberMeToken getTokenForSeries(String seriesId) {
-        RememberMeToken rememberMeToken = rememberMeTokenDao.getRememberMeToken(seriesId);
-        return  Optional.ofNullable(rememberMeToken).map(a ->{
-            return new PersistentRememberMeToken(a.getLoginName(),a.getSeries(),a.getToken(),a.getLastUsed());
-        }).orElse(null);
-    }
-
-    @Transactional
-    @Override
-    public void removeUserTokens(String username) {
-        rememberMeTokenDao.deleteRememberMeToken(username);
-    }
+	@Transactional
+	@Override
+	public void removeUserTokens(String username) {
+		rememberMeTokenDao.removeUserTokens(username);
+	}
 }

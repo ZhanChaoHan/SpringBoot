@@ -83,13 +83,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		// 配置持久化
 		httpSecurity.rememberMe().key("remember-me")
-//		.rememberMeServices(persistentTokenBasedRememberMeServices())
-		.tokenRepository(persistentTokenRepository());
-
-		httpSecurity.rememberMe().userDetailsService(loginService).tokenRepository(persistentTokenRepository())
-				.tokenValiditySeconds(3600); // 设置token过期时间
-		
-		
+		.rememberMeServices(persistentTokenBasedRememberMeServices())//自定义的
+//		.userDetailsService(loginService)
+//		.tokenRepository(persistentTokenRepository());//官方自定义的
+		.tokenValiditySeconds(3600);// 设置token过期时间
 	}
 
 	/**
@@ -122,10 +119,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	 */
 	@Bean
 	public PersistentTokenBasedRememberMeServices persistentTokenBasedRememberMeServices() {
+		rememberMeTokenService.setCreateTableOnStartup(true);//首次设置为true,自动创建表，如果这里不设置为true就需要自己手动创建表
 		PersistentTokenBasedRememberMeServices services = new PersistentTokenBasedRememberMeServices("remember-me",
 				loginService, rememberMeTokenService);
-		services.setTokenValiditySeconds(3600);
-		services.setParameter("rememberMe");
+//		services.setTokenValiditySeconds(3600);
+//		services.setParameter("rememberMe");
 		return services;
 	}
 	/***

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
@@ -28,6 +29,7 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("code", "400");
         paramMap.put("message", "登录成功!");
+        paramMap.put("security", SecurityContextHolder.getContext().getAuthentication());
         //设置返回请求头
         response.setContentType("application/json;charset=utf-8");
         //写出流

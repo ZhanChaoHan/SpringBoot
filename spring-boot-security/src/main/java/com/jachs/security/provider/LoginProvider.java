@@ -33,7 +33,7 @@ public class LoginProvider implements AuthenticationProvider {
 		UserDetails userDetails = loginService.loadUserByUsername(username);
 		// 对加密密码进行验证
 		if (passwordEncoderConfig.matches(password, userDetails.getPassword())) {
-			return new UsernamePasswordAuthenticationToken(username, password, null);
+			return new UsernamePasswordAuthenticationToken(username, password, userDetails.getAuthorities());
 		} else {
 			throw new BadCredentialsException("密码错误");
 		}

@@ -24,8 +24,8 @@ public class LoginService implements  UserDetailsService {
     @Override
     public UserDetails loadUserByUsername ( String username ) throws UsernameNotFoundException{
         Set<SecurityUser> gaSet = new HashSet<> ();
-        gaSet.add ( new  SecurityUser ( 1, "ROLE_A" ));
-        gaSet.add ( new  SecurityUser ( 2, "ROLE_B" ));
+        gaSet.add ( new  SecurityUser ( 1, "ROLE_Jachs" ));
+        gaSet.add ( new  SecurityUser ( 2, "ROLE_User" ));
         RoleUser ud = new RoleUser ();
         ud.setUsername ( username );
         ud.setPassword ( "oooo" );

@@ -69,17 +69,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		// 放行所有login下接口地址
 		registry
 		.antMatchers("/login/*").permitAll()
-		.antMatchers("/helper/*","").hasRole("ROS")
+		.antMatchers(HttpMethod.POST,"/helper/*","/modular/*").hasRole("Jachs")
 		.anyRequest().authenticated();
 		
 		
 		// 配置成功失败处理器
-		httpSecurity.formLogin().loginPage("/login/golog")// 登录页面url
-				.loginProcessingUrl("/login/mylogin") // 指定验证凭据的URL，和表单路径一样
-				.successHandler(loginSuccessHandler)// 成功登录处理器
-				.failureHandler(loginFailureHandler).and().logout().logoutUrl("/login/logout")
-				// 注销成功处理器
-				.logoutSuccessHandler(loginOutHandler).permitAll();// 失败登录处理器
+		httpSecurity.formLogin()
+			.loginPage("/login/golog")// 登录页面url
+			.loginProcessingUrl("/login/mylogin") // 指定验证凭据的URL，和表单路径一样
+			.successHandler(loginSuccessHandler)// 成功登录处理器
+			.failureHandler(loginFailureHandler).and().logout().logoutUrl("/login/logout")// 失败登录处理器
+			.logoutSuccessHandler(loginOutHandler).permitAll();// 注销成功处理器
 		
 		// 配置持久化
 		httpSecurity.rememberMe().rememberMeServices(persistentTokenBasedRememberMeServices()).key("remember-me");
@@ -107,7 +107,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		// auth.inMemoryAuthentication()
 		// .withUser("admin").password("admin").roles("ADMIN")
 		// .and()
-		// .withUser("jachs").password("BCrypt").roles("USER")
+		// .withUser("jachs").password("BCrypt").roles("jachs")
 		// .and()
 		// .withUser("test").password("test").roles("USER");
 	}

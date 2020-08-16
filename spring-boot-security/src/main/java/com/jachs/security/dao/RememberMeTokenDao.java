@@ -9,7 +9,6 @@ import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.web.authentication.rememberme.InMemoryTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
-import org.springframework.security.web.authentication.rememberme.PersistentRememberMeToken;
 import org.springframework.stereotype.Repository;
 
 import com.jachs.security.entity.RememberMeToken;
@@ -37,11 +36,6 @@ public class RememberMeTokenDao {
 	/** The default SQL used by <tt>removeUserTokens</tt> */
 	public static final String DEF_REMOVE_USER_TOKENS_SQL = "delete from my_mytoken where username = ?";
 
-	protected void initDao() {
-		if (createTableOnStartup) {
-			
-		}
-	}
 	// ~ Instance fields
 	// ================================================================================================
 
@@ -49,7 +43,6 @@ public class RememberMeTokenDao {
 	private String insertTokenSql = DEF_INSERT_TOKEN_SQL;
 	private String updateTokenSql = DEF_UPDATE_TOKEN_SQL;
 	private String removeUserTokensSql = DEF_REMOVE_USER_TOKENS_SQL;
-	private boolean createTableOnStartup;
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;

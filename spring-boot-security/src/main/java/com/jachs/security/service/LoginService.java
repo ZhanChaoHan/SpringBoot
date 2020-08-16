@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import com.jachs.security.entity.RoleUser;
 import com.jachs.security.entity.SecurityUser;
 /****
- * 登录Action
+ * 登录认证
  * @author zhanchaohan
  *
  */

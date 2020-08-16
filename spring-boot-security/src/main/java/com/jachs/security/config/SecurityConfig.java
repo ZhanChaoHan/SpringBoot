@@ -84,8 +84,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		// 配置持久化
 		httpSecurity.rememberMe().key("remember-me")
 		.rememberMeServices(persistentTokenBasedRememberMeServices())//自定义的
-//		.userDetailsService(loginService)
-//		.tokenRepository(persistentTokenRepository());//官方自定义的
+//		.userDetailsService(loginService).tokenRepository(persistentTokenRepository());//官方自定义的
 		.tokenValiditySeconds(3600);// 设置token过期时间
 	}
 

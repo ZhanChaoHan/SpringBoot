@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
+ * 自定义用户
  * @author zhanchaohan
  * 
  */
@@ -21,7 +22,7 @@ public class RoleUser implements UserDetails {
     private static final long serialVersionUID = 1L;
     private Long Id;
     private String Name;
-    private String Phone;
+    private Long Phone;
     private boolean Enabled;
     private String Username;
     private String Password;

@@ -13,6 +13,7 @@ import com.jachs.security.dao.RememberMeTokenDao;
 import com.jachs.security.entity.RememberMeToken;
 
 /**
+ * 持久化登录
  * @author zhanchaohan
  * 
  */

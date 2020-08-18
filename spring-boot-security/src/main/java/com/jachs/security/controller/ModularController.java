@@ -17,6 +17,6 @@ public class ModularController {
 	@RequestMapping("/test")
 	@ResponseBody
 	public String test() {
-		return "modular.test"+SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		return "modular.test"+SecurityContextHolder.getContext().getAuthentication();
 	}
 }

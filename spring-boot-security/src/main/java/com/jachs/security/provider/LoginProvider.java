@@ -14,7 +14,7 @@ import com.jachs.security.config.PasswordEncoderConfig;
 import com.jachs.security.service.LoginService;
 
 /****
- * 
+ * 验证用户
  * @author zhanchaohan
  *
  */

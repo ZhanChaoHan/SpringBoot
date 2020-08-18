@@ -66,9 +66,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		HttpSecurity httpSecurity = http.authorizeRequests().and();
 
-		// 放行所有login下接口地址
 		registry
-		.antMatchers("/login/*").permitAll()
+		.antMatchers("/login/*").permitAll()// 放行所有login下接口地址
 		.antMatchers(HttpMethod.POST,"/helper/*","/modular/*").hasRole("Jachs")
 		.anyRequest().authenticated();
 		

@@ -18,6 +18,6 @@ public class PartController {
 	@ResponseBody
 	public String test() {
 		
-		return "part.test"+SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		return "part.test"+SecurityContextHolder.getContext().getAuthentication();
 	}
 }

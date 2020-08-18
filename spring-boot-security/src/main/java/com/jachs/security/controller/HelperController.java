@@ -17,6 +17,6 @@ public class HelperController {
 	@RequestMapping("/test")
 	@ResponseBody
 	public String test() {
-		return "helper.test"+SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		return "helper.test"+SecurityContextHolder.getContext().getAuthentication();
 	}
 }

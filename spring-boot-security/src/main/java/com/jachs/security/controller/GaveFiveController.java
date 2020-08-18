@@ -17,6 +17,6 @@ public class GaveFiveController {
 	@RequestMapping("/test")
 	@ResponseBody
 	public String test() {
-		return "gavefive.test"+SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		return "gavefive.test"+SecurityContextHolder.getContext().getAuthentication();
 	}
 }

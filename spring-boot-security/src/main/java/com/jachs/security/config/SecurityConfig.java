@@ -68,9 +68,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		registry
 		.antMatchers("/login/*").permitAll()// 放行所有login下接口地址
-		.antMatchers(HttpMethod.POST,"/helper/*","/modular/*").hasRole("Jachs")
-		.anyRequest().authenticated();
+		.antMatchers(HttpMethod.POST,"/helper/*","/modular/*").hasRole("UserB")
+		.antMatchers(HttpMethod.POST,"/gavefive/*","/part/*").hasRole("UserA")
+		.antMatchers("/helper/*","/modular/*","/gavefive/*","/part/*").hasRole("Jachs")
 		
+		.anyRequest().authenticated();
 		
 		// 配置成功失败处理器
 		httpSecurity.formLogin()

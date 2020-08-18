@@ -7,6 +7,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import com.jachs.security.config.PasswordEncoderConfig;
@@ -31,6 +32,9 @@ public class LoginProvider implements AuthenticationProvider {
 		// 表单输入的密码
 		String password = (String) authentication.getCredentials();
 		UserDetails userDetails = loginService.loadUserByUsername(username);
+		if(userDetails==null) {
+		    throw new UsernameNotFoundException("用户不存在");
+		}
 		// 对加密密码进行验证
 		if (passwordEncoderConfig.matches(password, userDetails.getPassword())) {
 			return new UsernamePasswordAuthenticationToken(username, password, userDetails.getAuthorities());

@@ -12,7 +12,7 @@ CREATE TABLE `roleuser` (
   `CredentialsNonExpired` varchar(1) DEFAULT NULL COMMENT '0 - 无效\n    1 - 有效',
   PRIMARY KEY (`Id`),
   UNIQUE KEY (`Username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 insert into roleuser values(null,'zhanchaohan','13236365841','0','Jachs','123','0','0','0');
 
@@ -22,6 +22,6 @@ CREATE TABLE `SecurityUser` (
   `Authority` varchar(50),
   PRIMARY KEY (`Code`,`Authority`),
   FOREIGN KEY (Username) REFERENCES roleuser (Username)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 insert into SecurityUser values('Jachs',1,'ROLE_Jachs');

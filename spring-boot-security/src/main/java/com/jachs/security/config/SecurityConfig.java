@@ -20,6 +20,7 @@ import com.jachs.security.handler.security.AccessDeniedServletHandler;
 import com.jachs.security.handler.security.LoginFailureHandler;
 import com.jachs.security.handler.security.LoginOutHandler;
 import com.jachs.security.handler.security.LoginSuccessHandler;
+import com.jachs.security.handler.security.UserAuthenticationEntryPointHandler;
 import com.jachs.security.provider.LoginProvider;
 import com.jachs.security.service.LoginService;
 import com.jachs.security.service.RememberMeTokenService;
@@ -42,6 +43,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private LoginFailureHandler loginFailureHandler;
 	@Resource
     private AccessDeniedServletHandler accessDeniedServletHandler;
+	@Resource
+	private UserAuthenticationEntryPointHandler userAuthenticationEntryPointHandler;
 	// 登出handler
 	@Resource
 	private LoginOutHandler loginOutHandler;
@@ -82,7 +85,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.and().exceptionHandling().accessDeniedHandler(accessDeniedServletHandler);
 		
 		// 配置成功失败处理器
-		httpSecurity.formLogin()
+		httpSecurity
+		.httpBasic().authenticationEntryPoint(userAuthenticationEntryPointHandler)
+		.and ().formLogin()
 			.loginPage("/login/golog")// 登录页面url
 			.loginProcessingUrl("/login/mylogin") // 指定验证凭据的URL，和表单路径一样
 			.successHandler(loginSuccessHandler)// 成功登录处理器

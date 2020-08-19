@@ -17,6 +17,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * 重写AccessDeniedHandler实现自定义状态码
+ * 没权限访问
  * @author zhanchaohan
  * 
  */

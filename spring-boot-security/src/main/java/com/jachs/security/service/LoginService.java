@@ -23,7 +23,7 @@ public class LoginService implements  UserDetailsService {
      * 接口提供的默认查询方法
      */
     @Override
-    public UserDetails loadUserByUsername ( String username ) throws UsernameNotFoundException{
+    public RoleUser loadUserByUsername ( String username ) throws UsernameNotFoundException{
 //        Set<SecurityUser> gaSet = new HashSet<> ();
 //        gaSet.add ( new  SecurityUser ( 1, "ROLE_Jachs" ));
 //        gaSet.add ( new  SecurityUser ( 2, "ROLE_User" ));

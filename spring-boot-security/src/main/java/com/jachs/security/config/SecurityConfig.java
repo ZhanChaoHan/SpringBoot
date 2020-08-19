@@ -16,6 +16,7 @@ import org.springframework.security.web.authentication.rememberme.JdbcTokenRepos
 import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
+import com.jachs.security.handler.security.AccessDeniedServletHandler;
 import com.jachs.security.handler.security.LoginFailureHandler;
 import com.jachs.security.handler.security.LoginOutHandler;
 import com.jachs.security.handler.security.LoginSuccessHandler;
@@ -39,6 +40,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	// 登录失败handler
 	@Resource
 	private LoginFailureHandler loginFailureHandler;
+	@Resource
+    private AccessDeniedServletHandler accessDeniedServletHandler;
 	// 登出handler
 	@Resource
 	private LoginOutHandler loginOutHandler;
@@ -68,18 +71,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		registry
 		.antMatchers("/login/*").permitAll()// 放行所有login下接口地址
-		.antMatchers(HttpMethod.POST,"/helper/*","/modular/*").hasRole("UserB")
-		.antMatchers(HttpMethod.POST,"/gavefive/*","/part/*").hasRole("UserA")
+		.antMatchers("/gavefive/*","/helper/*").hasRole("Usera")
+		.antMatchers("/modular/*","/part/*").hasRole("Userb")
+		.antMatchers(HttpMethod.POST,"/gavefive/*","/helper/*").hasRole("Posta")
+		.antMatchers(HttpMethod.POST,"/modular/*","/part/*").hasRole("Postb")
+		.antMatchers(HttpMethod.GET,"/gavefive/*","/helper/*").hasRole("Geta")
+        .antMatchers(HttpMethod.GET,"/modular/*","/part/*").hasRole("Getb")
 		.antMatchers("/helper/*","/modular/*","/gavefive/*","/part/*").hasRole("Jachs")
-		
-		.anyRequest().authenticated();
+		.anyRequest().authenticated()
+		.and().exceptionHandling().accessDeniedHandler(accessDeniedServletHandler);
 		
 		// 配置成功失败处理器
 		httpSecurity.formLogin()
 			.loginPage("/login/golog")// 登录页面url
 			.loginProcessingUrl("/login/mylogin") // 指定验证凭据的URL，和表单路径一样
 			.successHandler(loginSuccessHandler)// 成功登录处理器
-			.failureHandler(loginFailureHandler).and().logout().logoutUrl("/login/logout")// 失败登录处理器
+			.failureHandler(loginFailureHandler)
+			.and().logout().logoutUrl("/login/logout")// 失败登录处理器
 			.logoutSuccessHandler(loginOutHandler).permitAll();// 注销成功处理器
 		
 		// 配置持久化

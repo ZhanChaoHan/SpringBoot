@@ -45,20 +45,20 @@ public class LoginProvider implements AuthenticationProvider {
         if ( userDetails == null ) {
             throw new UsernameNotFoundException ( "用户不存在" );
         }
-        if (!userDetails.isAccountNonLocked()) {
+        if (userDetails.isAccountNonLocked()) {
             throw new LockedException(messages.getMessage(
                     "AccountStatusUserDetailsChecker.locked", "User account is locked"));
         }
-        if (!userDetails.isEnabled()) {
+        if (userDetails.isEnabled()) {
             throw new DisabledException(messages.getMessage(
                     "AccountStatusUserDetailsChecker.disabled", "User is disabled"));
         }
-        if (!userDetails.isAccountNonExpired()) {
+        if (userDetails.isAccountNonExpired()) {
             throw new AccountExpiredException(
                     messages.getMessage("AccountStatusUserDetailsChecker.expired",
                             "User account has expired"));
         }
-        if (!userDetails.isCredentialsNonExpired()) {
+        if (userDetails.isCredentialsNonExpired()) {
             throw new CredentialsExpiredException(messages.getMessage(
                     "AccountStatusUserDetailsChecker.credentialsExpired",
                     "User credentials have expired"));

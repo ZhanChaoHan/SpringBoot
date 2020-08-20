@@ -22,7 +22,7 @@ http://localhost:8080/part/pb
 http://localhost:8080/part/ga
 http://localhost:8080/part/gb
 
-用户:PostA  权限码:pa
+
 http://localhost:8080/gavefive/pa
 http://localhost:8080/gavefive/pb
 http://localhost:8080/helper/pa

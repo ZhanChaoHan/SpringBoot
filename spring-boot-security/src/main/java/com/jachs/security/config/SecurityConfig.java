@@ -74,12 +74,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		registry
 		.antMatchers("/login/*").permitAll()// 放行所有login下接口地址
-		.antMatchers("/gavefive/*","/helper/*").hasRole("Usera")
-		.antMatchers("/modular/*","/part/*").hasRole("Userb")
-		.antMatchers(HttpMethod.POST,"/gavefive/*","/helper/*").hasRole("Posta")
-		.antMatchers(HttpMethod.POST,"/modular/*","/part/*").hasRole("Postb")
-		.antMatchers(HttpMethod.GET,"/gavefive/*","/helper/*").hasRole("Geta")
-        .antMatchers(HttpMethod.GET,"/modular/*","/part/*").hasRole("Getb")
+		.antMatchers("/gavefive/*","/helper/*").hasRole("UserA")
+		.antMatchers("/modular/*","/part/*").hasRole("UserB")
+		.antMatchers(HttpMethod.POST,"/gavefive/*","/helper/*").hasRole("PostA")
+		.antMatchers(HttpMethod.POST,"/modular/*","/part/*").hasRole("PostB")
+		.antMatchers(HttpMethod.GET,"/gavefive/*","/helper/*").hasRole("GetA")
+        .antMatchers(HttpMethod.GET,"/modular/*","/part/*").hasRole("GetB")
 		.antMatchers("/helper/*","/modular/*","/gavefive/*","/part/*").hasRole("Jachs")
 		.anyRequest().authenticated()
 		.and().exceptionHandling().accessDeniedHandler(accessDeniedServletHandler);

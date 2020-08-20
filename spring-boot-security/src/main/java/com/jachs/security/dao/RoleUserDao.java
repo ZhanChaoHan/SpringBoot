@@ -43,12 +43,12 @@ public class RoleUserDao {
                         RoleUser ru = new RoleUser ();
                         ru.setName ( rs.getString ( "Name" ) );
                         ru.setPhone ( rs.getLong ( "Phone" ) );
-                        ru.setEnabled ( rs.getInt ( "Enabled" ) == 1 ? true : false );
+                        ru.setEnabled ( rs.getInt ( "Enabled" ) == 0 ? true : false );
                         ru.setUsername ( rs.getString ( "Username" ) );
                         ru.setPassword ( rs.getString ( "Password" ) );
-                        ru.setAccountNonExpired ( rs.getInt ( "AccountNonExpired" ) == 1 ? true : false );
-                        ru.setAccountNonLocked ( rs.getInt ( "AccountNonLocked" ) == 1 ? true : false );
-                        ru.setCredentialsNonExpired ( rs.getInt ( "CredentialsNonExpired" ) == 1 ? true : false );
+                        ru.setAccountNonExpired ( rs.getInt ( "AccountNonExpired" ) == 0 ? true : false );
+                        ru.setAccountNonLocked ( rs.getInt ( "AccountNonLocked" ) == 0 ? true : false );
+                        ru.setCredentialsNonExpired ( rs.getInt ( "CredentialsNonExpired" ) == 0 ? true : false );
                         return ru;
                 }
             } ,Username);

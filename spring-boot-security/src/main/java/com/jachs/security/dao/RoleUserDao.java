@@ -1,5 +1,7 @@
 package com.jachs.security.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
@@ -8,8 +10,11 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.jachs.security.entity.RoleUser;
@@ -18,7 +23,7 @@ import com.jachs.security.entity.SecurityUser;
 import lombok.extern.slf4j.Slf4j;
 
 /****
- * 
+ * 登录用Dao
  * @author zhanchaohan
  *
  */
@@ -31,6 +36,8 @@ public class RoleUserDao {
     public static final String QUERY_AUTHORITIES = "select Username,Code,Authority from securityuser where  Username=?";
     private String queryAuthorities = QUERY_AUTHORITIES;
 
+    public static final String ADD_ROLE_SQL="insert into roleuser (Name, Phone, Enabled, Username, Password, AccountNonExpired, AccountNonLocked, CredentialsNonExpired) values (?,?,?,?,?,?,?,?)";
+    private String addRoleSql=ADD_ROLE_SQL;
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
@@ -73,5 +80,25 @@ public class RoleUserDao {
                 return result;
             }
         }, username );
+    }
+
+    public int addUser ( RoleUser roleUser ) {
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        jdbcTemplate.update(new PreparedStatementCreator() {
+            @Override
+            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+                PreparedStatement preparedStatement = connection.prepareStatement(addRoleSql, new String[]{"Id"});
+                preparedStatement.setString(1,roleUser.getName ());
+                preparedStatement.setLong(2,roleUser.getPhone ());
+                preparedStatement.setBoolean(3,roleUser.isEnabled ());
+                preparedStatement.setString(4,roleUser.getUsername ());
+                preparedStatement.setString(5,roleUser.getPassword ());
+                preparedStatement.setBoolean(6,roleUser.isAccountNonExpired ());
+                preparedStatement.setBoolean(6,roleUser.isAccountNonLocked ());
+                preparedStatement.setBoolean(7,roleUser.isCredentialsNonExpired ());
+                return preparedStatement;
+            }
+        }, keyHolder);
+        return keyHolder.getKey().intValue();
     }
 }

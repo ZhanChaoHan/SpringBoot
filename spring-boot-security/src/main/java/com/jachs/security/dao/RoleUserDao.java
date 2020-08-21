@@ -82,23 +82,21 @@ public class RoleUserDao {
         }, username );
     }
 
-    public int addUser ( RoleUser roleUser ) {
-        KeyHolder keyHolder = new GeneratedKeyHolder();
-        jdbcTemplate.update(new PreparedStatementCreator() {
+    public boolean addUser ( RoleUser roleUser ) {
+        return jdbcTemplate.update(new PreparedStatementCreator() {
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-                PreparedStatement preparedStatement = connection.prepareStatement(addRoleSql, new String[]{"Id"});
+                PreparedStatement preparedStatement = connection.prepareStatement(addRoleSql);
                 preparedStatement.setString(1,roleUser.getName ());
                 preparedStatement.setLong(2,roleUser.getPhone ());
-                preparedStatement.setBoolean(3,roleUser.isEnabled ());
+                preparedStatement.setString(3,roleUser.isEnabled ()==true?"1":"0");
                 preparedStatement.setString(4,roleUser.getUsername ());
                 preparedStatement.setString(5,roleUser.getPassword ());
-                preparedStatement.setBoolean(6,roleUser.isAccountNonExpired ());
-                preparedStatement.setBoolean(6,roleUser.isAccountNonLocked ());
-                preparedStatement.setBoolean(7,roleUser.isCredentialsNonExpired ());
+                preparedStatement.setString(6,roleUser.isAccountNonExpired ()==true?"1":"0");
+                preparedStatement.setString(7,roleUser.isAccountNonLocked ()==true?"1":"0");
+                preparedStatement.setString(8,roleUser.isCredentialsNonExpired ()==true?"1":"0");
                 return preparedStatement;
             }
-        }, keyHolder);
-        return keyHolder.getKey().intValue();
+        }) > 0;
     }
 }

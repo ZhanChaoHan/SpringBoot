@@ -3,6 +3,7 @@ package com.jachs.security.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jachs.security.entity.RoleUser;
 import com.jachs.security.service.RoleUserService;
@@ -14,7 +15,8 @@ public class RoleUserController {
     private RoleUserService roleUserService;
     
     @RequestMapping("/addUser")
-    public void addUser(RoleUser roleUser) {
-        roleUserService.addUser(roleUser);
+    @ResponseBody
+    public boolean addUser(RoleUser roleUser) {
+        return roleUserService.addUser(roleUser);
     }
 }

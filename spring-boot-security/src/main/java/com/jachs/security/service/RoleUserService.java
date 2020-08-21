@@ -4,6 +4,6 @@ import com.jachs.security.entity.RoleUser;
 
 public interface RoleUserService {
 
-    int addUser ( RoleUser roleUser );
+    boolean addUser ( RoleUser roleUser );
 
 }

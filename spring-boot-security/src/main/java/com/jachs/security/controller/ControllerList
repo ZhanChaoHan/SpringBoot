@@ -27,3 +27,5 @@ http://localhost:8080/gavefive/pa
 http://localhost:8080/gavefive/pb
 http://localhost:8080/helper/pa
 http://localhost:8080/helper/pb
+
+http://localhost:8080/roleuser/addUser

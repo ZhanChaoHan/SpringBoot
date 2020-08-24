@@ -10,7 +10,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/login")
 public class LoginController {
-
+    
+    @RequestMapping("/testpage")
+    public String testPage() {
+        return "test";
+    }
 	@RequestMapping("/failure")
 	public String failure() {
 		return "failure";

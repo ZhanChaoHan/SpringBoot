@@ -1,5 +1,7 @@
 package com.jachs.security.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,11 @@ public class GaveFiveController {
 	@Autowired
 	private GaveFiveService gaveFiveService;
 
+	@RequestMapping("/check")
+	@ResponseBody
+	public boolean checkRole(HttpServletRequest request,String username) {
+	  return  request.isUserInRole(username);
+	}
 	@RequestMapping("/test")
 	@ResponseBody
 	public String test() {

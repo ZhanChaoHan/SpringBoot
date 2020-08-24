@@ -73,14 +73,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		HttpSecurity httpSecurity = http.authorizeRequests().and();
 
 		registry
-		.antMatchers("/login/*").permitAll()// 放行所有login下接口地址
 		.antMatchers("/gavefive/*","/helper/*").hasRole("UserA")
 		.antMatchers("/modular/*","/part/*").hasRole("UserB")
 		.antMatchers(HttpMethod.POST,"/gavefive/*","/helper/*").hasRole("PostA")
 		.antMatchers(HttpMethod.POST,"/modular/*","/part/*").hasRole("PostB")
 		.antMatchers(HttpMethod.GET,"/gavefive/*","/helper/*").hasRole("GetA")
-        .antMatchers(HttpMethod.GET,"/modular/*","/part/*").hasRole("GetB")
+		.antMatchers(HttpMethod.GET,"/modular/*","/part/*").hasRole("GetB")
 		.antMatchers("/helper/*","/modular/*","/gavefive/*","/part/*").hasRole("Jachs")
+		.antMatchers("/login/*").permitAll()// 放行所有login下接口地址
 		.anyRequest().authenticated()
 		.and().exceptionHandling().accessDeniedHandler(accessDeniedServletHandler);
 		

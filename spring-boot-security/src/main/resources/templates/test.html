@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<title>权限测试!</title>
+</head>
+<body>
+	<!-- --------Role------------ -->
+	<div sec:authorize="hasRole('UserA')">
+		<p class="bg-info">权限UserA可见</p>
+	</div>
+	<div sec:authorize="hasRole('UserB')">
+		<p class="bg-info">权限UserB可见</p>
+	</div>
+	<div sec:authorize="hasRole('PostA')">
+		<p class="bg-info">权限PostA可见</p>
+	</div>
+	<div sec:authorize="hasRole('PostB')">
+		<p class="bg-info">权限PostB可见</p>
+	</div>
+	<div sec:authorize="hasRole('GetA')">
+		<p class="bg-info">权限GetA可见</p>
+	</div>
+	<div sec:authorize="hasRole('GetB')">
+		<p class="bg-info">权限GetB可见</p>
+	</div>
+	<!-- ---Authority--- -->
+	<div sec:authorize="hasAnyAuthority('UserA')">
+		<p class="bg-info">权限UserA可见</p>
+	</div>
+	<div sec:authorize="hasAnyAuthority('UserB')">
+		<p class="bg-info">权限UserB可见</p>
+	</div>
+	<div sec:authorize="hasAnyAuthority('PostA')">
+		<p class="bg-info">权限PostA可见</p>
+	</div>
+	<div sec:authorize="hasAnyAuthority('PostB')">
+		<p class="bg-info">权限PostB可见</p>
+	</div>
+	<div sec:authorize="hasAnyAuthority('GetA')">
+		<p class="bg-info">权限GetA可见</p>
+	</div>
+	<div sec:authorize="hasAnyAuthority('GetB')">
+		<p class="bg-info">权限GetB可见</p>
+	</div>
+</body>
+</html>

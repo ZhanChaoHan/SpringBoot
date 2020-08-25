@@ -18,6 +18,7 @@ import com.jachs.security.entity.RoleUser;
 public class LoginService implements  UserDetailsService {
 	@Autowired
 	private RoleUserDao roleUserDao;
+	
     /**
      * 接口提供的默认查询方法
      */

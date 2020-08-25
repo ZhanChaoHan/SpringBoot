@@ -13,6 +13,10 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.User.UserBuilder;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
@@ -101,10 +105,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		// 配置持久化
 		httpSecurity.rememberMe().key("remember-me")
-		.rememberMeServices(persistentTokenBasedRememberMeServices())//自定义的
-//		.userDetailsService(loginService).tokenRepository(persistentTokenRepository());//官方自定义的
+//		.alwaysRemember ( true )//永远记住
+//		.userDetailsService ( userDetailsService() )//测试
+		.rememberMeServices(persistentTokenBasedRememberMeServices())//自定义的持久化
+//		.userDetailsService(loginService).tokenRepository(persistentTokenRepository());//官方自定义的持久化
 		.tokenValiditySeconds(3600);// 设置token过期时间
 	}
+	
+	public UserDetailsService userDetailsService() {
+        // ensure the passwords are encoded properly
+        UserBuilder users = User.withDefaultPasswordEncoder();
+        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+        manager.createUser(users.username("user").password("password").roles("PostA").build());
+        manager.createUser(users.username("admin").password("password").roles("USER","ADMIN").build());
+        return manager;
+    }
 
 	/**
 	 * 忽略拦截url或静态资源文件夹

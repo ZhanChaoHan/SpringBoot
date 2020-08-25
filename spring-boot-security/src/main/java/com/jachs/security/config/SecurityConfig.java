@@ -34,6 +34,7 @@ import com.jachs.security.service.RememberMeTokenService;
  */
 @Configuration
 //开启注解
+//@@EnableWebSecurity//顶级注解
 @EnableGlobalMethodSecurity(prePostEnabled = true,securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired

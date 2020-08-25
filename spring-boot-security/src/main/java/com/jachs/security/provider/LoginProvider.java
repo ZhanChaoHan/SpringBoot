@@ -12,11 +12,11 @@ import org.springframework.security.authentication.LockedException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.SpringSecurityMessageSource;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import com.jachs.security.config.PasswordEncoderConfig;
-import com.jachs.security.entity.RoleUser;
 import com.jachs.security.service.LoginService;
 
 /****
@@ -41,7 +41,7 @@ public class LoginProvider implements AuthenticationProvider {
         String username = (String) authentication.getPrincipal ();
         // 表单输入的密码
         String password = (String) authentication.getCredentials ();
-        RoleUser userDetails = loginService.loadUserByUsername ( username );
+        UserDetails userDetails = loginService.loadUserByUsername ( username );
         if ( userDetails == null ) {
             throw new UsernameNotFoundException ( "用户不存在" );
         }

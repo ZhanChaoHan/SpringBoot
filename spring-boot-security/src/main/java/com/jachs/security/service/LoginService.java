@@ -2,6 +2,8 @@ package com.jachs.security.service;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -23,7 +25,7 @@ public class LoginService implements  UserDetailsService {
      * 接口提供的默认查询方法
      */
     @Override
-    public RoleUser loadUserByUsername ( String username ) throws UsernameNotFoundException{
+    public UserDetails loadUserByUsername ( String username ) throws UsernameNotFoundException{
 //        Set<SecurityUser> gaSet = new HashSet<> ();
 //        gaSet.add ( new  SecurityUser ( 1, "ROLE_Jachs" ));
 //        gaSet.add ( new  SecurityUser ( 2, "ROLE_User" ));
@@ -42,7 +44,9 @@ public class LoginService implements  UserDetailsService {
     	if(ud!=null) {
     		ud.setAuthorities(roleUserDao.queryAuthorities(username));
     	}
-        return ud;
+    	return ud;
+//    	 return new org.springframework.security.core.userdetails.User(ud.getUsername (), ud.getPassword (), ud.isEnabled (), ud.isAccountNonExpired (), ud.isCredentialsNonExpired (), ud.isAccountNonLocked (), ud.getAuthorities ());
+//    	 return new org.springframework.security.core.userdetails.User(ud.getUsername (), ud.getPassword (), ud.isEnabled (), ud.isAccountNonExpired (), ud.isCredentialsNonExpired (), ud.isAccountNonLocked (), AuthorityUtils.commaSeparatedStringToAuthorityList ( "PostA" ));
     }
 
 

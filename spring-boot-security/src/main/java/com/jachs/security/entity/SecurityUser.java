@@ -20,5 +20,11 @@ public class SecurityUser implements GrantedAuthority{
     private static final long serialVersionUID = 1L;
     private Integer Code;
     private String Authority;
+    
+//    @Override
+//    public String getAuthority () {
+//        return this.Authority;
+//    }
+    
 
 }

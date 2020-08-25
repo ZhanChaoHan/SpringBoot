@@ -28,7 +28,7 @@ import lombok.extern.slf4j.Slf4j;
 @Repository
 @Slf4j
 public class RoleUserDao {
-    public static final String QUERY_ROLE_SQL = "select Name,Phone,Enabled,Username,Password,AccountNonExpired,AccountNonLocked,CredentialsNonExpired  from roleuser where Username = ?";
+    public static final String QUERY_ROLE_SQL = "select Name,Phone,Enabled,Username,Password,AccountNonExpired,AccountNonLocked,CredentialsNonExpired  from roleuser where Name = ?";
     private String queryRoleSql = QUERY_ROLE_SQL;
 
     public static final String QUERY_AUTHORITIES = "select Username,Code,Authority from securityuser where  Username=?";
@@ -39,7 +39,7 @@ public class RoleUserDao {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public RoleUser queryRoleUser ( String Username ) {
+    public RoleUser queryRoleUser ( String Name ) {
         RoleUser user = null;
         try {
                 user = jdbcTemplate.queryForObject ( queryRoleSql, new RowMapper<RoleUser> () {
@@ -56,7 +56,7 @@ public class RoleUserDao {
                         ru.setCredentialsNonExpired ( rs.getInt ( "CredentialsNonExpired" ) == 0 ? true : false );
                         return ru;
                 }
-            } ,Username);
+            } ,Name);
         }
         catch ( EmptyResultDataAccessException e ) {
            return null;

@@ -42,7 +42,7 @@ public class LoginService implements  UserDetailsService {
     	
     	RoleUser ud=roleUserDao.queryRoleUser(username);
     	if(ud!=null) {
-    		ud.setAuthorities(roleUserDao.queryAuthorities(username));
+    		ud.setAuthorities(roleUserDao.queryAuthorities(ud.getUsername ()));
     	}
     	return ud;
 //    	 return new org.springframework.security.core.userdetails.User(ud.getUsername (), ud.getPassword (), ud.isEnabled (), ud.isAccountNonExpired (), ud.isCredentialsNonExpired (), ud.isAccountNonLocked (), ud.getAuthorities ());

@@ -19,4 +19,9 @@ public class RoleUserController {
     public boolean addUser(RoleUser roleUser) {
         return roleUserService.addUser(roleUser);
     }
+    @RequestMapping("/findUser")
+    @ResponseBody
+    public RoleUser findUser(String Name) {
+        return roleUserService.findUser(Name);
+    }
 }

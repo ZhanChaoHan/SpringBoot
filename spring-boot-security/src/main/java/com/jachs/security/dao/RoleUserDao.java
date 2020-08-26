@@ -97,4 +97,8 @@ public class RoleUserDao {
             }
         }) > 0;
     }
+
+    public RoleUser findUser ( String username ) {
+        return null;
+    }
 }

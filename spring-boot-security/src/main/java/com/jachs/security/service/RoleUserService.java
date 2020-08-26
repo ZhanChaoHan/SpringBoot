@@ -5,5 +5,5 @@ import com.jachs.security.entity.RoleUser;
 public interface RoleUserService {
 
     boolean addUser ( RoleUser roleUser );
-
+    RoleUser findUser(String username);
 }

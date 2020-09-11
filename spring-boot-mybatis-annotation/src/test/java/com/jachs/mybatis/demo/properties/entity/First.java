@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  *
  */
 @Component
-@PropertySource(value = {"classpath:properties_first.properties"})
+@PropertySource(value = {"classpath:properties_first.properties"}, encoding = "utf-8")
 public class First {
 	@Value("${properties.first.Name}")
 	private String Name;

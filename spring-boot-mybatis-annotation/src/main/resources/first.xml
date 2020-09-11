@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+		<bean id="propertyConfigurer"
+			class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+			<property name="locations">
+				<list>
+					<value>classpath:properties_first.properties</value>
+				</list>
+			</property>
+			<property name="fileEncoding" value="UTF-8"/>
+		</bean>
+   <bean id="firstB"
+		class="com.jachs.mybatis.demo.properties.entity.FirstFactoryBean">
+		<property name="properties">
+				<props>
+					<prop key="name">${properties.first.Name}</prop>
+					<prop key="pwd">${properties.first.Pwd}</prop>
+				</props>
+		</property>
+	</bean>
+</beans>

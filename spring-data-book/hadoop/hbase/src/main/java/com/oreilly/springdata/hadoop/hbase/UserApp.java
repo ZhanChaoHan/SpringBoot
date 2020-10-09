@@ -22,6 +22,10 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.oreilly.springdata.hadoop.hbase.dao.UserRepository;
+import com.oreilly.springdata.hadoop.hbase.entity.User;
+import com.oreilly.springdata.hadoop.hbase.utill.UserUtils;
+
 public class UserApp {
 
 	private static final Log log = LogFactory.getLog(UserApp.class);

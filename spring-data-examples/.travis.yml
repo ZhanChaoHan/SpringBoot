@@ -1,0 +1,52 @@
+language: java
+
+os: linux
+
+jobs:
+  include:
+    - jdk: openjdk8
+      env: JDK='OpenJDK 8'
+    - jdk: openjdk11
+      env: JDK='OpenJDK 11'
+    - env: JDK='OpenJDK 12'
+      before_install: wget https://github.com/sormuras/bach/raw/master/install-jdk.sh && . ./install-jdk.sh -f 12
+    - env: JDK='OpenJDK 13'
+      before_install: wget https://github.com/sormuras/bach/raw/master/install-jdk.sh && . ./install-jdk.sh -f 13
+    - env: JDK='OpenJDK 14'
+      before_install: wget https://github.com/sormuras/bach/raw/master/install-jdk.sh && . ./install-jdk.sh -f 14
+    - env: JDK='OpenJDK EA'
+      before_install: wget https://github.com/sormuras/bach/raw/master/install-jdk.sh && . ./install-jdk.sh
+  allow_failures:
+    - env: JDK='OpenJDK EA'
+
+addons:
+  apt:
+    sources:
+      - sourceline: 'deb http://packages.couchbase.com/releases/couchbase-server/community/deb/  xenial xenial/main'
+        key_url: 'http://packages.couchbase.com/ubuntu/couchbase.key'
+    packages:
+      - couchbase-server-community
+
+services:
+  - redis
+  - docker
+
+cache:
+  directories:
+    - $HOME/.m2
+    - download
+
+# See https://issues.couchbase.com/browse/MB-26556
+install:
+  - curl -X POST http://127.0.0.1:8091/pools/default -d memoryQuota=2000  -d indexMemoryQuota=256 -d ftsMemoryQuota=256
+  - curl -X POST http://127.0.0.1:8091/node/controller/setupServices -d "services=kv,index,n1ql,fts"
+  - curl -X POST http://127.0.0.1:8091/settings/indexes -d "storageMode=forestdb"
+  - curl -X POST http://127.0.0.1:8091/settings/web -d "username=Administrator&password=password&port=8091&"
+  - /opt/couchbase/bin/cbdocloader -c 127.0.0.1:8091 -u Administrator -p password -b travel-sample -m 256 -d /opt/couchbase/samples/travel-sample.zip
+  - /opt/couchbase/bin/couchbase-cli user-manage -c 127.0.0.1:8091 -u Administrator -p password --set  --rbac-username=travel-sample --rbac-password=password --roles=admin --auth-domain local
+
+script:
+  - cp -f settings.xml $HOME/.m2/settings.xml
+  - mvn -version
+  - java -version
+  - mvn clean test -U -Dsort -Dmaven.test.redirectTestOutputToFile=true -B -s settings.xml

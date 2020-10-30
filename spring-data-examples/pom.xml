@@ -1,0 +1,287 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.springframework.data.examples</groupId>
+	<artifactId>spring-data-examples</artifactId>
+	<version>2.0.0.BUILD-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>Spring Data - Examples</name>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.3.1.RELEASE</version>
+	</parent>
+
+	<modules>
+		<module>bom</module>
+		<module>couchbase</module>
+		<module>elasticsearch</module>
+		<module>jdbc</module>
+		<module>jpa</module>
+		<module>ldap</module>
+		<module>map</module>
+		<module>mongodb</module>
+		<module>multi-store</module>
+		<module>neo4j</module>
+		<module>r2dbc</module>
+		<module>rest</module>
+		<module>redis</module>
+		<module>solr</module>
+		<module>web</module>
+	</modules>
+
+	<properties>
+		<apt.version>1.1.3</apt.version>
+		<jvm.enable-preview></jvm.enable-preview>
+	</properties>
+
+	<profiles>
+		<profile>
+			<id>spring-data-next-releasetrain</id>
+			<properties>
+				<spring-data-releasetrain.version>Neumann-BUILD-SNAPSHOT</spring-data-releasetrain.version>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>spring-data-next</id>
+			<properties>
+				<spring-data-releasetrain.version>Neumann-BUILD-SNAPSHOT</spring-data-releasetrain.version>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>java8</id>
+
+			<activation>
+				<jdk>1.8</jdk>
+			</activation>
+
+			<modules>
+
+				<!-- Embedded Cassandra (cassandra-all) is not compatible with Java runtime 9 and higher.
+				 See https://issues.apache.org/jira/browse/CASSANDRA-9608 -->
+				<module>cassandra</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<id>java11</id>
+
+			<activation>
+				<jdk>11</jdk>
+			</activation>
+		</profile>
+
+		<profile>
+			<id>java-next</id>
+
+			<activation>
+				<jdk>[9,)</jdk>
+			</activation>
+
+			<dependencies>
+				<dependency>
+					<groupId>javax.xml.bind</groupId>
+					<artifactId>jaxb-api</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>javax.annotation</groupId>
+					<artifactId>javax.annotation-api</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>java-13+</id>
+
+			<activation>
+				<jdk>[13,)</jdk>
+			</activation>
+
+			<properties>
+				<jvm.enable-preview>--enable-preview</jvm.enable-preview>
+			</properties>
+
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<configuration>
+							<release>13</release>
+							<compilerArgs>
+								${jvm.enable-preview}
+							</compilerArgs>
+						</configuration>
+					</plugin>
+					<plugin>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<configuration>
+							<argLine>${jvm.enable-preview}</argLine>
+						</configuration>
+					</plugin>
+					<plugin>
+						<artifactId>maven-failsafe-plugin</artifactId>
+						<configuration>
+							<argLine>${jvm.enable-preview}</argLine>
+						</configuration>
+					</plugin>
+
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
+			<id>java-13</id>
+
+			<activation>
+				<jdk>13</jdk>
+			</activation>
+
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<configuration>
+							<release>13</release>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
+			<id>java-14</id>
+
+			<activation>
+				<jdk>14</jdk>
+			</activation>
+
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<configuration>
+							<release>14</release>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
+			<id>java-15</id>
+
+			<activation>
+				<jdk>15</jdk>
+			</activation>
+
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<configuration>
+							<release>15</release>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
+			<id>java-16</id>
+
+			<activation>
+				<jdk>16</jdk>
+			</activation>
+
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<configuration>
+							<release>16</release>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+	</profiles>
+
+	<developers>
+		<developer>
+			<id>odrotbohm</id>
+			<name>Oliver Drotbohm</name>
+			<email>odrotbohm@pivotal.io</email>
+		</developer>
+		<developer>
+			<id>tdarimont</id>
+			<name>Thomas Darimont</name>
+			<email>tdarimont@gopivotal.io</email>
+		</developer>
+		<developer>
+			<id>cstrobl</id>
+			<name>Christoph Strobl</name>
+			<email>cstrobl@pivotal.io</email>
+		</developer>
+		<developer>
+			<id>gturnquist</id>
+			<name>Greg Turnquist</name>
+			<email>gturnquist@pivotal.io</email>
+		</developer>
+		<developer>
+			<id>mpaluch</id>
+			<name>Mark Paluch</name>
+			<email>mpaluch@pivotal.io</email>
+		</developer>
+		<developer>
+			<id>jschauder</id>
+			<name>Jens Schauder</name>
+			<email>jschauder@pivotal.io</email>
+		</developer>
+	</developers>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Test dependencies -->
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+
+	<repositories>
+		<repository>
+			<id>spring-libs-snapshot</id>
+			<url>https://repo.spring.io/libs-snapshot</url>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>spring-libs-snapshot</id>
+			<url>https://repo.spring.io/libs-snapshot</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+</project>

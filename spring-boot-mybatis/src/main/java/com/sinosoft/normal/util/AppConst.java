@@ -105,19 +105,14 @@ public class AppConst {
 	public static final String COM_TYPE_ADMIN = "-";
 	/** 机构类型*/
 	public static final String COM_TYPE = "ComType";
-	/** 机构类型 - 保监局 */
 	public static final String COM_TYPE_00 = "00";
-	/** 机构类型 - 保险协会*/
 	public static final String COM_TYPE_01 = "01";
 	/** 机构类型 - 经侦 */
 	public static final String COM_TYPE_02 = "02";
 	/** 机构类型 -  */
 	public static final String COM_TYPE_03 = "03";
-	/** 机构类型 - 保险公司 */
 	public static final String COM_TYPE_04 = "04";
-	/** 机构级别  */
 	public static final String COM_LEVEL = "ComLevel";
-	/** 机构级别 - 全国 */
 	public static final String COM_LEVEL_0 = "00";
 	/** 机构级别 - 省级 */
 	public static final String COM_LEVEL_1 = "01";

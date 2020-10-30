@@ -134,7 +134,6 @@ public class LoginController {
 						userSession.setAreaCode(company.getAreaCode());
 						// 公司类型 '00 全国 01 省级 02 市级 03 县级 ',
 						userSession.setComType(company.getComType());
-						// 公司级别( ' - 超级机构 00 保监局 01 保险协会 02 经侦 03 中国保信 04 保险公司 ')
 						userSession.setComLevel(company.getComLevel());
 						// 放入用户的权限合集
 						userSession.setFuncPowers(funcPowersMap);

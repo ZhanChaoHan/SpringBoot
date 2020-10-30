@@ -10,6 +10,6 @@ import com.jachs.jpa.entity.MySubject;
  * @author zhanchaohan
  * 
  */
-//public interface MySubjectRepository extends JpaRepository<MySubject,String>{
-//
-//}
+public interface MySubjectRepository extends JpaRepository<MySubject,Integer>{
+
+}

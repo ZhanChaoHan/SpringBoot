@@ -10,6 +10,6 @@ import com.jachs.jpa.entity.Example;
  * @author zhanchaohan
  * 
  */
-//public interface ExampleRepository extends JpaRepository<Example,String>{
-//
-//}
+public interface ExampleRepository extends JpaRepository<Example,Integer>{
+
+}

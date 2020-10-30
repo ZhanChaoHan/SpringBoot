@@ -10,6 +10,6 @@ import com.jachs.jpa.entity.MyStudent;
  * @author zhanchaohan
  * 
  */
-public interface MyStudentRepository extends JpaRepository<MyStudent,String>{
+public interface MyStudentRepository extends JpaRepository<MyStudent,Integer>{
 
 }

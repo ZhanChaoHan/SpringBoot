@@ -9,6 +9,6 @@ import com.jachs.jpa.entity.MyClass;
  * @author zhanchaohan
  * 
  */
-public interface MyClassRepository extends JpaRepository<MyClass,String>{
+public interface MyClassRepository extends JpaRepository<MyClass,Integer>{
 
 }

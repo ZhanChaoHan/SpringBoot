@@ -1,10 +1,14 @@
 package com.jachs.jpa.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -32,17 +36,21 @@ public class MyClass {
     @Column(name = "ClassType", nullable = true, length = 2)
     private int ClassType;
     @Column(name = "ClassName", nullable = true, length = 20)
-    private String className;
+    private String ClassName;
+    
+    @OneToMany
+    private List<MyStudent> MyStudent=new ArrayList<MyStudent>();
     
     public MyClass () {
         super ();
     }
 
-    public MyClass ( int classId, int classType, String className ) {
+    public MyClass ( int classId, int classType, String className, List<com.jachs.jpa.entity.MyStudent> myStudent ) {
         super ();
         ClassId = classId;
         ClassType = classType;
-        this.className = className;
+        ClassName = className;
+        MyStudent = myStudent;
     }
 
     public int getClassId () {
@@ -62,11 +70,20 @@ public class MyClass {
     }
 
     public String getClassName () {
-        return className;
+        return ClassName;
     }
 
     public void setClassName ( String className ) {
-        this.className = className;
+        ClassName = className;
     }
+
+    public List<MyStudent> getMyStudent () {
+        return MyStudent;
+    }
+
+    public void setMyStudent ( List<MyStudent> myStudent ) {
+        MyStudent = myStudent;
+    }
+
 
 }

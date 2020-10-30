@@ -28,8 +28,8 @@ public class MyStudent {
      * FetchType.EAGER:立即获取数据
      * 
      */
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = MyClass.class)
-    @JoinColumn(name = "classid", columnDefinition = "INT NOT NUL")
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = MyClass.class,optional=true)
+    @JoinColumn(name = "classid")
     private MyClass MyClass;
     
     

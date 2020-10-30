@@ -11,10 +11,13 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import lombok.Data;
+
 /**
  * @author zhanchaohan
  * 
  */
+@Data
 @Entity
 /**
  *myclass非驼峰命名表名称就是myclass
@@ -38,52 +41,9 @@ public class MyClass {
     @Column(name = "ClassName", nullable = true, length = 20)
     private String ClassName;
     
-    @OneToMany
-    private List<MyStudent> MyStudent=new ArrayList<MyStudent>();
+//    @OneToMany(mappedBy="class")
+//    private List<MyStudent> MyStudent=new ArrayList<MyStudent>();
     
-    public MyClass () {
-        super ();
-    }
-
-    public MyClass ( int classId, int classType, String className, List<com.jachs.jpa.entity.MyStudent> myStudent ) {
-        super ();
-        ClassId = classId;
-        ClassType = classType;
-        ClassName = className;
-        MyStudent = myStudent;
-    }
-
-    public int getClassId () {
-        return ClassId;
-    }
-
-    public void setClassId ( int classId ) {
-        ClassId = classId;
-    }
-
-    public int getClassType () {
-        return ClassType;
-    }
-
-    public void setClassType ( int classType ) {
-        ClassType = classType;
-    }
-
-    public String getClassName () {
-        return ClassName;
-    }
-
-    public void setClassName ( String className ) {
-        ClassName = className;
-    }
-
-    public List<MyStudent> getMyStudent () {
-        return MyStudent;
-    }
-
-    public void setMyStudent ( List<MyStudent> myStudent ) {
-        MyStudent = myStudent;
-    }
 
 
 }

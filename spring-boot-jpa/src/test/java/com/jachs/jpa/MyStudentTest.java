@@ -24,17 +24,26 @@ public class MyStudentTest {
     
     @Test
     public void testAdd() {
-        Optional<MyClass> mc=myClassRepository.findById ( 2 );
-        
+    	MyClass mc=new MyClass();
+    	mc.setClassName("二年级");
+    	mc.setClassType(2);
+    	
         MyStudent ms01=new MyStudent();
-        
-        ms01.setMyClass(mc.get ());
-        
         ms01.setStudentAge ( 2 );
         ms01.setStudentGender ( 0 );
         ms01.setStudentName ( "张2岁" );
+        ms01.setMyClass(mc);
         
+        MyStudent ms02=new MyStudent();
+        ms02.setStudentAge ( 3 );
+        ms02.setStudentGender ( 0 );
+        ms02.setStudentName ( "张3岁" );
+        ms02.setMyClass(mc);
+        
+        
+        myClassRepository.save(mc);
         myStudentRepository.save ( ms01 );
+        myStudentRepository.save ( ms02 );
     }
     
 }

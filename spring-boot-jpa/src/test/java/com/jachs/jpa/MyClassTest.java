@@ -21,6 +21,8 @@ public class MyClassTest {
         MyClass mc=new MyClass();
         mc.setClassName ( "小学一年级" );
         mc.setClassType ( 10 );
+        
+        
         myClassRepository.save ( mc );
     }
     

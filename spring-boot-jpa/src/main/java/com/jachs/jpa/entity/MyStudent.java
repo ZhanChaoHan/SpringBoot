@@ -12,10 +12,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.Data;
+
 /**
  * @author zhanchaohan
  * 
  */
+@Data
 @Entity
 @Table(name="MyStudent")
 public class MyStudent {
@@ -28,7 +31,7 @@ public class MyStudent {
      * FetchType.EAGER:立即获取数据
      * 
      */
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = MyClass.class,optional=true)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, targetEntity = MyClass.class,optional=true)
     @JoinColumn(name = "classid")
     private MyClass MyClass;
     
@@ -40,59 +43,6 @@ public class MyStudent {
     @Column(name = "StudentName", nullable = true, length = 5)
     private String StudentName;
     
-    public MyStudent () {
-        super ();
-    }
-
-    public MyStudent ( int studentId, com.jachs.jpa.entity.MyClass myClass, int studentAge, int studentGender,
-            String studentName ) {
-        super ();
-        StudentId = studentId;
-        MyClass = myClass;
-        StudentAge = studentAge;
-        StudentGender = studentGender;
-        StudentName = studentName;
-    }
-
-    public int getStudentId () {
-        return StudentId;
-    }
-
-    public void setStudentId ( int studentId ) {
-        StudentId = studentId;
-    }
-
-    public MyClass getMyClass () {
-        return MyClass;
-    }
-
-    public void setMyClass ( MyClass myClass ) {
-        MyClass = myClass;
-    }
-
-    public int getStudentAge () {
-        return StudentAge;
-    }
-
-    public void setStudentAge ( int studentAge ) {
-        StudentAge = studentAge;
-    }
-
-    public int getStudentGender () {
-        return StudentGender;
-    }
-
-    public void setStudentGender ( int studentGender ) {
-        StudentGender = studentGender;
-    }
-
-    public String getStudentName () {
-        return StudentName;
-    }
-
-    public void setStudentName ( String studentName ) {
-        StudentName = studentName;
-    }
 
     
 }

@@ -1,6 +1,5 @@
 package com.jachs.jpa;
 
-import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

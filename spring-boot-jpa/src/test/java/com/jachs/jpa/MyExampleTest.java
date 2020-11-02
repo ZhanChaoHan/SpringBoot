@@ -39,4 +39,11 @@ public class MyExampleTest {
     	exampleRepository.save(example);
     }
     
+    @Test
+    public void testQuery() {
+        Example example= exampleRepository.findAll ().get ( 0 );
+        MyStudent ms=example.getMyStudent ();
+        
+        System.out.println ( ms.getStudentName () );
+    }
 }

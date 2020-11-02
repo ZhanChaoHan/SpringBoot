@@ -26,11 +26,11 @@ public class Example {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int Id;
 	
-	@OneToOne
+	@OneToOne(optional = false)
 	@JoinColumn(name="MyStudentId",referencedColumnName="StudentId")
     private MyStudent MyStudent;
 	
-	@OneToOne
+	@OneToOne(optional = false)
 	@JoinColumn(name="MySubjectId",referencedColumnName="SubjectId")
     private MySubject MySubject;
     

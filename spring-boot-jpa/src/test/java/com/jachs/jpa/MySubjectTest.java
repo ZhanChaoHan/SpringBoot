@@ -2,6 +2,9 @@ package com.jachs.jpa;
 
 import java.util.List;
 
+import org.apache.commons.lang.RandomStringUtils;
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.math.RandomUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -33,5 +36,16 @@ public class MySubjectTest {
     	
     	mySubjectRepository.save(ms);
     }
-    
+    @Test
+    public void testAddRandomName() {
+        RandomStringUtils rsu=new RandomStringUtils();
+        List<MyStudent> myStudentList=myStudentRepository.findAll();
+        MySubject ms=new MySubject();
+        ms.setSubjectName(rsu.random ( 2 ));
+        
+        ms.setMyStudentList(myStudentList);
+        
+        
+        mySubjectRepository.save(ms);
+    }
 }

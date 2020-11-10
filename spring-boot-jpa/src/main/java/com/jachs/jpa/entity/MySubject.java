@@ -1,6 +1,5 @@
 package com.jachs.jpa.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -34,6 +33,6 @@ public class MySubject {
 	@ManyToMany
 	@JoinTable()
 	private List<MyStudent>MyStudentList;
-	
+
 	
 }

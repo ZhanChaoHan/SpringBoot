@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title th:text="${title}"></title>
+<link th:href="@{/static/css/test.css}" rel="stylesheet"/>
+<script th:src="@{/static/js/test.js}"></script>
+</head>
+<body>
+	<!--字符串输出-->
+	打印个标题:
+	<p th:text="${title}"></p>
+	<p>----------------------------------</p>
+	<!--数学运算-->
+	数学运算:9+10
+	<p th:text="9 + 10"></p>
+	<p>----------------------------------</p>
+	数学运算:10 * 10
+	<p th:text="10 * 10"></p>
+	<p>----------------------------------</p>
+	数学运算:1 - 10
+	<p th:text="1 - 10"></p>
+	<p>----------------------------------</p>
+	数学运算:8 / 3
+	<p th:text="8 / 3"></p>
+	<p>----------------------------------</p>
+	数学运算:3 % 2
+	<p th:text="3 % 2"></p>
+	<p>----------------------------------</p>
+	<!--操作域对象-->
+	对象属性:
+	<p th:text="${user}"></p>
+	<p>----------------------------------</p>
+	对象成员属性:
+	<p th:text="${user.UserName}"></p>
+	<p th:text="${user.UserAge}"></p>
+	<p>----------------------------------</p>
+	<!--遍历数组-->
+	遍历对象集合:
+	<table th:each="item, sta:${user.UserFriend}">
+		<tr>
+			<td th:text="${item}"></td>
+		</tr>
+	</table>
+	<p>----------------------------------</p>
+	遍历集合
+	<div th:each="item:${SArr}" th:text="${item}"></div>
+	<p>----------------------------------</p>
+	<p>----------------------------------</p>
+	遍历Map
+	<div th:each="item:${map}" th:text="${item.key}"></div>
+</body>
+</html>

@@ -1,0 +1,1 @@
+alert("script has been load");

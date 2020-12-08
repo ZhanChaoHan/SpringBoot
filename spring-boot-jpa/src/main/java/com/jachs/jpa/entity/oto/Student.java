@@ -28,5 +28,5 @@ public class Student {
     
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "sCart")
-    private StudentCart StudentCart;
+    private StudentCard StudentCard;
 }

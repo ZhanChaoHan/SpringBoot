@@ -4,13 +4,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.jachs.jpa.dao.oto.StudentCartRepository;
+import com.jachs.jpa.dao.oto.StudentCardRepository;
 import com.jachs.jpa.dao.oto.StudentRepository;
 import com.jachs.jpa.entity.Example;
 import com.jachs.jpa.entity.MyStudent;
 import com.jachs.jpa.entity.MySubject;
 import com.jachs.jpa.entity.oto.Student;
-import com.jachs.jpa.entity.oto.StudentCart;
+import com.jachs.jpa.entity.oto.StudentCard;
 
 /**
  * @author zhanchaohan
@@ -21,7 +21,7 @@ public class StudentTest {
     @Autowired
     private StudentRepository studentRepository;
     @Autowired
-    private StudentCartRepository studentCartRepository;
+    private StudentCardRepository studentCardRepository;
     
     //单存
     @Test
@@ -41,13 +41,13 @@ public class StudentTest {
         s.setStudentName ( "马保国" );
         s.setStudentAge ( 69 );
         
-        StudentCart sc=new StudentCart();
+        StudentCard sc=new StudentCard();
         sc.setCardId ( "sOneC" );
         sc.setCardMonery ( 5L );
         sc.setCardType ( "老年卡" );
         
         
-        s.setStudentCart ( sc );
+        s.setStudentCard ( sc );
         studentRepository.save ( s );
     }
     //删除主表从表数据一起删了
@@ -58,6 +58,6 @@ public class StudentTest {
   //删除从表数据
     @Test
     public void deleteStuendCard() {
-        studentCartRepository.delete ( studentCartRepository.findById ( "sOneC" ).get () );
+        studentCardRepository.delete ( studentCardRepository.findById ( "sOneC" ).get () );
     }
 }

@@ -1,10 +1,8 @@
 package com.jachs.jpa.entity.oto;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -15,8 +13,8 @@ import lombok.Data;
  */
 @Data
 @Entity
-@Table(name="StudentCart")
-public class StudentCart {
+@Table(name="StudentCard")
+public class StudentCard {
     @Id
     private String CardId;
     @Column(name = "CardType")

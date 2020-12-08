@@ -55,7 +55,7 @@ public class StudentTest {
     public void deleteStuend() {
         studentRepository.delete ( studentRepository.findById ( "sOne" ).get () );
     }
-  //删除从表数据
+   //删除从表数据,删不掉因为有外键
     @Test
     public void deleteStuendCard() {
         studentCardRepository.delete ( studentCardRepository.findById ( "sOneC" ).get () );

@@ -6,9 +6,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.jachs.jpa.dao.oto.StudentCardRepository;
 import com.jachs.jpa.dao.oto.StudentRepository;
-import com.jachs.jpa.entity.Example;
-import com.jachs.jpa.entity.MyStudent;
-import com.jachs.jpa.entity.MySubject;
 import com.jachs.jpa.entity.oto.Student;
 import com.jachs.jpa.entity.oto.StudentCard;
 

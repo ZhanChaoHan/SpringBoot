@@ -23,11 +23,11 @@ public class Computer {
     @Id
     private String ComputerId;
     
-    @Column(name = "StudentName")
+    @Column(name = "ComputerName")
     private String ComputerName;
     @Column(name = "ComputerPrice")
     private Long ComputerPrice;
     
-    @OneToMany(targetEntity = SoftWare.class,mappedBy = "ComputersId",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = SoftWare.class,mappedBy = "CId",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private Set<SoftWare> SoftWares;
 }

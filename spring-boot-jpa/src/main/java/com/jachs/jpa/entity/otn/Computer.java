@@ -14,7 +14,7 @@ import lombok.Data;
 
 /**
  * @author zhanchaohan
- * 
+ * 一对多的一
  */
 @Data
 @Entity

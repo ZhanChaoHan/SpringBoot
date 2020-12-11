@@ -17,8 +17,6 @@ import com.jachs.jpa.entity.oto.StudentCard;
 public class StudentTest {
     @Autowired
     private StudentRepository studentRepository;
-    @Autowired
-    private StudentCardRepository studentCardRepository;
     
     //单存
     @Test
@@ -51,10 +49,5 @@ public class StudentTest {
     @Test
     public void deleteStuend() {
         studentRepository.delete ( studentRepository.findById ( "sOne" ).get () );
-    }
-   //删除从表数据,删不掉因为有外键
-    @Test
-    public void deleteStuendCard() {
-        studentCardRepository.delete ( studentCardRepository.findById ( "sOneC" ).get () );
     }
 }

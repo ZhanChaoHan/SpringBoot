@@ -9,7 +9,7 @@ import lombok.Data;
 
 /**
  * @author zhanchaohan
- * 
+ * 学生卡对象被关联对象
  */
 @Data
 @Entity

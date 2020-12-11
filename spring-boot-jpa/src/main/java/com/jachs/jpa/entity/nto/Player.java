@@ -12,7 +12,7 @@ import lombok.Data;
 
 /**
  * @author zhanchaohan
- * 
+ * 多对一的一
  */
 @Data
 @Entity

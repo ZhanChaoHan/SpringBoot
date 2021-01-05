@@ -151,7 +151,7 @@ public class WebSocket {
 				play.setIds(time.getTime()+"");
 				play.setMess(messages.getMess());
 				play.setPlayuser(messages.getUserName());
-				play.setStatustype(messages.getStatus().name());
+				play.setStatustype(messages.getStatus());
 				play.setTimeconsuming(null);
 				
 				playService.insert(play);
@@ -161,7 +161,7 @@ public class WebSocket {
 				play.setIds(time.getTime()+"");
 				play.setMess(messages.getMess());
 				play.setPlayuser(messages.getUserName());
-				play.setStatustype(messages.getStatus().name());
+				play.setStatustype(messages.getStatus());
 				play.setTimeconsuming(null);
 				
 				playService.insert(play);

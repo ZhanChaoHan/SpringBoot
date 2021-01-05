@@ -7,6 +7,11 @@ import com.jachs.websocket.dao.GameMapper;
 import com.jachs.websocket.entity.Game;
 import com.jachs.websocket.service.GameService;
 
+/***
+ * 
+ * @author zhanchaohan
+ *
+ */
 @Service
 public class GameServiceImpl implements GameService {
 	@Autowired

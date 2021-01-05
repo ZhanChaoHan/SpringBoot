@@ -9,6 +9,11 @@ import com.jachs.websocket.action.WebSocket;
 import com.jachs.websocket.service.GameService;
 import com.jachs.websocket.service.PlayService;
 
+/***
+ * 
+ * @author zhanchaohan
+ *
+ */
 @Configuration
 public class WebSocketConfig {
     @Bean

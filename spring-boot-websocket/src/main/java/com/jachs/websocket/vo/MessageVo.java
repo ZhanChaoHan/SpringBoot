@@ -8,6 +8,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jachs.websocket.entity.Message;
 
+/***
+ * 
+ * @author zhanchaohan
+ *
+ */
 public class MessageVo implements Encoder.Text<Message>{
 
 	@Override

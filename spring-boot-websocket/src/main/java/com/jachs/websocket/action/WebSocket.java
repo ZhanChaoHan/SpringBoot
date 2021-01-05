@@ -26,6 +26,11 @@ import com.jachs.websocket.service.GameService;
 import com.jachs.websocket.service.PlayService;
 import com.jachs.websocket.vo.MessageVo;
 
+/***
+ * 
+ * @author zhanchaohan
+ *
+ */
 @Component
 @ServerEndpoint(value = "/websocket", encoders = { MessageVo.class })
 public class WebSocket {

@@ -2,6 +2,12 @@ package com.jachs.websocket.entity;
 
 import java.io.Serializable;
 
+
+/***
+ * 
+ * @author zhanchaohan
+ *
+ */
 public class Message implements Serializable{
 	private String userName;//用户
 	private boolean playUser;//游戏玩家

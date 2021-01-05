@@ -18,7 +18,11 @@ import com.jachs.websocket.entity.Message;
 import com.jachs.websocket.entity.Status;
 
 
-
+/***
+ * 
+ * @author zhanchaohan
+ *
+ */
 @Controller
 @RequestMapping(value = "/login")
 public class LoginController {

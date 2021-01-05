@@ -3,6 +3,11 @@ package com.jachs.websocket.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+/***
+ * 
+ * @author zhanchaohan
+ *
+ */
 public class Game implements Serializable {
     private String ids;
 

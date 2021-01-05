@@ -2,6 +2,12 @@ package com.jachs.websocket.entity;
 
 import java.io.Serializable;
 
+
+/***
+ * 
+ * @author zhanchaohan
+ *
+ */
 public class Play implements Serializable {
     private String ids;
 

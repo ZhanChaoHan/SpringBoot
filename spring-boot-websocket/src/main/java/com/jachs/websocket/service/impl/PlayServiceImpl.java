@@ -7,6 +7,11 @@ import com.jachs.websocket.dao.PlayMapper;
 import com.jachs.websocket.entity.Play;
 import com.jachs.websocket.service.PlayService;
 
+/***
+ * 
+ * @author zhanchaohan
+ *
+ */
 @Service
 public class PlayServiceImpl implements PlayService {
 	@Autowired

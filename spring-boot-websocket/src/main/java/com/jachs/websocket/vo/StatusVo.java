@@ -1,5 +1,11 @@
 package com.jachs.websocket.vo;
 
+
+/***
+ * 
+ * @author zhanchaohan
+ *
+ */
 public class StatusVo {
 	private int status;
 	private String name;

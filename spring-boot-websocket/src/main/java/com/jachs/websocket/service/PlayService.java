@@ -2,6 +2,12 @@ package com.jachs.websocket.service;
 
 import com.jachs.websocket.entity.Play;
 
+
+/***
+ * 
+ * @author zhanchaohan
+ *
+ */
 public interface PlayService {
 	int deleteByPrimaryKey(String ids);
 

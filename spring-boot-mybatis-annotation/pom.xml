@@ -69,7 +69,7 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<!-- 高版本SQL驱动包有问题 -->
-			<version>5.1.32</version>
+			<version>8.0.16</version>
 		</dependency>
 
 	</dependencies>

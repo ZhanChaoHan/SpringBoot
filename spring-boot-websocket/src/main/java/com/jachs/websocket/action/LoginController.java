@@ -32,14 +32,14 @@ public class LoginController {
 	public String index() {
 		try {
 			logger.info("初始化登陆页面...");
-			File path =new File(ResourceUtils.getURL("classpath:").getPath());
+//			File path =new File(ResourceUtils.getURL("classpath:").getPath());
 			
 			
-			BufferedWriter fileWriter=new BufferedWriter(new FileWriter(URLDecoder.decode(path.getAbsolutePath(), "UTF-8")+File.separator+"static"+File.separator+"js"+File.separator+"Status.json"));
-			Gson gson=new Gson();
-			String []json=new String []{gson.toJson(Status.values()),gson.toJson(new Message("",false,Status.SENDMESS,""))};
-			fileWriter.write(gson.toJson(json));
-			fileWriter.close();
+//			BufferedWriter fileWriter=new BufferedWriter(new FileWriter(URLDecoder.decode(path.getAbsolutePath(), "UTF-8")+File.separator+"static"+File.separator+"js"+File.separator+"Status.json"));
+//			Gson gson=new Gson();
+//			String []json=new String []{gson.toJson(Status.values()),gson.toJson(new Message("",false,Status.SENDMESS,""))};
+//			fileWriter.write(gson.toJson(json));
+//			fileWriter.close();
 			return "/html/chess/chess";
 		} catch (Exception e) {
 			e.printStackTrace();

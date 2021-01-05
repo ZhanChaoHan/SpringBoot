@@ -17,7 +17,7 @@ $.ajax({
 });
 */
 if(dates!=null){
-	var ws = new WebSocket("ws://127.0.0.1:8080/websocket?"+dates);
+	var ws = new WebSocket("ws://"+window.location.host+"/websocket?"+dates);
 }else{
 	alert("No Name No Game!!!");
 }

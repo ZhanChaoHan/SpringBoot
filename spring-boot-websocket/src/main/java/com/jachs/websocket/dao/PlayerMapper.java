@@ -2,23 +2,23 @@ package com.jachs.websocket.dao;
 
 import org.apache.ibatis.annotations.Insert;
 
-import com.jachs.websocket.entity.Play;
+import com.jachs.websocket.entity.Player;
 
 /***
  * 
  * @author zhanchaohan
  *
  */
-public interface PlayMapper {
+public interface PlayerMapper {
     int deleteByPrimaryKey(String ids);
     @Insert("insert into play (ids, gameid, playuser,timeconsuming,statustype,mess) values (#{ids,jdbcType=VARCHAR}, #{gameid,jdbcType=VARCHAR}, #{playuser,jdbcType=VARCHAR}, #{timeconsuming,jdbcType=VARCHAR}, #{statustype,jdbcType=VARCHAR},#{mess,jdbcType=VARCHAR})")
-    int insert(Play record);
+    int insert(Player record);
 
-    int insertSelective(Play record);
+    int insertSelective(Player record);
 
-    Play selectByPrimaryKey(String ids);
+    Player selectByPrimaryKey(String ids);
 
-    int updateByPrimaryKeySelective(Play record);
+    int updateByPrimaryKeySelective(Player record);
 
-    int updateByPrimaryKey(Play record);
+    int updateByPrimaryKey(Player record);
 }

@@ -7,7 +7,7 @@ import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 
 import com.jachs.websocket.action.WebSocket;
 import com.jachs.websocket.service.GameService;
-import com.jachs.websocket.service.PlayService;
+import com.jachs.websocket.service.PlayerService;
 
 /***
  * 
@@ -26,7 +26,7 @@ public class WebSocketConfig {
     	WebSocket.gameService = messageService;
     }
     @Autowired
-    public void setPlayService(PlayService messageService) {
+    public void setPlayService(PlayerService messageService) {
     	WebSocket.playService = messageService;
     }
 }

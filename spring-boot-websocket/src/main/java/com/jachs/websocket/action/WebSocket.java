@@ -20,10 +20,10 @@ import org.springframework.stereotype.Component;
 import com.google.gson.Gson;
 import com.jachs.websocket.entity.Game;
 import com.jachs.websocket.entity.Message;
-import com.jachs.websocket.entity.Play;
+import com.jachs.websocket.entity.Player;
 import com.jachs.websocket.entity.Status;
 import com.jachs.websocket.service.GameService;
-import com.jachs.websocket.service.PlayService;
+import com.jachs.websocket.service.PlayerService;
 import com.jachs.websocket.vo.MessageVo;
 
 /***
@@ -49,7 +49,7 @@ public class WebSocket {
 	private static Gson gson=new Gson();
 	private static String gameID;
 	public static GameService gameService;
-	public static PlayService playService;
+	public static PlayerService playService;
 	
 
 	/**
@@ -144,7 +144,7 @@ public class WebSocket {
 		Message messages=gson.fromJson(message, Message.class);
 		System.out.println("来自客户端的消息:"+messages.getMess());
 		Date time=new Date();
-		Play play=new Play();
+		Player play=new Player();
 		switch (messages.getStatus()) {
 			case MOVER:
 				play.setGameid(gameID);

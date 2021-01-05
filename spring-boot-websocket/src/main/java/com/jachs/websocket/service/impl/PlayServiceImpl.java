@@ -3,9 +3,9 @@ package com.jachs.websocket.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.jachs.websocket.dao.PlayMapper;
-import com.jachs.websocket.entity.Play;
-import com.jachs.websocket.service.PlayService;
+import com.jachs.websocket.dao.PlayerMapper;
+import com.jachs.websocket.entity.Player;
+import com.jachs.websocket.service.PlayerService;
 
 /***
  * 
@@ -13,9 +13,9 @@ import com.jachs.websocket.service.PlayService;
  *
  */
 @Service
-public class PlayServiceImpl implements PlayService {
+public class PlayServiceImpl implements PlayerService {
 	@Autowired
-	public PlayMapper playMapper;
+	public PlayerMapper playMapper;
 
 	@Override
 	public int deleteByPrimaryKey(String ids) {
@@ -23,27 +23,27 @@ public class PlayServiceImpl implements PlayService {
 	}
 
 	@Override
-	public int insert(Play record) {
+	public int insert(Player record) {
 		return playMapper.insert(record);
 	}
 
 	@Override
-	public int insertSelective(Play record) {
+	public int insertSelective(Player record) {
 		return playMapper.insertSelective(record);
 	}
 
 	@Override
-	public Play selectByPrimaryKey(String ids) {
+	public Player selectByPrimaryKey(String ids) {
 		return playMapper.selectByPrimaryKey(ids);
 	}
 
 	@Override
-	public int updateByPrimaryKeySelective(Play record) {
+	public int updateByPrimaryKeySelective(Player record) {
 		return playMapper.updateByPrimaryKey(record);
 	}
 
 	@Override
-	public int updateByPrimaryKey(Play record) {
+	public int updateByPrimaryKey(Player record) {
 		return playMapper.updateByPrimaryKeySelective(record);
 	}
 	

@@ -1,10 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>HTML5实现中国象棋游戏</title>
-<link href="/css/zzsc.css" type="text/css" rel="stylesheet" />
-<script src="/js/jquery-2.1.4.js"></script>
+<link th:href="@{/css/zzsc.css}" rel="stylesheet"/>
+<script th:src="@{/js/jquery-2.1.4.js}"></script>
 <script>
 //var dates=Date.parse(new Date())+Math.round(Math.random()*10);//取当前时间为用户ID
 var Status;//状态码
@@ -15,11 +15,14 @@ var play1;//玩家一
 var play2;//玩家二
 var ready=false;//准备
 
-
+/*
 $.getJSON("../js/Status.json", function (data,status){
 	Status=$.parseJSON(data[0]);
 	Sender=$.parseJSON(data[1]);
-})
+})*/
+Status=$.parseJSON(${userInfo}[0]);
+Sender=$.parseJSON(${userInfo}[1]);
+
 dates=prompt("输入名称?","请在这里输入");
 
 </script>
@@ -56,11 +59,11 @@ dates=prompt("输入名称?","请在这里输入");
 		<input type="button" onclick="sendMess()" id="sendMssg" value="发送信息"/>
 	</div>
 </div>
-<script src="/js/common.js"></script> 
-<script src="/js/play.js"></script> 
-<script src="/js/bill.js"></script> 
-<script src="/js/socket.js"></script>
-<script src="/js/socketUtill.js"></script>
+<script th:src="@{/js/common.js}"></script>
+<script th:src="@{/js/play.js}"></script>
+<script th:src="@{/js/bill.js}"></script>
+<script th:src="@{/js/socket.js}"></script>
+<script th:src="@{/js/socketUtill.js}"></script>
 <div style="text-align:center;clear:both"></div>
 </body>
 </html>

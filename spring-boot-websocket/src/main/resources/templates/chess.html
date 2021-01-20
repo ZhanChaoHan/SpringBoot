@@ -5,7 +5,7 @@
 <title>HTML5实现中国象棋游戏</title>
 <link th:href="@{/css/zzsc.css}" rel="stylesheet"/>
 <script th:src="@{/js/jquery-2.1.4.js}"></script>
-<script>
+<script th:inline="javascript">
 //var dates=Date.parse(new Date())+Math.round(Math.random()*10);//取当前时间为用户ID
 var Status;//状态码
 var Sender;//发送
@@ -20,8 +20,9 @@ $.getJSON("../js/Status.json", function (data,status){
 	Status=$.parseJSON(data[0]);
 	Sender=$.parseJSON(data[1]);
 })*/
-Status=$.parseJSON(${userInfo}[0]);
-Sender=$.parseJSON(${userInfo}[1]);
+var josnO=$.parseJSON([[${userInfo}]]);
+Status=$.parseJSON(josnO[0]);
+Sender=$.parseJSON(josnO[1]);
 
 dates=prompt("输入名称?","请在这里输入");
 

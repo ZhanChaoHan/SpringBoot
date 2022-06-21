@@ -55,7 +55,7 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<!-- 高版本SQL驱动包有问题 -->
-			<version>8.0.20</version>
+			<version>8.0.28</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-lang</groupId>
